@@ -129,6 +129,13 @@
       "category": "Border"
     },
     {
+      "token": "vdc-icon-default",
+      "hex": "#242424",
+      "rgb": "36, 36, 36",
+      "usage": "Default color for icons without dedicated entity colors",
+      "category": "Entity"
+    },
+    {
       "token": "vdc-entity-ingredient",
       "hex": "#5E4DB2",
       "rgb": "94, 77, 178",

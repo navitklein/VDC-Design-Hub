@@ -18,11 +18,11 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
         <div class="shell__header-content">
           <!-- Logo & Title -->
           <a routerLink="/dashboard" class="shell__logo">
-            <i class="fa-solid fa-palette"></i>
+            <img src="/vdc-logo.svg" alt="VDC Logo" class="shell__logo-icon" />
             <span class="shell__title">VDC Design Hub</span>
           </a>
 
-          <!-- Navigation -->
+          <!-- Navigation (centered) -->
           <nav class="shell__nav">
             <a 
               routerLink="/dashboard" 
@@ -54,12 +54,6 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
             </a>
           </nav>
 
-          <!-- Actions -->
-          <div class="shell__actions">
-            <button kendoButton look="flat" title="Help">
-              <i class="fa-solid fa-question-circle"></i>
-            </button>
-          </div>
         </div>
       </header>
 
@@ -88,11 +82,10 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
     .shell__header-content {
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      max-width: 1440px;
-      margin: 0 auto;
-      padding: 0 var(--vdc-space-lg);
+      justify-content: center;
+      padding: 0 var(--vdc-space-xl);
       height: 56px;
+      position: relative;
     }
 
     .shell__logo {
@@ -103,10 +96,13 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
       color: var(--vdc-primary);
       font-size: var(--vdc-font-size-lg);
       font-weight: var(--vdc-font-weight-semibold);
+      position: absolute;
+      left: var(--vdc-space-xl);
+    }
 
-      i {
-        font-size: 24px;
-      }
+    .shell__logo-icon {
+      width: 28px;
+      height: 28px;
     }
 
     .shell__title {
@@ -149,18 +145,10 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
       }
     }
 
-    .shell__actions {
-      display: flex;
-      align-items: center;
-      gap: var(--vdc-space-sm);
-    }
-
     .shell__main {
       flex: 1;
-      max-width: 1440px;
       width: 100%;
-      margin: 0 auto;
-      padding: var(--vdc-space-lg);
+      padding: var(--vdc-space-lg) var(--vdc-space-xl);
     }
   `]
 })

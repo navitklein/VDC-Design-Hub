@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { ButtonsModule } from '@progress/kendo-angular-buttons';
 import { InputsModule } from '@progress/kendo-angular-inputs';
+import { forkJoin } from 'rxjs';
 import { TokenService } from '../../core/services/token.service';
 import { VdcIconConcept } from '../../core/models';
 
@@ -107,12 +108,23 @@ interface ColorOption {
               }
             </div>
           </div>
+
+          <!-- Special Filters -->
+          <div class="special-filters">
+            <button 
+              class="filter-chip filter-chip--tbd"
+              [class.filter-chip--active]="showOnlyTbd()"
+              (click)="toggleTbdFilter()">
+              <i class="fa-solid fa-question"></i>
+              TBD Only ({{ tbdCount() }})
+            </button>
+          </div>
         </section>
 
         <!-- Results Count -->
         <div class="results-info">
           <span>{{ filteredIcons().length }} icon{{ filteredIcons().length !== 1 ? 's' : '' }}</span>
-          @if (searchQuery() || selectedCategory() !== 'All' || selectedEntity() !== 'All') {
+          @if (searchQuery() || selectedCategory() !== 'All' || selectedEntity() !== 'All' || showOnlyTbd()) {
             <button class="clear-filters" (click)="clearAllFilters()">
               <i class="fa-solid fa-times"></i> Clear filters
             </button>
@@ -190,8 +202,8 @@ interface ColorOption {
                           class="expanded__icon-preview"
                           [class.expanded__icon-preview--circle]="testConfig().showCircle"
                           [style.background-color]="testConfig().showCircle ? testConfig().circleColor : 'transparent'"
-                          [style.width.px]="testConfig().showCircle ? testConfig().size * 2.5 : 'auto'"
-                          [style.height.px]="testConfig().showCircle ? testConfig().size * 2.5 : 'auto'">
+                          [style.width.px]="testConfig().showCircle ? circleSize() : null"
+                          [style.height.px]="testConfig().showCircle ? circleSize() : null">
                           <i 
                             [class]="getIconClass(icon, testConfig().style)"
                             [style.color]="testConfig().colorHex"
@@ -220,6 +232,14 @@ interface ColorOption {
                           </div>
                         }
                       </div>
+                      
+                      <!-- Apply Entity Colors Button -->
+                      @if (icon.colorToken) {
+                        <button class="entity-colors-btn" (click)="applyEntityColors(icon)">
+                          <i class="fa-regular fa-palette"></i>
+                          Apply Entity Colors
+                        </button>
+                      }
                       
                       <!-- Style Previews -->
                       <div class="expanded__section">
@@ -484,6 +504,27 @@ interface ColorOption {
         border-color: var(--vdc-primary);
         color: white;
       }
+
+      &--tbd {
+        border-color: var(--vdc-warning);
+        color: var(--vdc-warning);
+
+        i { margin-right: 4px; }
+
+        &:hover {
+          background: rgba(255, 185, 0, 0.1);
+        }
+
+        &.filter-chip--active {
+          background: var(--vdc-warning);
+          color: white;
+        }
+      }
+    }
+
+    .special-filters {
+      display: flex;
+      gap: var(--vdc-space-sm);
     }
 
     /* Results Info */
@@ -690,8 +731,6 @@ interface ColorOption {
       display: flex;
       align-items: center;
       justify-content: center;
-      min-width: 80px;
-      min-height: 80px;
       transition: all 0.2s;
 
       &--circle {
@@ -722,6 +761,33 @@ interface ColorOption {
     .expanded__circle-colors {
       display: flex;
       gap: 6px;
+    }
+
+    /* Entity Colors Button */
+    .entity-colors-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 16px;
+      margin-bottom: var(--vdc-space-md);
+      background: var(--vdc-surface-200);
+      border: 1px solid var(--vdc-border-default);
+      border-radius: var(--vdc-radius-md);
+      color: var(--vdc-text-primary);
+      font-size: var(--vdc-font-size-sm);
+      font-weight: var(--vdc-font-weight-semibold);
+      cursor: pointer;
+      transition: all 0.15s;
+
+      i {
+        font-size: var(--vdc-font-size-md);
+      }
+
+      &:hover {
+        background: var(--vdc-primary);
+        border-color: var(--vdc-primary);
+        color: white;
+      }
     }
 
     .circle-color-btn {
@@ -888,6 +954,7 @@ export class VdcIconsComponent implements OnInit {
   readonly selectedCategory = signal<string>('All');
   readonly selectedEntity = signal<string>('All');
   readonly searchQuery = signal<string>('');
+  readonly showOnlyTbd = signal<boolean>(false);
   
   // UI State
   readonly expandedIcon = signal<VdcIconConcept | null>(null);
@@ -902,15 +969,24 @@ export class VdcIconsComponent implements OnInit {
     circleColor: '#f8e8f0'
   });
   
-  // Color options
+  // Color options - includes standard colors and entity colors
   readonly colorOptions: ColorOption[] = [
+    // Default icon color (production default)
+    { name: 'Default Icon', token: 'vdc-icon-default', hex: '#242424' },
+    // Standard semantic colors
     { name: 'Primary', token: 'vdc-primary', hex: '#0078d4' },
     { name: 'Success', token: 'vdc-success', hex: '#107c10' },
     { name: 'Warning', token: 'vdc-warning', hex: '#ffb900' },
     { name: 'Error', token: 'vdc-error', hex: '#d13438' },
     { name: 'Text', token: 'vdc-text-primary', hex: '#323130' },
     { name: 'Secondary', token: 'vdc-text-secondary', hex: '#605e5c' },
-    { name: 'Purple', token: 'vdc-purple', hex: '#8764b8' }
+    // Entity colors
+    { name: 'Ingredient', token: 'vdc-entity-ingredient', hex: '#5E4DB2' },
+    { name: 'Release', token: 'vdc-entity-release', hex: '#943D73' },
+    { name: 'Workflow', token: 'vdc-entity-workflow', hex: '#F5CD47' },
+    // Context colors
+    { name: 'Project', token: 'vdc-context-project', hex: '#0B4F8A' },
+    { name: 'Personal', token: 'vdc-context-personal', hex: '#2E7D6B' }
   ];
   
   // Circle background options (including the pink from the image)
@@ -927,8 +1003,22 @@ export class VdcIconsComponent implements OnInit {
   // Size options
   readonly sizeOptions = [16, 24, 32, 48, 64];
   
+  // Circle size multiplier - keeps consistent padding ratio around the icon
+  // 1.8 means icon takes ~55% of circle, with ~22.5% padding on each side
+  private readonly circleSizeMultiplier = 1.8;
+  
+  // Computed circle size based on icon size and multiplier
+  readonly circleSize = computed(() => Math.round(this.testConfig().size * this.circleSizeMultiplier));
+  
   // Total icon count
   readonly totalIconCount = computed(() => this.vdcIcons().length);
+  
+  // TBD icons count
+  readonly tbdCount = computed(() => {
+    return this.vdcIcons().filter(icon => 
+      icon.variants.some(v => v.fontAwesome === 'TBD')
+    ).length;
+  });
   
   // Categories with counts (always based on all icons)
   readonly categoriesWithCounts = computed(() => {
@@ -997,11 +1087,22 @@ export class VdcIconsComponent implements OnInit {
       );
     }
     
+    // Filter TBD only
+    if (this.showOnlyTbd()) {
+      icons = icons.filter(i => 
+        i.variants.some(v => v.fontAwesome === 'TBD')
+      );
+    }
+    
     return icons;
   });
   
   ngOnInit(): void {
-    this.tokenService.loadVdcIcons().subscribe();
+    // Load both VDC icons and colors for entity color lookup
+    forkJoin({
+      icons: this.tokenService.loadVdcIcons(),
+      colors: this.tokenService.loadColors()
+    }).subscribe();
   }
   
   onSearchInput(event: Event): void {
@@ -1017,6 +1118,11 @@ export class VdcIconsComponent implements OnInit {
     this.selectedCategory.set('All');
     this.selectedEntity.set('All');
     this.searchQuery.set('');
+    this.showOnlyTbd.set(false);
+  }
+  
+  toggleTbdFilter(): void {
+    this.showOnlyTbd.update(v => !v);
   }
   
   selectCategory(category: string): void {
@@ -1034,6 +1140,7 @@ export class VdcIconsComponent implements OnInit {
       this.expandedIcon.set(null);
     } else {
       this.expandedIcon.set(icon);
+      this.applyEntityColors(icon);  // Auto-apply entity colors on expand
     }
   }
   
@@ -1069,6 +1176,12 @@ export class VdcIconsComponent implements OnInit {
       return '';
     }
     
+    // Check if this is a Kit icon (custom icons from Font Awesome Kit)
+    // Kit icons don't support style variants - they stay as fa-kit
+    if (firstVariant.fontAwesome.startsWith('fa-kit')) {
+      return firstVariant.fontAwesome;
+    }
+    
     // Extract icon name (e.g., "fa-rocket-launch" from "fa-regular fa-rocket-launch")
     const parts = firstVariant.fontAwesome.split(' ');
     const iconName = parts.length > 1 ? parts[1] : parts[0];
@@ -1081,5 +1194,41 @@ export class VdcIconsComponent implements OnInit {
     navigator.clipboard.writeText(code).then(() => {
       console.log('Copied:', code);
     });
+  }
+  
+  /**
+   * Apply entity colors to the test configuration.
+   * Uses the icon's colorToken to look up the entity color and its light variant.
+   */
+  applyEntityColors(icon: VdcIconConcept): void {
+    if (!icon.colorToken) {
+      // Use default icon color for icons without entity colors
+      this.testConfig.update(c => ({
+        ...c,
+        color: 'vdc-icon-default',
+        colorHex: '#242424'
+      }));
+      return;
+    }
+    
+    const entityColor = this.tokenService.findColor(icon.colorToken);
+    const lightColor = this.tokenService.findColor(`${icon.colorToken}-light`);
+    
+    if (entityColor) {
+      this.testConfig.update(c => ({
+        ...c,
+        color: icon.colorToken!,
+        colorHex: entityColor.hex,
+        showCircle: true,
+        circleColor: lightColor?.hex || '#f3f2f1'
+      }));
+    } else {
+      // Fallback to default if color token not found in loaded colors
+      this.testConfig.update(c => ({
+        ...c,
+        color: 'vdc-icon-default',
+        colorHex: '#242424'
+      }));
+    }
   }
 }

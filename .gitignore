@@ -45,3 +45,6 @@ Thumbs.db
 
 # Font Awesome Pro license token
 .npmrc
+
+# Kendo UI license
+kendo-ui-license.txt

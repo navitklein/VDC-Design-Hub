@@ -59,7 +59,7 @@
       "category": "VDC Entities",
       "colorToken": "vdc-entity-ingredient",
       "variants": [
-        { "label": "Current", "fontAwesome": "fa-regular fa-cube-pen", "isProduction": true }
+        { "label": "Current", "fontAwesome": "fa-kit fa-regular-cube-pen", "isProduction": true }
       ]
     },
     {
@@ -69,7 +69,7 @@
       "category": "VDC Entities",
       "colorToken": "vdc-entity-ingredient",
       "variants": [
-        { "label": "Current", "fontAwesome": "fa-regular fa-cube-sync", "isProduction": true }
+        { "label": "Current", "fontAwesome": "fa-kit fa-regular-cube-sync", "isProduction": true }
       ]
     },
     {
@@ -79,7 +79,7 @@
       "category": "VDC Entities",
       "colorToken": "vdc-entity-ingredient",
       "variants": [
-        { "label": "Current", "fontAwesome": "fa-regular fa-cube-circle-plus", "isProduction": true }
+        { "label": "Current", "fontAwesome": "fa-kit fa-regular-cube-circle-plus", "isProduction": true }
       ]
     },
     {
@@ -99,7 +99,7 @@
       "category": "VDC Entities",
       "colorToken": "vdc-entity-release",
       "variants": [
-        { "label": "Current", "fontAwesome": "fa-regular fa-rocket-launch-pen", "isProduction": true }
+        { "label": "Current", "fontAwesome": "fa-kit fa-regular-rocket-launch-pen", "isProduction": true }
       ]
     },
     {
@@ -109,7 +109,7 @@
       "category": "VDC Entities",
       "colorToken": "vdc-entity-release",
       "variants": [
-        { "label": "Current", "fontAwesome": "fa-regular fa-rocket-launch-sync", "isProduction": true }
+        { "label": "Current", "fontAwesome": "fa-kit fa-regular-rocket-launch-sync", "isProduction": true }
       ]
     },
     {
@@ -204,7 +204,7 @@
       "category": "VDC Actions",
       "colorToken": "vdc-entity-workflow",
       "variants": [
-        { "label": "Current", "fontAwesome": "fa-regular fa-vial", "isProduction": true }
+        { "label": "Current", "fontAwesome": "fa-regular fa-vial-vertical", "isProduction": true }
       ]
     },
     {

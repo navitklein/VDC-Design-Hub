@@ -102,13 +102,11 @@ import { AnnotationDirective } from '../../../../shared/directives/annotation.di
     }
 
     .design__loading {
-      max-width: 1200px;
-      margin: 0 auto;
+      /* Remove max-width to allow full screen usage */
     }
 
     .design__placeholder {
-      max-width: 1200px;
-      margin: 0 auto;
+      /* Remove max-width to allow full screen usage */
     }
 
     .design__header {
