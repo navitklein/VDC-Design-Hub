@@ -1,0 +1,13 @@
+{
+  "features": [
+    {
+      "slug": "personal-workspace",
+      "name": "Personal Workspace",
+      "description": "User's centralized dashboard for managing active projects and frequently used tools",
+      "status": "draft",
+      "lastUpdated": "2026-01-31",
+      "thumbnail": "/assets/images/thumbnails/placeholder.png",
+      "tags": ["dashboard", "navigation", "productivity"]
+    }
+  ]
+}

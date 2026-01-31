@@ -1,0 +1,85 @@
+// =============================================================================
+// Kendo Fluent Theme Overrides
+// =============================================================================
+// Customize Kendo components to match VDC brand while preserving Fluent look.
+// Use CSS custom properties for consistency with tokens.
+
+// ---------------------------------------------------------------------------
+// Global Kendo Overrides
+// ---------------------------------------------------------------------------
+.k-button {
+  font-family: var(--vdc-font-family);
+}
+
+.k-input,
+.k-textbox,
+.k-dropdown {
+  font-family: var(--vdc-font-family);
+}
+
+// ---------------------------------------------------------------------------
+// Grid Overrides
+// ---------------------------------------------------------------------------
+.k-grid {
+  font-family: var(--vdc-font-family);
+  
+  .k-grid-header {
+    background-color: var(--vdc-surface-200);
+  }
+  
+  .k-grid-content {
+    background-color: var(--vdc-surface-100);
+  }
+  
+  .k-alt {
+    background-color: var(--vdc-surface-200);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Button Overrides
+// ---------------------------------------------------------------------------
+.k-button-solid-primary {
+  background-color: var(--vdc-primary);
+  border-color: var(--vdc-primary);
+  
+  &:hover {
+    background-color: var(--vdc-primary-hover);
+    border-color: var(--vdc-primary-hover);
+  }
+  
+  &:active {
+    background-color: var(--vdc-primary-active);
+    border-color: var(--vdc-primary-active);
+  }
+}
+
+// ---------------------------------------------------------------------------
+// Form Controls
+// ---------------------------------------------------------------------------
+.k-input:focus,
+.k-textbox:focus {
+  border-color: var(--vdc-primary);
+  box-shadow: 0 0 0 1px var(--vdc-primary);
+}
+
+// ---------------------------------------------------------------------------
+// Dialog Overrides
+// ---------------------------------------------------------------------------
+.k-dialog {
+  border-radius: var(--vdc-radius-lg);
+  box-shadow: var(--vdc-shadow-lg);
+}
+
+.k-dialog-titlebar {
+  background-color: var(--vdc-surface-100);
+  border-bottom: 1px solid var(--vdc-border-subtle);
+}
+
+// ---------------------------------------------------------------------------
+// Tooltip Overrides
+// ---------------------------------------------------------------------------
+.k-tooltip {
+  font-family: var(--vdc-font-family);
+  font-size: var(--vdc-font-size-sm);
+}

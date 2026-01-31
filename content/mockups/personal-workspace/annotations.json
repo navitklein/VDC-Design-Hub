@@ -1,0 +1,25 @@
+{
+  "annotations": [
+    {
+      "id": "ann-1",
+      "selector": "#header",
+      "title": "Page Header",
+      "note": "Contains personalized greeting, search bar, and quick action buttons. Greeting updates based on time of day.",
+      "position": "top-right"
+    },
+    {
+      "id": "ann-2",
+      "selector": "#recent-projects",
+      "title": "Recent Projects",
+      "note": "Shows last 5 accessed projects. Cards include project name, last activity, and quick action menu. Click opens project in new tab.",
+      "position": "top-left"
+    },
+    {
+      "id": "ann-3",
+      "selector": "#quick-actions",
+      "title": "Quick Actions",
+      "note": "Configurable shortcuts to frequently used features. Maximum of 6 items. Users can customize via settings.",
+      "position": "top-right"
+    }
+  ]
+}

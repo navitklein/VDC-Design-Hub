@@ -1,0 +1,224 @@
+// =============================================================================
+// VDC Design Hub - Main Stylesheet
+// =============================================================================
+
+// Note: Tailwind utilities are imported via @import in individual components
+// We use CSS custom properties and utility classes directly instead of @tailwind directives
+// This avoids conflicts with Kendo Fluent theme
+
+// VDC Design Tokens
+@use 'styles/tokens';
+
+// Kendo Fluent Theme Overrides
+@use 'styles/kendo-fluent-overrides';
+
+// Component-specific themes
+@use 'styles/simulator-theme';
+@use 'styles/annotation-theme';
+
+// =============================================================================
+// Global Styles
+// =============================================================================
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  font-family: var(--vdc-font-family);
+  font-size: var(--vdc-font-size-md);
+  color: var(--vdc-text-primary);
+  background-color: var(--vdc-surface-200);
+}
+
+// =============================================================================
+// Layout Utilities
+// =============================================================================
+
+.vdc-container {
+  width: 100%;
+  max-width: 1440px;
+  margin: 0 auto;
+  padding: 0 var(--vdc-space-lg);
+}
+
+.vdc-page {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.vdc-main {
+  flex: 1;
+  padding: var(--vdc-space-lg);
+}
+
+// =============================================================================
+// Typography Utilities
+// =============================================================================
+
+.vdc-heading-1 {
+  font-size: var(--vdc-font-size-3xl);
+  font-weight: var(--vdc-font-weight-bold);
+  line-height: var(--vdc-line-height-tight);
+  color: var(--vdc-text-primary);
+}
+
+.vdc-heading-2 {
+  font-size: var(--vdc-font-size-2xl);
+  font-weight: var(--vdc-font-weight-semibold);
+  line-height: var(--vdc-line-height-tight);
+  color: var(--vdc-text-primary);
+}
+
+.vdc-heading-3 {
+  font-size: var(--vdc-font-size-xl);
+  font-weight: var(--vdc-font-weight-semibold);
+  line-height: var(--vdc-line-height-tight);
+  color: var(--vdc-text-primary);
+}
+
+.vdc-body {
+  font-size: var(--vdc-font-size-md);
+  line-height: var(--vdc-line-height-normal);
+  color: var(--vdc-text-primary);
+}
+
+.vdc-caption {
+  font-size: var(--vdc-font-size-sm);
+  line-height: var(--vdc-line-height-normal);
+  color: var(--vdc-text-secondary);
+}
+
+// =============================================================================
+// Card Styles
+// =============================================================================
+
+.vdc-card {
+  background-color: var(--vdc-surface-100);
+  border-radius: var(--vdc-radius-lg);
+  box-shadow: var(--vdc-shadow-sm);
+  overflow: hidden;
+  transition: box-shadow 0.2s ease;
+  
+  &:hover {
+    box-shadow: var(--vdc-shadow-md);
+  }
+}
+
+// =============================================================================
+// Status Badges
+// =============================================================================
+
+.vdc-badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: var(--vdc-radius-full);
+  font-size: var(--vdc-font-size-xs);
+  font-weight: var(--vdc-font-weight-semibold);
+  text-transform: uppercase;
+  
+  &--draft {
+    background-color: #e3f2fd;
+    color: #1565c0;
+  }
+  
+  &--review {
+    background-color: #fff3e0;
+    color: #e65100;
+  }
+  
+  &--ready {
+    background-color: #e8f5e9;
+    color: #2e7d32;
+  }
+}
+
+// =============================================================================
+// Loading States
+// =============================================================================
+
+.vdc-skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--vdc-surface-300) 25%,
+    var(--vdc-surface-200) 50%,
+    var(--vdc-surface-300) 75%
+  );
+  background-size: 200% 100%;
+  animation: skeleton-loading 1.5s infinite;
+  border-radius: var(--vdc-radius-md);
+}
+
+@keyframes skeleton-loading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+// =============================================================================
+// Empty State
+// =============================================================================
+
+.vdc-empty-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--vdc-space-2xl);
+  text-align: center;
+  
+  &__icon {
+    font-size: 48px;
+    color: var(--vdc-text-disabled);
+    margin-bottom: var(--vdc-space-md);
+  }
+  
+  &__title {
+    font-size: var(--vdc-font-size-lg);
+    font-weight: var(--vdc-font-weight-semibold);
+    color: var(--vdc-text-primary);
+    margin-bottom: var(--vdc-space-xs);
+  }
+  
+  &__description {
+    font-size: var(--vdc-font-size-md);
+    color: var(--vdc-text-secondary);
+  }
+}
+
+// =============================================================================
+// Error State
+// =============================================================================
+
+.vdc-error-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--vdc-space-2xl);
+  text-align: center;
+  background-color: #ffebee;
+  border-radius: var(--vdc-radius-lg);
+  
+  &__icon {
+    font-size: 48px;
+    color: var(--vdc-error);
+    margin-bottom: var(--vdc-space-md);
+  }
+  
+  &__title {
+    font-size: var(--vdc-font-size-lg);
+    font-weight: var(--vdc-font-weight-semibold);
+    color: var(--vdc-error);
+    margin-bottom: var(--vdc-space-xs);
+  }
+  
+  &__description {
+    font-size: var(--vdc-font-size-md);
+    color: var(--vdc-text-secondary);
+  }
+}

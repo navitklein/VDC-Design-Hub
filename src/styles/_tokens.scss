@@ -1,0 +1,118 @@
+// =============================================================================
+// VDC Design Tokens
+// =============================================================================
+// These CSS custom properties define the visual language of VDC Design Hub.
+// They integrate with Kendo Fluent theme and provide semantic naming.
+
+:root {
+  // ---------------------------------------------------------------------------
+  // Brand Colors (customizable per VDC identity)
+  // ---------------------------------------------------------------------------
+  --vdc-primary: #0078d4;           // Fluent blue
+  --vdc-primary-hover: #106ebe;
+  --vdc-primary-active: #005a9e;
+  
+  --vdc-secondary: #6264a7;         // Purple accent
+  --vdc-secondary-hover: #4f52a3;
+  
+  // ---------------------------------------------------------------------------
+  // Semantic Colors
+  // ---------------------------------------------------------------------------
+  --vdc-success: #107c10;
+  --vdc-warning: #ffb900;
+  --vdc-error: #d13438;
+  --vdc-info: #0078d4;
+  
+  // ---------------------------------------------------------------------------
+  // Surface Colors (backgrounds)
+  // ---------------------------------------------------------------------------
+  --vdc-surface-100: #ffffff;
+  --vdc-surface-200: #faf9f8;
+  --vdc-surface-300: #f3f2f1;
+  --vdc-surface-400: #edebe9;
+  
+  // ---------------------------------------------------------------------------
+  // Text Colors
+  // ---------------------------------------------------------------------------
+  --vdc-text-primary: #323130;
+  --vdc-text-secondary: #605e5c;
+  --vdc-text-disabled: #a19f9d;
+  --vdc-text-inverse: #ffffff;
+  
+  // ---------------------------------------------------------------------------
+  // Border Colors
+  // ---------------------------------------------------------------------------
+  --vdc-border-default: #8a8886;
+  --vdc-border-subtle: #edebe9;
+  --vdc-border-strong: #323130;
+  
+  // ---------------------------------------------------------------------------
+  // Icon Colors
+  // ---------------------------------------------------------------------------
+  --vdc-icon-primary: #323130;
+  --vdc-icon-secondary: #605e5c;
+  --vdc-icon-accent: #0078d4;
+  
+  // ---------------------------------------------------------------------------
+  // Simulator & Annotation Colors
+  // ---------------------------------------------------------------------------
+  --vdc-simulator-bg: #1f1f1f;
+  --vdc-simulator-text: #ffffff;
+  --vdc-annotation-marker: #ff6b35;
+  --vdc-annotation-bg: #fff8e1;
+  --vdc-annotation-border: #ffb300;
+  
+  // ---------------------------------------------------------------------------
+  // Spacing Scale
+  // ---------------------------------------------------------------------------
+  --vdc-space-xs: 4px;
+  --vdc-space-sm: 8px;
+  --vdc-space-md: 16px;
+  --vdc-space-lg: 24px;
+  --vdc-space-xl: 32px;
+  --vdc-space-2xl: 48px;
+  
+  // ---------------------------------------------------------------------------
+  // Border Radius
+  // ---------------------------------------------------------------------------
+  --vdc-radius-sm: 2px;
+  --vdc-radius-md: 4px;
+  --vdc-radius-lg: 8px;
+  --vdc-radius-full: 9999px;
+  
+  // ---------------------------------------------------------------------------
+  // Shadows
+  // ---------------------------------------------------------------------------
+  --vdc-shadow-sm: 0 1.6px 3.6px 0 rgba(0, 0, 0, 0.132), 0 0.3px 0.9px 0 rgba(0, 0, 0, 0.108);
+  --vdc-shadow-md: 0 3.2px 7.2px 0 rgba(0, 0, 0, 0.132), 0 0.6px 1.8px 0 rgba(0, 0, 0, 0.108);
+  --vdc-shadow-lg: 0 6.4px 14.4px 0 rgba(0, 0, 0, 0.132), 0 1.2px 3.6px 0 rgba(0, 0, 0, 0.108);
+  
+  // ---------------------------------------------------------------------------
+  // Typography
+  // ---------------------------------------------------------------------------
+  --vdc-font-family: 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+  --vdc-font-size-xs: 10px;
+  --vdc-font-size-sm: 12px;
+  --vdc-font-size-md: 14px;
+  --vdc-font-size-lg: 16px;
+  --vdc-font-size-xl: 20px;
+  --vdc-font-size-2xl: 24px;
+  --vdc-font-size-3xl: 32px;
+  
+  --vdc-font-weight-regular: 400;
+  --vdc-font-weight-semibold: 600;
+  --vdc-font-weight-bold: 700;
+  
+  --vdc-line-height-tight: 1.2;
+  --vdc-line-height-normal: 1.5;
+  --vdc-line-height-relaxed: 1.75;
+  
+  // ---------------------------------------------------------------------------
+  // Z-Index Scale
+  // ---------------------------------------------------------------------------
+  --vdc-z-dropdown: 1000;
+  --vdc-z-modal: 1050;
+  --vdc-z-tooltip: 1070;
+  --vdc-z-annotation: 9998;
+  --vdc-z-simulator: 9999;
+}

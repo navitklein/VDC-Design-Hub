@@ -1,0 +1,99 @@
+// =============================================================================
+// Annotation System Theme
+// =============================================================================
+
+.annotation-marker {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  
+  width: 24px;
+  height: 24px;
+  
+  background-color: var(--vdc-annotation-marker);
+  color: #ffffff;
+  
+  border-radius: var(--vdc-radius-full);
+  box-shadow: var(--vdc-shadow-sm);
+  
+  font-family: var(--vdc-font-family);
+  font-size: var(--vdc-font-size-xs);
+  font-weight: var(--vdc-font-weight-bold);
+  
+  cursor: pointer;
+  z-index: var(--vdc-z-annotation);
+  
+  transition: transform 0.15s ease;
+  
+  &:hover {
+    transform: scale(1.1);
+  }
+  
+  // Positioning variants
+  &--top-right {
+    top: -8px;
+    right: -8px;
+  }
+  
+  &--top-left {
+    top: -8px;
+    left: -8px;
+  }
+  
+  &--bottom-right {
+    bottom: -8px;
+    right: -8px;
+  }
+  
+  &--bottom-left {
+    bottom: -8px;
+    left: -8px;
+  }
+}
+
+// Annotation tooltip content
+.annotation-tooltip {
+  max-width: 300px;
+  padding: var(--vdc-space-sm);
+  
+  font-family: var(--vdc-font-family);
+  
+  &__title {
+    margin: 0 0 var(--vdc-space-xs);
+    font-size: var(--vdc-font-size-md);
+    font-weight: var(--vdc-font-weight-semibold);
+    color: var(--vdc-text-primary);
+  }
+  
+  &__note {
+    margin: 0;
+    font-size: var(--vdc-font-size-sm);
+    color: var(--vdc-text-secondary);
+    line-height: var(--vdc-line-height-normal);
+  }
+}
+
+// Host element styling when annotation is active
+[appAnnotation] {
+  position: relative;
+  
+  &.annotation-visible {
+    outline: 2px dashed var(--vdc-annotation-marker);
+    outline-offset: 2px;
+  }
+}
+
+// Animation for annotation markers
+@keyframes annotation-pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+}
+
+.annotation-marker--highlight {
+  animation: annotation-pulse 1.5s ease-in-out infinite;
+}

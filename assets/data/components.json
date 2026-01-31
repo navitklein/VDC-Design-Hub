@@ -1,0 +1,52 @@
+{
+  "components": [
+    {
+      "name": "VdcButton",
+      "slug": "vdc-button",
+      "description": "Standard button component with primary, secondary, and destructive variants",
+      "kendoBase": "kendo-button",
+      "status": "ready",
+      "category": "Actions"
+    },
+    {
+      "name": "VdcGrid",
+      "slug": "vdc-grid",
+      "description": "Data grid with sorting, filtering, and pagination",
+      "kendoBase": "kendo-grid",
+      "status": "ready",
+      "category": "Data Display"
+    },
+    {
+      "name": "VdcDropdown",
+      "slug": "vdc-dropdown",
+      "description": "Dropdown select with search and loading states",
+      "kendoBase": "kendo-dropdownlist",
+      "status": "ready",
+      "category": "Inputs"
+    },
+    {
+      "name": "VdcDatePicker",
+      "slug": "vdc-datepicker",
+      "description": "Date picker with range selection support",
+      "kendoBase": "kendo-datepicker",
+      "status": "draft",
+      "category": "Inputs"
+    },
+    {
+      "name": "VdcDialog",
+      "slug": "vdc-dialog",
+      "description": "Modal dialog for confirmations and forms",
+      "kendoBase": "kendo-dialog",
+      "status": "draft",
+      "category": "Overlays"
+    },
+    {
+      "name": "VdcFormField",
+      "slug": "vdc-form-field",
+      "description": "Form field wrapper with label, input, and validation",
+      "kendoBase": "kendo-textbox",
+      "status": "draft",
+      "category": "Inputs"
+    }
+  ]
+}

@@ -1,0 +1,39 @@
+﻿---
+description: Kendo UI with Fluent theme patterns and VDC wrapper conventions
+globs: **/*.{ts,html}
+alwaysApply: false
+---
+
+# Kendo UI Fluent Patterns
+
+## Always Use VDC Wrappers in Mockups
+
+<!-- Use VDC wrapper -->
+<vdc-button variant="primary">Save</vdc-button>
+<vdc-grid [data]="items"></vdc-grid>
+
+<!-- Don't use raw Kendo directly in mockups -->
+
+## VDC Wrapper Pattern
+
+@Component({
+  selector: 'vdc-button',
+  standalone: true,
+  imports: [ButtonsModule],
+  template: <button kendoButton [themeColor]="themeColor"><ng-content></ng-content></button>
+})
+export class VdcButtonComponent {
+  @Input() variant: 'primary' | 'secondary' | 'destructive' = 'primary';
+}
+
+## Tailwind + Kendo Coexistence
+
+- Use Tailwind for layout (flex, grid, spacing, positioning)
+- Use Kendo theme for component styling (colors, borders, shadows)
+- Override Kendo only via _kendo-fluent-overrides.scss
+
+<!-- Layout with Tailwind, component is Kendo -->
+<div class="flex gap-4 p-6">
+  <vdc-dropdown [data]="options"></vdc-dropdown>
+  <vdc-button variant="primary">Apply</vdc-button>
+</div>

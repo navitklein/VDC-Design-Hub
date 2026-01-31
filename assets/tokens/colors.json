@@ -1,0 +1,124 @@
+{
+  "categories": [
+    {
+      "name": "Brand",
+      "description": "Primary brand colors for VDC"
+    },
+    {
+      "name": "Semantic",
+      "description": "Colors with specific meaning (success, error, etc.)"
+    },
+    {
+      "name": "Surface",
+      "description": "Background colors for different surface levels"
+    },
+    {
+      "name": "Text",
+      "description": "Text colors for different contexts"
+    },
+    {
+      "name": "Border",
+      "description": "Border and divider colors"
+    }
+  ],
+  "colors": [
+    {
+      "token": "vdc-primary",
+      "hex": "#0078d4",
+      "rgb": "0, 120, 212",
+      "usage": "Primary actions, links, and key interactive elements",
+      "category": "Brand"
+    },
+    {
+      "token": "vdc-primary-hover",
+      "hex": "#106ebe",
+      "rgb": "16, 110, 190",
+      "usage": "Hover state for primary elements",
+      "category": "Brand"
+    },
+    {
+      "token": "vdc-secondary",
+      "hex": "#6264a7",
+      "rgb": "98, 100, 167",
+      "usage": "Secondary actions and accent elements",
+      "category": "Brand"
+    },
+    {
+      "token": "vdc-success",
+      "hex": "#107c10",
+      "rgb": "16, 124, 16",
+      "usage": "Success states, confirmations, positive actions",
+      "category": "Semantic"
+    },
+    {
+      "token": "vdc-warning",
+      "hex": "#ffb900",
+      "rgb": "255, 185, 0",
+      "usage": "Warning states, caution indicators",
+      "category": "Semantic"
+    },
+    {
+      "token": "vdc-error",
+      "hex": "#d13438",
+      "rgb": "209, 52, 56",
+      "usage": "Error states, destructive actions ONLY",
+      "category": "Semantic"
+    },
+    {
+      "token": "vdc-surface-100",
+      "hex": "#ffffff",
+      "rgb": "255, 255, 255",
+      "usage": "Primary surface (cards, dialogs, content areas)",
+      "category": "Surface"
+    },
+    {
+      "token": "vdc-surface-200",
+      "hex": "#faf9f8",
+      "rgb": "250, 249, 248",
+      "usage": "Page background, secondary surfaces",
+      "category": "Surface"
+    },
+    {
+      "token": "vdc-surface-300",
+      "hex": "#f3f2f1",
+      "rgb": "243, 242, 241",
+      "usage": "Hover backgrounds, subtle emphasis",
+      "category": "Surface"
+    },
+    {
+      "token": "vdc-text-primary",
+      "hex": "#323130",
+      "rgb": "50, 49, 48",
+      "usage": "Primary text, headings, important content",
+      "category": "Text"
+    },
+    {
+      "token": "vdc-text-secondary",
+      "hex": "#605e5c",
+      "rgb": "96, 94, 92",
+      "usage": "Secondary text, descriptions, captions",
+      "category": "Text"
+    },
+    {
+      "token": "vdc-text-disabled",
+      "hex": "#a19f9d",
+      "rgb": "161, 159, 157",
+      "usage": "Disabled text, placeholder text",
+      "category": "Text"
+    },
+    {
+      "token": "vdc-border-default",
+      "hex": "#8a8886",
+      "rgb": "138, 136, 134",
+      "usage": "Default borders for inputs, cards",
+      "category": "Border"
+    },
+    {
+      "token": "vdc-border-subtle",
+      "hex": "#edebe9",
+      "rgb": "237, 235, 233",
+      "usage": "Subtle dividers, table borders",
+      "category": "Border"
+    }
+  ]
+}

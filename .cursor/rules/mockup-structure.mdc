@@ -1,0 +1,55 @@
+﻿---
+description: Structure and patterns for creating mockup features
+globs: **/features/mockups/**/*.ts
+alwaysApply: false
+---
+
+# Mockup Feature Structure
+
+## Required Files
+
+mockups/[slug]/
+  [slug].routes.ts       # Route config with child routes
+  identity/
+    identity.component.ts
+  design/
+    design.component.ts
+  component-spec/        # Optional
+    spec.component.ts
+  content/
+    identity.md          # Markdown content
+    annotations.json     # Annotation definitions
+
+## Design Component Pattern
+
+@Component({
+  selector: 'app-design',
+  standalone: true,
+  imports: [CommonModule, SimulatorBarComponent],
+  template: 
+    <app-simulator-bar />
+    @switch (simulatorState()) {
+      @case ('loading') { <app-loading-skeleton /> }
+      @case ('empty') { <app-empty-state /> }
+      @case ('error') { <app-error-state /> }
+      @case ('data') { <!-- Mockup content --> }
+    }
+  
+})
+export class DesignComponent {
+  private simulator = inject(SimulatorStateService);
+  simulatorState = this.simulator.currentState;
+}
+
+## Annotations JSON Format
+
+{
+  "annotations": [
+    {
+      "id": "ann-1",
+      "selector": "#header-actions",
+      "title": "Primary Actions",
+      "note": "Group related actions. Max 3 visible."
+    }
+  ]
+}

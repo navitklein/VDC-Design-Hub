@@ -1,0 +1,44 @@
+﻿---
+description: Core conventions for the VDC Design Hub Angular application. Always apply when working in this project.
+alwaysApply: true
+---
+
+# VDC Design Hub Conventions
+
+## Architecture Rules
+
+- **Standalone Components ONLY** - Never use NgModules
+- **Lazy Loading** - Every feature route must be lazy-loaded
+- **No Database** - All data is static JSON/Markdown loaded at runtime
+
+## Technology Stack
+
+- Angular 19+ with standalone components
+- Kendo UI for Angular with **Fluent theme**
+- Tailwind CSS for layout and custom styling
+- Font Awesome for icons
+- ngx-markdown for content rendering
+
+## File Organization
+
+features/mockups/[slug]/
+  [slug].routes.ts
+  identity/
+  design/
+  component-spec/
+  content/
+    identity.md
+    annotations.json
+
+## Naming Conventions
+
+- Feature folders: kebab-case (e.g., personal-workspace)
+- Components: PascalCase with .component.ts suffix
+- Services: PascalCase with .service.ts suffix
+- VDC Library components: Prefix with Vdc (e.g., VdcGridComponent)
+
+## State Management
+
+- Use BehaviorSubject in services for simple state
+- Simulator states: 'loading' | 'empty' | 'data' | 'error'
+- Annotations toggle: boolean via AnnotationService

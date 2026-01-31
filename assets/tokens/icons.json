@@ -1,0 +1,148 @@
+{
+  "categories": [
+    {
+      "name": "Entities",
+      "description": "Icons representing VDC business entities"
+    },
+    {
+      "name": "Actions",
+      "description": "Icons for user actions"
+    },
+    {
+      "name": "Navigation",
+      "description": "Icons for navigation and wayfinding"
+    },
+    {
+      "name": "Status",
+      "description": "Icons indicating state or status"
+    }
+  ],
+  "icons": [
+    {
+      "name": "briefcase",
+      "fontAwesome": "fa-briefcase",
+      "entity": "Project",
+      "usage": "Represents a Project entity in navigation, cards, and lists",
+      "sizes": ["16px", "24px", "32px"],
+      "colorToken": "vdc-icon-primary",
+      "category": "Entities"
+    },
+    {
+      "name": "user",
+      "fontAwesome": "fa-user",
+      "entity": "User / Team Member",
+      "usage": "Represents individual users or team members",
+      "sizes": ["16px", "24px"],
+      "colorToken": "vdc-icon-primary",
+      "category": "Entities"
+    },
+    {
+      "name": "users",
+      "fontAwesome": "fa-users",
+      "entity": "Team",
+      "usage": "Represents a team or group of users",
+      "sizes": ["16px", "24px"],
+      "colorToken": "vdc-icon-primary",
+      "category": "Entities"
+    },
+    {
+      "name": "folder",
+      "fontAwesome": "fa-folder",
+      "entity": "Folder / Category",
+      "usage": "Represents folders or organizational categories",
+      "sizes": ["16px", "24px"],
+      "colorToken": "vdc-icon-primary",
+      "category": "Entities"
+    },
+    {
+      "name": "file",
+      "fontAwesome": "fa-file",
+      "entity": "Document / File",
+      "usage": "Represents documents or files",
+      "sizes": ["16px", "24px"],
+      "colorToken": "vdc-icon-primary",
+      "category": "Entities"
+    },
+    {
+      "name": "plus",
+      "fontAwesome": "fa-plus",
+      "entity": null,
+      "usage": "Add or create new items",
+      "sizes": ["12px", "16px"],
+      "colorToken": "vdc-icon-primary",
+      "category": "Actions"
+    },
+    {
+      "name": "edit",
+      "fontAwesome": "fa-pen",
+      "entity": null,
+      "usage": "Edit or modify items",
+      "sizes": ["12px", "16px"],
+      "colorToken": "vdc-icon-primary",
+      "category": "Actions"
+    },
+    {
+      "name": "trash",
+      "fontAwesome": "fa-trash",
+      "entity": null,
+      "usage": "Delete items (use with caution, pair with error color)",
+      "sizes": ["12px", "16px"],
+      "colorToken": "vdc-error",
+      "category": "Actions"
+    },
+    {
+      "name": "search",
+      "fontAwesome": "fa-search",
+      "entity": null,
+      "usage": "Search functionality",
+      "sizes": ["16px"],
+      "colorToken": "vdc-icon-secondary",
+      "category": "Actions"
+    },
+    {
+      "name": "home",
+      "fontAwesome": "fa-home",
+      "entity": null,
+      "usage": "Home or dashboard navigation",
+      "sizes": ["16px", "24px"],
+      "colorToken": "vdc-icon-primary",
+      "category": "Navigation"
+    },
+    {
+      "name": "chevron-right",
+      "fontAwesome": "fa-chevron-right",
+      "entity": null,
+      "usage": "Navigation forward, expand",
+      "sizes": ["12px", "16px"],
+      "colorToken": "vdc-icon-secondary",
+      "category": "Navigation"
+    },
+    {
+      "name": "check-circle",
+      "fontAwesome": "fa-check-circle",
+      "entity": null,
+      "usage": "Success status, completed items",
+      "sizes": ["16px", "24px"],
+      "colorToken": "vdc-success",
+      "category": "Status"
+    },
+    {
+      "name": "exclamation-triangle",
+      "fontAwesome": "fa-exclamation-triangle",
+      "entity": null,
+      "usage": "Warning status",
+      "sizes": ["16px", "24px"],
+      "colorToken": "vdc-warning",
+      "category": "Status"
+    },
+    {
+      "name": "times-circle",
+      "fontAwesome": "fa-times-circle",
+      "entity": null,
+      "usage": "Error status, failed items",
+      "sizes": ["16px", "24px"],
+      "colorToken": "vdc-error",
+      "category": "Status"
+    }
+  ]
+}

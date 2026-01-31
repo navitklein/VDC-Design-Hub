@@ -1,0 +1,72 @@
+{
+  "name": "vdc-design-hub",
+  "version": "0.0.0",
+  "scripts": {
+    "ng": "ng",
+    "start": "ng serve",
+    "build": "ng build",
+    "watch": "ng build --watch --configuration development",
+    "test": "ng test"
+  },
+  "prettier": {
+    "printWidth": 100,
+    "singleQuote": true,
+    "overrides": [
+      {
+        "files": "*.html",
+        "options": {
+          "parser": "angular"
+        }
+      }
+    ]
+  },
+  "private": true,
+  "packageManager": "npm@10.9.2",
+  "dependencies": {
+    "@angular/animations": "^21.1.2",
+    "@angular/common": "^21.1.0",
+    "@angular/compiler": "^21.1.0",
+    "@angular/core": "^21.1.0",
+    "@angular/forms": "^21.1.0",
+    "@angular/localize": "^19.2.18",
+    "@angular/platform-browser": "^21.1.0",
+    "@angular/router": "^21.1.0",
+    "@fortawesome/fontawesome-free": "^7.1.0",
+    "@progress/kendo-angular-buttons": "^22.0.1",
+    "@progress/kendo-angular-common": "^22.0.1",
+    "@progress/kendo-angular-dateinputs": "^22.0.1",
+    "@progress/kendo-angular-dialog": "^22.0.1",
+    "@progress/kendo-angular-dropdowns": "^22.0.1",
+    "@progress/kendo-angular-grid": "^22.0.1",
+    "@progress/kendo-angular-icons": "^22.0.1",
+    "@progress/kendo-angular-inputs": "^22.0.1",
+    "@progress/kendo-angular-intl": "^22.0.1",
+    "@progress/kendo-angular-l10n": "^22.0.1",
+    "@progress/kendo-angular-label": "^22.0.1",
+    "@progress/kendo-angular-layout": "^22.0.1",
+    "@progress/kendo-angular-navigation": "^22.0.1",
+    "@progress/kendo-angular-popup": "^22.0.1",
+    "@progress/kendo-angular-tooltip": "^22.0.1",
+    "@progress/kendo-angular-treeview": "^22.0.1",
+    "@progress/kendo-angular-utils": "^22.0.1",
+    "@progress/kendo-data-query": "^1.7.3",
+    "@progress/kendo-drawing": "^1.24.0",
+    "@progress/kendo-licensing": "^1.10.0",
+    "@progress/kendo-theme-fluent": "^12.3.0",
+    "@tailwindcss/postcss": "^4.1.18",
+    "autoprefixer": "^10.4.24",
+    "marked": "^17.0.1",
+    "ngx-markdown": "^21.0.1",
+    "postcss": "^8.5.6",
+    "rxjs": "~7.8.0",
+    "tailwindcss": "^4.1.18",
+    "tslib": "^2.3.0",
+    "zone.js": "^0.16.0"
+  },
+  "devDependencies": {
+    "@angular/build": "^21.1.2",
+    "@angular/cli": "^21.1.2",
+    "@angular/compiler-cli": "^21.1.0",
+    "typescript": "~5.9.2"
+  }
+}

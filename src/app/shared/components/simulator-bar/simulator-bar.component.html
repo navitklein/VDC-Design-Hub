@@ -1,0 +1,77 @@
+<div 
+  class="simulator-bar" 
+  [class.simulator-bar--collapsed]="collapsed()"
+  kendoTooltip
+  position="top">
+
+  <!-- Collapse/Expand Button -->
+  <button 
+    class="simulator-bar__toggle-btn"
+    (click)="toggleCollapsed()"
+    [title]="collapsed() ? 'Expand Simulator' : 'Collapse Simulator'">
+    <i class="fa-solid" [class.fa-chevron-up]="!collapsed()" [class.fa-chevron-down]="collapsed()"></i>
+  </button>
+
+  @if (!collapsed()) {
+    <!-- Simulator Label -->
+    <span class="simulator-bar__label">
+      <i class="fa-solid fa-sliders"></i>
+      Simulator
+    </span>
+
+    <div class="simulator-bar__divider"></div>
+
+    <!-- State Controls -->
+    <div class="simulator-bar__controls">
+      <!-- State Dropdown -->
+      <div class="simulator-bar__control">
+        <label class="simulator-bar__control-label">State</label>
+        <kendo-dropdownlist
+          [data]="stateOptions"
+          [value]="currentStateOption()"
+          textField="label"
+          valueField="value"
+          [valuePrimitive]="true"
+          (valueChange)="onStateChange($event)"
+          [popupSettings]="{ width: 180 }">
+          <ng-template kendoDropDownListItemTemplate let-item>
+            <div class="state-option">
+              <span class="state-indicator" [ngClass]="getStateClass(item.value)">
+                {{ item.label }}
+              </span>
+              <span class="state-option__shortcut">{{ item.shortcut }}</span>
+            </div>
+          </ng-template>
+          <ng-template kendoDropDownListValueTemplate let-item>
+            <span class="state-indicator" [ngClass]="getStateClass(item.value)">
+              {{ item.label }}
+            </span>
+          </ng-template>
+        </kendo-dropdownlist>
+      </div>
+
+      <div class="simulator-bar__divider"></div>
+
+      <!-- Annotations Toggle -->
+      <div class="simulator-bar__control">
+        <label class="simulator-bar__control-label">
+          Annotations
+          <span class="simulator-bar__shortcut">(A)</span>
+        </label>
+        <kendo-switch
+          [checked]="annotationsVisible()"
+          (valueChange)="onAnnotationsToggle($event)"
+          onLabel="ON"
+          offLabel="OFF">
+        </kendo-switch>
+      </div>
+    </div>
+
+    <!-- Help Button -->
+    <button 
+      class="simulator-bar__toggle-btn"
+      title="Keyboard Shortcuts: 1-4 for states, A for annotations">
+      <i class="fa-solid fa-keyboard"></i>
+    </button>
+  }
+</div>

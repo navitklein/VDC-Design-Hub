@@ -1,0 +1,42 @@
+﻿---
+description: Angular standalone component patterns for VDC Design Hub
+globs: **/*.ts
+alwaysApply: false
+---
+
+# Angular Standalone Patterns
+
+## Component Structure
+
+// CORRECT - Standalone component
+@Component({
+  selector: 'app-feature',
+  standalone: true,
+  imports: [CommonModule, RouterModule],
+  templateUrl: './feature.component.html'
+})
+export class FeatureComponent {}
+
+// WRONG - Never use NgModules
+@NgModule({ declarations: [...] })
+
+## Route Configuration
+
+// feature.routes.ts
+export const FEATURE_ROUTES: Routes = [
+  { path: '', component: FeatureComponent }
+];
+
+// app.routes.ts - Always lazy load
+{
+  path: 'feature',
+  loadChildren: () => import('./features/feature/feature.routes')
+    .then(m => m.FEATURE_ROUTES)
+}
+
+## Service Injection
+
+// Use inject() function (preferred)
+export class MyComponent {
+  private readonly service = inject(MyService);
+}

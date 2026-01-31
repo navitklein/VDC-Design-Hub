@@ -1,0 +1,119 @@
+// =============================================================================
+// Simulator Bar Theme
+// =============================================================================
+
+.simulator-bar {
+  position: fixed;
+  bottom: var(--vdc-space-lg);
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: var(--vdc-z-simulator);
+  
+  display: flex;
+  align-items: center;
+  gap: var(--vdc-space-md);
+  
+  padding: var(--vdc-space-sm) var(--vdc-space-md);
+  background-color: var(--vdc-simulator-bg);
+  color: var(--vdc-simulator-text);
+  border-radius: var(--vdc-radius-lg);
+  box-shadow: var(--vdc-shadow-lg);
+  
+  font-family: var(--vdc-font-family);
+  font-size: var(--vdc-font-size-sm);
+  
+  transition: all 0.2s ease-in-out;
+  
+  &--collapsed {
+    width: auto;
+    padding: var(--vdc-space-sm);
+    
+    .simulator-bar__controls {
+      display: none;
+    }
+  }
+  
+  &__label {
+    font-weight: var(--vdc-font-weight-semibold);
+    white-space: nowrap;
+  }
+  
+  &__controls {
+    display: flex;
+    align-items: center;
+    gap: var(--vdc-space-md);
+  }
+  
+  &__divider {
+    width: 1px;
+    height: 24px;
+    background-color: rgba(255, 255, 255, 0.2);
+  }
+  
+  &__toggle-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    background: transparent;
+    border: none;
+    color: var(--vdc-simulator-text);
+    cursor: pointer;
+    border-radius: var(--vdc-radius-md);
+    transition: background-color 0.15s;
+    
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.1);
+    }
+  }
+  
+  // Override Kendo dropdown styles in simulator context
+  .k-dropdown {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: var(--vdc-simulator-text);
+    
+    .k-input-inner {
+      color: var(--vdc-simulator-text);
+    }
+  }
+  
+  // Override Kendo switch in simulator context
+  .k-switch-on {
+    .k-switch-track {
+      background-color: var(--vdc-primary);
+    }
+  }
+}
+
+// State indicator pills
+.state-indicator {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: var(--vdc-radius-full);
+  font-size: var(--vdc-font-size-xs);
+  font-weight: var(--vdc-font-weight-semibold);
+  text-transform: uppercase;
+  
+  &--loading {
+    background-color: #ffd54f;
+    color: #5d4037;
+  }
+  
+  &--empty {
+    background-color: #90a4ae;
+    color: #ffffff;
+  }
+  
+  &--data {
+    background-color: #81c784;
+    color: #1b5e20;
+  }
+  
+  &--error {
+    background-color: #ef5350;
+    color: #ffffff;
+  }
+}
