@@ -27,6 +27,7 @@
       "purpose": "Indicates project location in navigation and cards",
       "entity": "Project",
       "category": "VDC Entities",
+      "colorToken": "vdc-context-project",
       "variants": [
         { "label": "Current", "fontAwesome": "fa-regular fa-location-pin", "isProduction": true }
       ]
@@ -36,6 +37,7 @@
       "purpose": "Projects 1st tier navigation icon",
       "entity": "Project",
       "category": "VDC Entities",
+      "colorToken": "vdc-context-project",
       "variants": [
         { "label": "Current", "fontAwesome": "fa-regular fa-layer-group", "isProduction": true }
       ]
@@ -45,6 +47,7 @@
       "purpose": "Represents an ingredient entity",
       "entity": "Ingredient",
       "category": "VDC Entities",
+      "colorToken": "vdc-entity-ingredient",
       "variants": [
         { "label": "Current", "fontAwesome": "fa-regular fa-cube", "isProduction": true }
       ]
@@ -54,6 +57,7 @@
       "purpose": "Edit an existing ingredient",
       "entity": "Ingredient",
       "category": "VDC Entities",
+      "colorToken": "vdc-entity-ingredient",
       "variants": [
         { "label": "Current", "fontAwesome": "fa-regular fa-cube-pen", "isProduction": true }
       ]
@@ -63,6 +67,7 @@
       "purpose": "Replace/swap an ingredient",
       "entity": "Ingredient",
       "category": "VDC Entities",
+      "colorToken": "vdc-entity-ingredient",
       "variants": [
         { "label": "Current", "fontAwesome": "fa-regular fa-cube-sync", "isProduction": true }
       ]
@@ -72,6 +77,7 @@
       "purpose": "Add a new ingredient",
       "entity": "Ingredient",
       "category": "VDC Entities",
+      "colorToken": "vdc-entity-ingredient",
       "variants": [
         { "label": "Current", "fontAwesome": "fa-regular fa-cube-circle-plus", "isProduction": true }
       ]
@@ -81,6 +87,7 @@
       "purpose": "Represents a release entity",
       "entity": "Release",
       "category": "VDC Entities",
+      "colorToken": "vdc-entity-release",
       "variants": [
         { "label": "Current", "fontAwesome": "fa-regular fa-rocket-launch", "isProduction": true }
       ]
@@ -90,6 +97,7 @@
       "purpose": "Edit an existing release",
       "entity": "Release",
       "category": "VDC Entities",
+      "colorToken": "vdc-entity-release",
       "variants": [
         { "label": "Current", "fontAwesome": "fa-regular fa-rocket-launch-pen", "isProduction": true }
       ]
@@ -99,6 +107,7 @@
       "purpose": "Replace/swap a release",
       "entity": "Release",
       "category": "VDC Entities",
+      "colorToken": "vdc-entity-release",
       "variants": [
         { "label": "Current", "fontAwesome": "fa-regular fa-rocket-launch-sync", "isProduction": true }
       ]
@@ -108,6 +117,7 @@
       "purpose": "Represents a workflow entity",
       "entity": "Workflow",
       "category": "VDC Entities",
+      "colorToken": "vdc-entity-workflow",
       "variants": [
         { "label": "Current", "fontAwesome": "fa-regular fa-arrow-progress", "isProduction": true }
       ]
@@ -172,6 +182,7 @@
       "purpose": "Execute/run a workflow",
       "entity": "Workflow",
       "category": "VDC Actions",
+      "colorToken": "vdc-entity-workflow",
       "variants": [
         { "label": "Current", "fontAwesome": "fa-regular fa-circle-play", "isProduction": true }
       ]
@@ -181,6 +192,7 @@
       "purpose": "Represents a build step in workflow",
       "entity": "Workflow",
       "category": "VDC Actions",
+      "colorToken": "vdc-entity-workflow",
       "variants": [
         { "label": "Current", "fontAwesome": "fa-regular fa-wrench-simple", "isProduction": true }
       ]
@@ -190,6 +202,7 @@
       "purpose": "Represents a test step in workflow",
       "entity": "Workflow",
       "category": "VDC Actions",
+      "colorToken": "vdc-entity-workflow",
       "variants": [
         { "label": "Current", "fontAwesome": "fa-regular fa-vial", "isProduction": true }
       ]
@@ -208,6 +221,7 @@
       "purpose": "Indicates a personal/private project",
       "entity": "Project",
       "category": "Context & Users",
+      "colorToken": "vdc-context-personal",
       "variants": [
         { "label": "Current", "fontAwesome": "fa-regular fa-circle-user", "isProduction": true }
       ]
@@ -217,6 +231,7 @@
       "purpose": "Indicates a manual trigger by user",
       "entity": null,
       "category": "Context & Users",
+      "colorToken": "vdc-context-personal",
       "variants": [
         { "label": "Current", "fontAwesome": "fa-regular fa-circle-user", "isProduction": true }
       ]
@@ -226,6 +241,7 @@
       "purpose": "Indicates global/shared context",
       "entity": null,
       "category": "Context & Users",
+      "colorToken": "vdc-context-global",
       "variants": [
         { "label": "Current", "fontAwesome": "fa-regular fa-globe", "isProduction": true }
       ]
@@ -235,6 +251,7 @@
       "purpose": "Indicates personal/user-specific context",
       "entity": null,
       "category": "Context & Users",
+      "colorToken": "vdc-context-personal",
       "variants": [
         { "label": "Current", "fontAwesome": "fa-regular fa-circle-user", "isProduction": true }
       ]
@@ -244,6 +261,7 @@
       "purpose": "Shows release with user and date information",
       "entity": "Release",
       "category": "Context & Users",
+      "colorToken": "vdc-entity-release",
       "variants": [
         { "label": "Current", "fontAwesome": "fa-regular fa-calendar-circle-user", "isProduction": true }
       ]

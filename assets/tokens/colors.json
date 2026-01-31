@@ -19,6 +19,14 @@
     {
       "name": "Border",
       "description": "Border and divider colors"
+    },
+    {
+      "name": "Entity",
+      "description": "Colors for VDC business entities"
+    },
+    {
+      "name": "Navigation",
+      "description": "Colors for navigation context tiers"
     }
   ],
   "colors": [
@@ -119,6 +127,62 @@
       "rgb": "237, 235, 233",
       "usage": "Subtle dividers, table borders",
       "category": "Border"
+    },
+    {
+      "token": "vdc-entity-ingredient",
+      "hex": "#5E4DB2",
+      "rgb": "94, 77, 178",
+      "usage": "Ingredient entity icons, badges, and accents",
+      "category": "Entity"
+    },
+    {
+      "token": "vdc-entity-ingredient-light",
+      "hex": "#F3F0FF",
+      "rgb": "243, 240, 255",
+      "usage": "Ingredient entity backgrounds and subtle highlights",
+      "category": "Entity"
+    },
+    {
+      "token": "vdc-entity-release",
+      "hex": "#943D73",
+      "rgb": "148, 61, 115",
+      "usage": "Release entity icons, badges, and accents",
+      "category": "Entity"
+    },
+    {
+      "token": "vdc-entity-release-light",
+      "hex": "#FFECF8",
+      "rgb": "255, 236, 248",
+      "usage": "Release entity backgrounds and subtle highlights",
+      "category": "Entity"
+    },
+    {
+      "token": "vdc-entity-workflow",
+      "hex": "#F5CD47",
+      "rgb": "245, 205, 71",
+      "usage": "Workflow entity icons, badges, and accents (from VDC logo)",
+      "category": "Entity"
+    },
+    {
+      "token": "vdc-context-personal",
+      "hex": "#2E7D6B",
+      "rgb": "46, 125, 107",
+      "usage": "Personal context navigation and user-specific areas",
+      "category": "Navigation"
+    },
+    {
+      "token": "vdc-context-global",
+      "hex": "#0078d4",
+      "rgb": "0, 120, 212",
+      "usage": "Global context navigation (references vdc-primary)",
+      "category": "Navigation"
+    },
+    {
+      "token": "vdc-context-project",
+      "hex": "#0B4F8A",
+      "rgb": "11, 79, 138",
+      "usage": "Project context navigation and project-specific areas",
+      "category": "Navigation"
     }
   ]
 }

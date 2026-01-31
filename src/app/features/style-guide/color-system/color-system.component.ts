@@ -1,6 +1,5 @@
 import { Component, inject, OnInit, signal, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { DropDownListModule } from '@progress/kendo-angular-dropdowns';
 import { TokenService } from '../../../core/services/token.service';
 import { ColorToken, ColorCategory } from '../../../core/models';
 
@@ -10,7 +9,7 @@ import { ColorToken, ColorCategory } from '../../../core/models';
 @Component({
   selector: 'app-color-system',
   standalone: true,
-  imports: [CommonModule, DropDownListModule],
+  imports: [CommonModule],
   template: `
     <div class="color-system">
       <header class="color-system__header">
@@ -18,14 +17,18 @@ import { ColorToken, ColorCategory } from '../../../core/models';
           <h1 class="vdc-heading-1">Color System</h1>
           <p class="vdc-caption">VDC color palette with token names and usage guidelines</p>
         </div>
-
-        <kendo-dropdownlist
-          [data]="categoryOptions()"
-          [value]="selectedCategory()"
-          (valueChange)="onCategoryChange($event)"
-          class="color-system__filter">
-        </kendo-dropdownlist>
       </header>
+
+      <div class="color-system__chip-filter">
+        @for (category of categoryOptions(); track category) {
+          <button 
+            class="filter-chip"
+            [class.filter-chip--active]="selectedCategory() === category"
+            (click)="onChipSelect(category)">
+            {{ category }}
+          </button>
+        }
+      </div>
 
       @if (loading()) {
         <div class="color-system__loading">
@@ -78,8 +81,32 @@ import { ColorToken, ColorCategory } from '../../../core/models';
       }
     }
 
-    .color-system__filter {
-      width: 180px;
+    .color-system__chip-filter {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--vdc-space-xs);
+    }
+
+    .filter-chip {
+      padding: 6px 12px;
+      border: 1px solid var(--vdc-border-default);
+      border-radius: var(--vdc-radius-full);
+      background: var(--vdc-surface-100);
+      color: var(--vdc-text-secondary);
+      font-size: var(--vdc-font-size-sm);
+      cursor: pointer;
+      transition: all 0.15s;
+
+      &:hover {
+        background: var(--vdc-surface-200);
+        color: var(--vdc-text-primary);
+      }
+
+      &--active {
+        background: var(--vdc-primary);
+        border-color: var(--vdc-primary);
+        color: white;
+      }
     }
 
     .color-system__loading {
@@ -173,7 +200,7 @@ export class ColorSystemComponent implements OnInit {
     this.tokenService.loadColors().subscribe();
   }
   
-  onCategoryChange(category: string): void {
+  onChipSelect(category: string): void {
     this.selectedCategory.set(category);
   }
 }

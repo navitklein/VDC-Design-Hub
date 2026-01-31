@@ -54,6 +54,24 @@
   --vdc-icon-accent: #0078d4;
   
   // ---------------------------------------------------------------------------
+  // Entity Colors (for entity-specific styling and icons)
+  // ---------------------------------------------------------------------------
+  --vdc-entity-ingredient: #5E4DB2;
+  --vdc-entity-ingredient-light: #F3F0FF;
+  
+  --vdc-entity-release: #943D73;
+  --vdc-entity-release-light: #FFECF8;
+  
+  --vdc-entity-workflow: #F5CD47;
+  
+  // ---------------------------------------------------------------------------
+  // Navigation Context Colors (1st tier navigation)
+  // ---------------------------------------------------------------------------
+  --vdc-context-personal: #2E7D6B;
+  --vdc-context-global: var(--vdc-primary);  // Fluent blue
+  --vdc-context-project: #0B4F8A;
+  
+  // ---------------------------------------------------------------------------
   // Simulator & Annotation Colors
   // ---------------------------------------------------------------------------
   --vdc-simulator-bg: #1f1f1f;

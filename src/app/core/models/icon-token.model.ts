@@ -74,6 +74,9 @@ export interface VdcIconConcept {
   /** Category for grouping */
   category: string;
   
+  /** CSS variable name for entity/context color (e.g., "vdc-entity-ingredient") */
+  colorToken?: string;
+  
   /** Available icon variants (current production + alternatives) */
   variants: VdcIconVariant[];
 }
