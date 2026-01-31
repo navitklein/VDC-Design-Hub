@@ -7,7 +7,9 @@ import {
   ColorCategory,
   IconToken, 
   IconsFile, 
-  IconCategory 
+  IconCategory,
+  VdcIconConcept,
+  VdcIconsFile
 } from '../models';
 
 /**
@@ -30,6 +32,12 @@ export class TokenService {
   private readonly _iconCategories = signal<IconCategory[]>([]);
   readonly icons = this._icons.asReadonly();
   readonly iconCategories = this._iconCategories.asReadonly();
+  
+  // VDC Icon state (with variants for comparison)
+  private readonly _vdcIcons = signal<VdcIconConcept[]>([]);
+  private readonly _vdcIconCategories = signal<IconCategory[]>([]);
+  readonly vdcIcons = this._vdcIcons.asReadonly();
+  readonly vdcIconCategories = this._vdcIconCategories.asReadonly();
   
   // Loading state
   private readonly _loading = signal<boolean>(false);
@@ -91,6 +99,23 @@ export class TokenService {
   }
   
   /**
+   * Load VDC icon concepts (with variants for comparison)
+   */
+  loadVdcIcons(): Observable<VdcIconConcept[]> {
+    return this.http.get<VdcIconsFile>('/assets/tokens/vdc-icons.json').pipe(
+      tap(data => {
+        this._vdcIcons.set(data.icons);
+        this._vdcIconCategories.set(data.categories);
+      }),
+      map(data => data.icons),
+      catchError(err => {
+        console.error('Error loading VDC icons:', err);
+        return of([]);
+      })
+    );
+  }
+  
+  /**
    * Get colors by category
    * @param category Category name
    */
@@ -127,5 +152,21 @@ export class TokenService {
    */
   findIcon(name: string): IconToken | undefined {
     return this._icons().find(i => i.name === name);
+  }
+  
+  /**
+   * Get VDC icons by category
+   * @param category Category name
+   */
+  getVdcIconsByCategory(category: string): VdcIconConcept[] {
+    return this._vdcIcons().filter(i => i.category === category);
+  }
+  
+  /**
+   * Find a VDC icon concept by name
+   * @param name Icon concept name
+   */
+  findVdcIcon(name: string): VdcIconConcept | undefined {
+    return this._vdcIcons().find(i => i.name === name);
   }
 }

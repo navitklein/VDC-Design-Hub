@@ -32,6 +32,11 @@ export const routes: Routes = [
         path: 'mockups/:slug',
         loadChildren: () => import('./features/mockups/mockup-shell.routes')
           .then(m => m.MOCKUP_SHELL_ROUTES)
+      },
+      {
+        path: 'vdc-icons',
+        loadChildren: () => import('./features/vdc-icons/vdc-icons.routes')
+          .then(m => m.VDC_ICONS_ROUTES)
       }
     ]
   },

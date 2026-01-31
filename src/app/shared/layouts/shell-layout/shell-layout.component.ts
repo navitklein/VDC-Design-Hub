@@ -45,6 +45,13 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
               <i class="fa-solid fa-cubes"></i>
               Components
             </a>
+            <a 
+              routerLink="/vdc-icons" 
+              routerLinkActive="shell__nav-link--active"
+              class="shell__nav-link">
+              <i class="fa-regular fa-icons"></i>
+              VDC Icons
+            </a>
           </nav>
 
           <!-- Actions -->

@@ -1,0 +1,342 @@
+{
+  "categories": [
+    {
+      "name": "VDC Entities",
+      "description": "Core VDC business objects and entities"
+    },
+    {
+      "name": "VDC Actions",
+      "description": "Actions and operations in VDC"
+    },
+    {
+      "name": "Context & Users",
+      "description": "User and context-related icons"
+    },
+    {
+      "name": "Status",
+      "description": "Status and state indicators"
+    },
+    {
+      "name": "Other",
+      "description": "Miscellaneous icons"
+    }
+  ],
+  "icons": [
+    {
+      "name": "Project Location",
+      "purpose": "Indicates project location in navigation and cards",
+      "entity": "Project",
+      "category": "VDC Entities",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-location-pin", "isProduction": true }
+      ]
+    },
+    {
+      "name": "Projects Navigation",
+      "purpose": "Projects 1st tier navigation icon",
+      "entity": "Project",
+      "category": "VDC Entities",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-layer-group", "isProduction": true }
+      ]
+    },
+    {
+      "name": "Ingredient",
+      "purpose": "Represents an ingredient entity",
+      "entity": "Ingredient",
+      "category": "VDC Entities",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-cube", "isProduction": true }
+      ]
+    },
+    {
+      "name": "Edit Ingredient",
+      "purpose": "Edit an existing ingredient",
+      "entity": "Ingredient",
+      "category": "VDC Entities",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-cube-pen", "isProduction": true }
+      ]
+    },
+    {
+      "name": "Replace Ingredient",
+      "purpose": "Replace/swap an ingredient",
+      "entity": "Ingredient",
+      "category": "VDC Entities",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-cube-sync", "isProduction": true }
+      ]
+    },
+    {
+      "name": "Add Ingredient",
+      "purpose": "Add a new ingredient",
+      "entity": "Ingredient",
+      "category": "VDC Entities",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-cube-circle-plus", "isProduction": true }
+      ]
+    },
+    {
+      "name": "Release",
+      "purpose": "Represents a release entity",
+      "entity": "Release",
+      "category": "VDC Entities",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-rocket-launch", "isProduction": true }
+      ]
+    },
+    {
+      "name": "Edit Release",
+      "purpose": "Edit an existing release",
+      "entity": "Release",
+      "category": "VDC Entities",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-rocket-launch-pen", "isProduction": true }
+      ]
+    },
+    {
+      "name": "Replace Release",
+      "purpose": "Replace/swap a release",
+      "entity": "Release",
+      "category": "VDC Entities",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-rocket-launch-sync", "isProduction": true }
+      ]
+    },
+    {
+      "name": "Workflow",
+      "purpose": "Represents a workflow entity",
+      "entity": "Workflow",
+      "category": "VDC Entities",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-arrow-progress", "isProduction": true }
+      ]
+    },
+    {
+      "name": "Knobs",
+      "purpose": "Represents knobs/settings configuration",
+      "entity": "Knobs",
+      "category": "VDC Entities",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-sliders", "isProduction": true }
+      ]
+    },
+    {
+      "name": "Dependencies",
+      "purpose": "Represents dependencies between entities",
+      "entity": "Dependency",
+      "category": "VDC Entities",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-cubes", "isProduction": true }
+      ]
+    },
+    {
+      "name": "Silicon",
+      "purpose": "Represents silicon/chip entity",
+      "entity": "Silicon",
+      "category": "VDC Entities",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-microchip", "isProduction": true }
+      ]
+    },
+    {
+      "name": "Package",
+      "purpose": "Represents a package entity",
+      "entity": "Package",
+      "category": "VDC Entities",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-box-archive", "isProduction": true }
+      ]
+    },
+    {
+      "name": "Download",
+      "purpose": "Download files and packages",
+      "entity": null,
+      "category": "VDC Actions",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-download", "isProduction": true },
+        { "label": "Option A", "fontAwesome": "fa-regular fa-arrow-down-to-line", "isProduction": false }
+      ]
+    },
+    {
+      "name": "Edit",
+      "purpose": "Edit or modify items",
+      "entity": null,
+      "category": "VDC Actions",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-pen-to-square", "isProduction": true }
+      ]
+    },
+    {
+      "name": "Run Workflow",
+      "purpose": "Execute/run a workflow",
+      "entity": "Workflow",
+      "category": "VDC Actions",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-circle-play", "isProduction": true }
+      ]
+    },
+    {
+      "name": "Build Step",
+      "purpose": "Represents a build step in workflow",
+      "entity": "Workflow",
+      "category": "VDC Actions",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-wrench-simple", "isProduction": true }
+      ]
+    },
+    {
+      "name": "Test Step",
+      "purpose": "Represents a test step in workflow",
+      "entity": "Workflow",
+      "category": "VDC Actions",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-vial", "isProduction": true }
+      ]
+    },
+    {
+      "name": "User",
+      "purpose": "Represents a user in the system",
+      "entity": "User",
+      "category": "Context & Users",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-circle-user", "isProduction": true }
+      ]
+    },
+    {
+      "name": "Personal Project",
+      "purpose": "Indicates a personal/private project",
+      "entity": "Project",
+      "category": "Context & Users",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-circle-user", "isProduction": true }
+      ]
+    },
+    {
+      "name": "Manual Trigger",
+      "purpose": "Indicates a manual trigger by user",
+      "entity": null,
+      "category": "Context & Users",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-circle-user", "isProduction": true }
+      ]
+    },
+    {
+      "name": "Global Context",
+      "purpose": "Indicates global/shared context",
+      "entity": null,
+      "category": "Context & Users",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-globe", "isProduction": true }
+      ]
+    },
+    {
+      "name": "Personal Context",
+      "purpose": "Indicates personal/user-specific context",
+      "entity": null,
+      "category": "Context & Users",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-circle-user", "isProduction": true }
+      ]
+    },
+    {
+      "name": "Release by User Date",
+      "purpose": "Shows release with user and date information",
+      "entity": "Release",
+      "category": "Context & Users",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-calendar-circle-user", "isProduction": true }
+      ]
+    },
+    {
+      "name": "Modification Indicator",
+      "purpose": "Indicates something has been modified",
+      "entity": null,
+      "category": "Status",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-bolt", "isProduction": true }
+      ]
+    },
+    {
+      "name": "Official Indicator",
+      "purpose": "Indicates official/verified status",
+      "entity": null,
+      "category": "Status",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-solid fa-badge-check", "isProduction": true }
+      ]
+    },
+    {
+      "name": "Success",
+      "purpose": "Indicates successful completion",
+      "entity": null,
+      "category": "Status",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-circle-check", "isProduction": true }
+      ]
+    },
+    {
+      "name": "Failure",
+      "purpose": "Indicates failure or error",
+      "entity": null,
+      "category": "Status",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-circle-xmark", "isProduction": true }
+      ]
+    },
+    {
+      "name": "Used By",
+      "purpose": "Shows usage/dependency relationship",
+      "entity": null,
+      "category": "Status",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-circle-dot", "isProduction": true }
+      ]
+    },
+    {
+      "name": "General Settings",
+      "purpose": "Settings and configuration",
+      "entity": null,
+      "category": "Other",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-gear", "isProduction": true }
+      ]
+    },
+    {
+      "name": "AI",
+      "purpose": "AI-related features and functionality",
+      "entity": null,
+      "category": "Other",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-stars", "isProduction": true }
+      ]
+    },
+    {
+      "name": "VDC Logo",
+      "purpose": "VDC application logo",
+      "entity": null,
+      "category": "Other",
+      "variants": [
+        { "label": "Current", "fontAwesome": "custom:vdc-logo", "isProduction": true }
+      ]
+    },
+    {
+      "name": "Trigger",
+      "purpose": "Trigger action or event",
+      "entity": null,
+      "category": "Other",
+      "variants": [
+        { "label": "TBD", "fontAwesome": "TBD", "isProduction": false }
+      ]
+    },
+    {
+      "name": "Workitem",
+      "purpose": "Represents a work item",
+      "entity": "Workitem",
+      "category": "Other",
+      "variants": [
+        { "label": "TBD", "fontAwesome": "TBD", "isProduction": false }
+      ]
+    }
+  ]
+}
