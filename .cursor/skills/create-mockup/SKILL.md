@@ -1,4 +1,4 @@
-﻿---
+---
 name: create-mockup
 description: Create a new mockup feature for VDC Design Hub. Use when the user wants to add a new mockup, create a new feature, or scaffold a new design view.
 ---
@@ -13,7 +13,28 @@ description: Create a new mockup feature for VDC Design Hub. Use when the user w
    - Problem statement
    - Any Jira ticket or research links
 
-2. **Create Folder Structure**
+2. **Propose Kendo Components** (REQUIRED)
+   
+   Before implementing, present a component proposal table:
+   
+   ```markdown
+   ## Proposed Kendo Components
+   
+   | UI Element | Kendo Component | Module |
+   |------------|-----------------|--------|
+   | Example | kendo-component | ModuleName |
+   
+   **Kendo Documentation:**
+   - [Component Name](https://www.telerik.com/kendo-angular-ui/components/...)
+   
+   Shall I proceed with this implementation?
+   ```
+   
+   **WAIT for explicit user approval before proceeding.**
+   
+   Also check for new icons - if using icons not in `assets/tokens/vdc-icons.json`, add them first.
+
+4. **Create Folder Structure**
 
    src/app/features/mockups/[slug]/
      [slug].routes.ts
@@ -31,26 +52,45 @@ description: Create a new mockup feature for VDC Design Hub. Use when the user w
      identity.md
      annotations.json
 
-3. **Register Feature**
+5. **Register Feature**
    - Add entry to assets/data/features.json
    - Add route to mockup routing
 
-4. **Create Identity Content**
+6. **Create Identity Content**
    Write identity.md with:
    - Problem Statement
    - User Research Links
    - Jira Ticket URL
    - Technical Constraints
 
-5. **Initialize Annotations**
+7. **Initialize Annotations**
    Create empty annotations.json:
    { "annotations": [] }
 
-6. **Scaffold Design Component**
+8. **Scaffold Design Component**
    - Import SimulatorBarComponent
    - Add state switch (@switch on simulatorState)
    - Create placeholder content for each state
 
+9. **Document Components** (REQUIRED)
+   
+   After implementation, update `assets/data/components.json` for any new VDC components:
+   
+   ```json
+   {
+     "name": "VdcComponentName",
+     "slug": "vdc-component-name",
+     "description": "Component description",
+     "kendoBase": ["kendo-component"],
+     "kendoDocs": "https://www.telerik.com/kendo-angular-ui/components/...",
+     "templateChanges": ["List of VDC-specific modifications"],
+     "designDecisions": ["Design decisions made during mockup"],
+     "status": "draft",
+     "category": "Category"
+   }
+   ```
+
 ## File Templates
 
 See .cursor/rules/mockup-structure.mdc for component patterns.
+See .cursor/rules/component-workflow.mdc for component approval and documentation workflow.

@@ -8,6 +8,15 @@
       "lastUpdated": "2026-01-31",
       "thumbnail": "/assets/images/thumbnails/placeholder.png",
       "tags": ["dashboard", "navigation", "productivity"]
+    },
+    {
+      "slug": "side-nav-demo",
+      "name": "Side Navigation Demo",
+      "description": "2-tier navigation component with Global, Personal, and Project contexts",
+      "status": "in-progress",
+      "lastUpdated": "2026-01-31",
+      "thumbnail": "/assets/images/thumbnails/placeholder.png",
+      "tags": ["navigation", "component", "layout"]
     }
   ]
 }

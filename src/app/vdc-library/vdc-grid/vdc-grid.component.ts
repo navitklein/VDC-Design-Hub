@@ -39,7 +39,7 @@ import { SortDescriptor } from '@progress/kendo-data-query';
         [pageable]="pageable"
         [sortable]="sortable"
         [sort]="sort"
-        [height]="height"
+        [height]="gridHeight"
         [selectable]="selectable"
         (pageChange)="onPageChange($event)"
         (sortChange)="onSortChange($event)"
@@ -134,6 +134,11 @@ export class VdcGridComponent {
   
   /** Grid height (number or 'auto') */
   @Input() height?: number;
+  
+  /** Grid height with default for Kendo binding */
+  get gridHeight(): number {
+    return this.height ?? 400;
+  }
   
   /** Whether row selection is enabled */
   @Input() selectable = false;

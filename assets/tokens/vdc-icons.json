@@ -19,6 +19,10 @@
     {
       "name": "Other",
       "description": "Miscellaneous icons"
+    },
+    {
+      "name": "Navigation",
+      "description": "Navigation and wayfinding icons"
     }
   ],
   "icons": [
@@ -354,6 +358,79 @@
       "category": "Other",
       "variants": [
         { "label": "TBD", "fontAwesome": "TBD", "isProduction": false }
+      ]
+    },
+    {
+      "name": "Collapse Navigation",
+      "purpose": "Collapse the navigation panel",
+      "entity": null,
+      "category": "Navigation",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-angles-left", "isProduction": false }
+      ]
+    },
+    {
+      "name": "Expand Navigation",
+      "purpose": "Expand the navigation panel",
+      "entity": null,
+      "category": "Navigation",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-angles-right", "isProduction": false }
+      ]
+    },
+    {
+      "name": "Help",
+      "purpose": "Help and support action",
+      "entity": null,
+      "category": "Navigation",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-circle-question", "isProduction": false }
+      ]
+    },
+    {
+      "name": "Dark Mode",
+      "purpose": "Switch to dark theme",
+      "entity": null,
+      "category": "Navigation",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-moon", "isProduction": false }
+      ]
+    },
+    {
+      "name": "Light Mode",
+      "purpose": "Indicates light theme is active",
+      "entity": null,
+      "category": "Navigation",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-brightness", "isProduction": false },
+        { "label": "Previous", "fontAwesome": "fa-regular fa-sun", "isProduction": false }
+      ]
+    },
+    {
+      "name": "Search",
+      "purpose": "Search functionality",
+      "entity": null,
+      "category": "Navigation",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-search", "isProduction": false }
+      ]
+    },
+    {
+      "name": "Chevron Right",
+      "purpose": "Navigation indicator or breadcrumb separator",
+      "entity": null,
+      "category": "Navigation",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-chevron-right", "isProduction": false }
+      ]
+    },
+    {
+      "name": "Arrow Left",
+      "purpose": "Back navigation or return action",
+      "entity": null,
+      "category": "Navigation",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-arrow-left", "isProduction": false }
       ]
     }
   ]

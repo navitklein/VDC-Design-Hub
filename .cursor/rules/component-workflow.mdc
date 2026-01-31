@@ -1,0 +1,120 @@
+---
+description: Component proposal workflow - approval before implementation, icon management, and documentation
+globs: **/*.{ts,html}
+alwaysApply: true
+---
+
+# Component Implementation Workflow
+
+## 1. Propose Components Before Implementation
+
+**ALWAYS** present the Kendo UI components you plan to use and wait for user approval before implementing.
+
+### Proposal Format
+
+Before coding, present:
+
+```markdown
+## Proposed Kendo Components
+
+| UI Element | Kendo Component | Module |
+|------------|-----------------|--------|
+| Search input | kendo-textbox | InputsModule |
+| Submit button | kendoButton | ButtonsModule |
+| Data table | kendo-grid | GridModule |
+
+**Kendo Documentation:**
+- [TextBox](https://www.telerik.com/kendo-angular-ui/components/inputs/textbox)
+- [Button](https://www.telerik.com/kendo-angular-ui/components/buttons/button)
+
+Shall I proceed with this implementation?
+```
+
+**Do NOT proceed until user explicitly approves.**
+
+## 2. Icon Management
+
+When using a new icon that is NOT in `assets/tokens/vdc-icons.json`:
+
+1. **STOP** - Do not use the icon yet
+2. **Add the icon** to `assets/tokens/vdc-icons.json` following the existing format:
+
+```json
+{
+  "name": "Icon Name",
+  "purpose": "What the icon represents",
+  "entity": null,
+  "category": "Navigation|VDC Entities|VDC Actions|Context & Users|Status|Other",
+  "variants": [
+    { "label": "Current", "fontAwesome": "fa-regular fa-icon-name", "isProduction": false }
+  ]
+}
+```
+
+3. **Then** use the icon in your implementation
+
+## 3. Component Documentation
+
+After implementing a VDC component wrapper, update `assets/data/components.json`:
+
+```json
+{
+  "name": "VdcComponentName",
+  "slug": "vdc-component-name",
+  "description": "What this component does",
+  "kendoBase": ["kendo-base-component"],
+  "kendoDocs": "https://www.telerik.com/kendo-angular-ui/components/...",
+  "templateChanges": [
+    "Custom prefix template for search icon",
+    "Modified separator icon"
+  ],
+  "status": "draft",
+  "category": "Navigation|Actions|Inputs|Data Display|Overlays"
+}
+```
+
+### Required Fields
+
+- `name` - PascalCase component name (e.g., VdcSideNav)
+- `slug` - kebab-case selector (e.g., vdc-side-nav)
+- `description` - Brief description of purpose
+- `kendoBase` - Array of underlying Kendo components used
+- `kendoDocs` - Link to primary Kendo documentation
+- `status` - "draft" or "ready"
+- `category` - Component category
+
+### Optional Fields
+
+- `templateChanges` - Array of VDC-specific template modifications
+- `designDecisions` - Array of design decisions made during mockup
+
+## 4. Design Decision Documentation
+
+When making design decisions during mockup implementation, document them:
+
+```json
+{
+  "designDecisions": [
+    "Used fa-angles-left/right for collapse instead of sidebar icons for better visibility",
+    "Breadcrumb separator changed from chevron-right to arrow-right per user preference"
+  ]
+}
+```
+
+## Workflow Summary
+
+```
+User Request
+    ↓
+Analyze Requirements
+    ↓
+Propose Kendo Components → Wait for Approval
+    ↓
+Check for New Icons → Add to vdc-icons.json if needed
+    ↓
+Implement Component
+    ↓
+Update components.json with docs and decisions
+    ↓
+Complete
+```

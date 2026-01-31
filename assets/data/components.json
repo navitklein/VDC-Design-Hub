@@ -47,6 +47,68 @@
       "kendoBase": "kendo-textbox",
       "status": "draft",
       "category": "Inputs"
+    },
+    {
+      "name": "VdcBreadcrumbs",
+      "slug": "vdc-breadcrumbs",
+      "description": "Breadcrumb navigation with custom slash separator",
+      "kendoBase": ["kendo-breadcrumb"],
+      "kendoDocs": ["https://www.telerik.com/kendo-angular-ui/components/navigation/breadcrumb"],
+      "templateChanges": [
+        "Custom separator template using '/' text",
+        "Styled using VDC typography and colors"
+      ],
+      "designDecisions": [
+        "Uses slash separator per user request"
+      ],
+      "status": "ready",
+      "category": "Navigation"
+    },
+    {
+      "name": "VdcSideNav",
+      "slug": "vdc-side-nav",
+      "description": "2-tier side navigation with icon rail (tier 1) and content panel (tier 2). Supports Global, Personal, and Project contexts with collapsible panel.",
+      "kendoBase": ["kendoButton", "kendo-textbox", "kendoTooltip"],
+      "kendoDocs": [
+        "https://www.telerik.com/kendo-angular-ui/components/buttons/button",
+        "https://www.telerik.com/kendo-angular-ui/components/inputs/textbox",
+        "https://www.telerik.com/kendo-angular-ui/components/tooltip"
+      ],
+      "templateChanges": [
+        "Custom 2-tier layout with icon rail and content panel",
+        "Context-based color theming using VDC design tokens",
+        "Project browser with search and recent projects list",
+        "Bottom utilities section with user profile, help, and theme toggle"
+      ],
+      "designDecisions": [
+        "Icon rail uses context colors (global/personal/project) as background",
+        "VDC logo uses white variant for visibility on dark backgrounds",
+        "Panel collapses with animation when toggled from top nav"
+      ],
+      "status": "draft",
+      "category": "Navigation"
+    },
+    {
+      "name": "VdcTopNav",
+      "slug": "vdc-top-nav",
+      "description": "Top navigation bar with breadcrumbs (VdcBreadcrumbs), panel collapse button, and release search. Integrates with VdcSideNav for panel expansion control.",
+      "kendoBase": ["kendoButton", "kendo-textbox", "kendoTooltip"],
+      "kendoDocs": [
+        "https://www.telerik.com/kendo-angular-ui/components/buttons/button",
+        "https://www.telerik.com/kendo-angular-ui/components/inputs/textbox",
+        "https://www.telerik.com/kendo-angular-ui/components/tooltip"
+      ],
+      "templateChanges": [
+        "Uses VdcBreadcrumbs for navigation path",
+        "Collapse button with fa-angles-left/right icons",
+        "Release search with rocket-launch icon prefix and search button suffix"
+      ],
+      "designDecisions": [
+        "Collapse button uses fa-angles-left (expanded) and fa-angles-right (collapsed)",
+        "Release search includes clear button and enter-to-search support"
+      ],
+      "status": "draft",
+      "category": "Navigation"
     }
   ]
 }

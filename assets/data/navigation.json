@@ -1,0 +1,225 @@
+{
+  "contexts": [
+    {
+      "id": "global",
+      "label": "Global Explorer",
+      "icon": "fa-globe",
+      "colorToken": "var(--vdc-context-global)",
+      "panelTitle": "GLOBAL EXPLORER"
+    },
+    {
+      "id": "personal",
+      "label": "My Workspace",
+      "icon": "fa-circle-user",
+      "colorToken": "var(--vdc-context-personal)",
+      "panelTitle": "MY WORKSPACE"
+    },
+    {
+      "id": "project",
+      "label": "Project",
+      "icon": "fa-briefcase",
+      "colorToken": "var(--vdc-context-project)",
+      "panelTitle": "PROJECT BROWSER"
+    }
+  ],
+  "panels": {
+    "global": {
+      "sections": [
+        {
+          "id": "discovery",
+          "label": "Discovery",
+          "items": [
+            {
+              "id": "project-explorer",
+              "label": "Project Explorer",
+              "route": "/project-explorer",
+              "icon": "fa-folder-tree"
+            },
+            {
+              "id": "ingredient-index",
+              "label": "Ingredient Index",
+              "route": "/ingredient-index",
+              "icon": "fa-cube"
+            }
+          ]
+        },
+        {
+          "id": "builders",
+          "label": "Builders",
+          "items": [
+            {
+              "id": "system-configs",
+              "label": "System Configs",
+              "route": "/system-configs",
+              "icon": "fa-sliders"
+            }
+          ]
+        }
+      ]
+    },
+    "personal": {
+      "sections": [
+        {
+          "id": "activity",
+          "label": "Activity",
+          "items": [
+            {
+              "id": "my-runs",
+              "label": "My Runs",
+              "route": "/my-runs",
+              "icon": "fa-play"
+            },
+            {
+              "id": "my-submissions",
+              "label": "My Submissions",
+              "route": "/my-submissions",
+              "icon": "fa-paper-plane"
+            }
+          ]
+        },
+        {
+          "id": "my-assets",
+          "label": "My Assets",
+          "items": [
+            {
+              "id": "my-ingredients",
+              "label": "My Ingredients",
+              "route": "/my-ingredients",
+              "icon": "fa-cube"
+            },
+            {
+              "id": "my-releases",
+              "label": "My Releases",
+              "route": "/my-releases",
+              "icon": "fa-rocket-launch"
+            },
+            {
+              "id": "my-workflows",
+              "label": "My Workflows",
+              "route": "/my-workflows",
+              "icon": "fa-diagram-project"
+            },
+            {
+              "id": "my-projects",
+              "label": "My Projects",
+              "route": "/my-projects",
+              "icon": "fa-briefcase"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "projectContextSections": [
+    {
+      "id": "overview",
+      "label": "Overview",
+      "items": [
+        {
+          "id": "dashboard",
+          "label": "Dashboard",
+          "route": "/dashboard",
+          "icon": "fa-gauge"
+        }
+      ]
+    },
+    {
+      "id": "management",
+      "label": "Management",
+      "items": [
+        {
+          "id": "ingredients",
+          "label": "Ingredients",
+          "route": "/ingredients",
+          "icon": "fa-cube"
+        },
+        {
+          "id": "releases",
+          "label": "Releases",
+          "route": "/releases",
+          "icon": "fa-rocket-launch"
+        },
+        {
+          "id": "history",
+          "label": "History",
+          "route": "/history",
+          "icon": "fa-clock-rotate-left"
+        }
+      ]
+    },
+    {
+      "id": "monitoring",
+      "label": "Monitoring",
+      "items": [
+        {
+          "id": "workflows",
+          "label": "Workflows",
+          "route": "/workflows",
+          "icon": "fa-diagram-project"
+        },
+        {
+          "id": "quick-builds",
+          "label": "Quick Builds",
+          "route": "/quick-builds",
+          "icon": "fa-hammer"
+        },
+        {
+          "id": "active-runs",
+          "label": "Active Runs",
+          "route": "/active-runs",
+          "icon": "fa-spinner"
+        },
+        {
+          "id": "error-logs",
+          "label": "Error Logs",
+          "route": "/error-logs",
+          "icon": "fa-triangle-exclamation"
+        }
+      ]
+    },
+    {
+      "id": "project-data",
+      "label": "Project Data",
+      "items": [
+        {
+          "id": "queries",
+          "label": "Queries",
+          "route": "/queries",
+          "icon": "fa-database"
+        },
+        {
+          "id": "attachments",
+          "label": "Attachments",
+          "route": "/attachments",
+          "icon": "fa-paperclip"
+        }
+      ]
+    }
+  ],
+  "recentProjects": [
+    {
+      "id": "mtl-s",
+      "name": "Meteor Lake-S",
+      "shortcode": "MTL-S",
+      "lastAccessed": "2026-01-31T08:00:00Z"
+    },
+    {
+      "id": "lnl-m",
+      "name": "Lunar Lake-M",
+      "shortcode": "LNL-M",
+      "lastAccessed": "2026-01-31T06:00:00Z"
+    },
+    {
+      "id": "arl-h",
+      "name": "Arrow Lake-H",
+      "shortcode": "ARL-H",
+      "lastAccessed": "2026-01-30T10:00:00Z"
+    },
+    {
+      "id": "pac-s",
+      "name": "Panther Canyon",
+      "shortcode": "PAC-S",
+      "lastAccessed": "2026-01-29T10:00:00Z"
+    }
+  ]
+}
