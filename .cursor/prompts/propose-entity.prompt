@@ -1,0 +1,15 @@
+﻿Propose a new entity for mockup: [MOCKUP SLUG]
+
+## Entity Details
+- Name: [EntityName]
+- Description: [what it represents]
+
+## Properties
+- [property1]: [type] - [description]
+- [property2]: [type] - [description]
+
+## Relationships
+- Belongs to: [parent entity]
+- Has many: [child entities]
+
+Please create the entity documentation and link it to the mockup.

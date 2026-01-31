@@ -1,0 +1,10 @@
+﻿Analyze the attached screenshot and recreate it as an Angular component.
+
+Identify:
+1. Layout structure (grid, flex, panels)
+2. Kendo UI components used
+3. VDC entities displayed
+4. Data patterns (tables, forms, cards)
+5. Icons and colors
+
+Then generate the Angular component code using VDC library components.

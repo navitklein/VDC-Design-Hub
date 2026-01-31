@@ -1,0 +1,12 @@
+﻿Create a new mockup for: [FEATURE NAME]
+
+## Requirements
+- Problem statement: [describe the problem this solves]
+- Target users: [who will use this]
+- Related Jira ticket: [URL if any]
+
+Please scaffold the complete mockup structure including:
+1. Routes and components
+2. Identity.md content
+3. Design component with simulator states
+4. Register in features.json

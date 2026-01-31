@@ -1,0 +1,5 @@
+﻿Show me the current VDC knowledge base status:
+- List all entities with their status (existing/proposed/deprecated)
+- List all APIs with their status
+- Show any pending proposed items
+- Show recent changelog entries
