@@ -21,11 +21,21 @@ import {
 export class TokenService {
   private readonly http = inject(HttpClient);
   
-  // Color state
+  // Color state (light theme)
   private readonly _colors = signal<ColorToken[]>([]);
   private readonly _colorCategories = signal<ColorCategory[]>([]);
   readonly colors = this._colors.asReadonly();
   readonly colorCategories = this._colorCategories.asReadonly();
+  
+  // Color state (dark theme)
+  private readonly _colorsDark = signal<ColorToken[]>([]);
+  private readonly _colorCategoriesDark = signal<ColorCategory[]>([]);
+  readonly colorsDark = this._colorsDark.asReadonly();
+  readonly colorCategoriesDark = this._colorCategoriesDark.asReadonly();
+  
+  // Usage guidelines
+  private readonly _usageGuidelines = signal<Record<string, unknown> | null>(null);
+  readonly usageGuidelines = this._usageGuidelines.asReadonly();
   
   // Icon state
   private readonly _icons = signal<IconToken[]>([]);
@@ -65,20 +75,126 @@ export class TokenService {
   }
   
   /**
-   * Load color tokens
+   * Load color tokens - processes the new nested structure into flat arrays
    */
   loadColors(): Observable<ColorToken[]> {
     return this.http.get<ColorsFile>('/assets/tokens/colors.json').pipe(
       tap(data => {
-        this._colors.set(data.colors);
-        this._colorCategories.set(data.categories);
+        // Process light theme colors
+        const { colors, categories } = this.flattenColorData(data, 'light');
+        this._colors.set(colors);
+        this._colorCategories.set(categories);
+        
+        // Process dark theme colors
+        const { colors: darkColors, categories: darkCategories } = this.flattenColorData(data, 'dark');
+        this._colorsDark.set(darkColors);
+        this._colorCategoriesDark.set(darkCategories);
+        
+        // Store usage guidelines
+        if (data.usageGuidelines) {
+          this._usageGuidelines.set(data.usageGuidelines as unknown as Record<string, unknown>);
+        }
       }),
-      map(data => data.colors),
+      map(() => this._colors()),
       catchError(err => {
         console.error('Error loading colors:', err);
         return of([]);
       })
     );
+  }
+  
+  /**
+   * Flatten the nested color structure into arrays for display
+   * @param data The colors file data
+   * @param theme 'light' or 'dark' to select which semantic colors to use
+   */
+  private flattenColorData(data: ColorsFile, theme: 'light' | 'dark' = 'light'): { colors: ColorToken[]; categories: ColorCategory[] } {
+    const colors: ColorToken[] = [];
+    const categories: ColorCategory[] = [];
+    
+    // Process palettes (same for both themes - these are the raw scales)
+    if (data.palettes) {
+      for (const palette of data.palettes) {
+        const categoryName = `Palette: ${palette.name}`;
+        categories.push({ name: categoryName, description: palette.description });
+        
+        for (const color of palette.colors) {
+          colors.push({
+            token: `${palette.name.toLowerCase().replace(/\s+/g, '-')}-${color.shade}`,
+            hex: color.hex,
+            usage: palette.usage,
+            category: categoryName
+          });
+        }
+      }
+    }
+    
+    // Select the appropriate semantic colors based on theme
+    const semanticSource = theme === 'dark' 
+      ? data.semanticColorsDark
+      : data.semanticColors;
+    
+    // Process semantic colors
+    if (semanticSource) {
+      for (const [groupKey, group] of Object.entries(semanticSource)) {
+        // Skip non-object entries
+        if (typeof group !== 'object' || !group || !Array.isArray(group.colors)) {
+          continue;
+        }
+        
+        const categoryName = theme === 'dark' 
+          ? `${this.formatCategoryName(groupKey)} (Dark)`
+          : this.formatCategoryName(groupKey);
+        categories.push({ name: categoryName, description: group.description });
+        
+        for (const color of group.colors) {
+          colors.push({
+            token: color.token,
+            hex: color.hex,
+            usage: color.usage,
+            category: categoryName,
+            paletteRef: color.paletteRef
+          });
+        }
+      }
+    }
+    
+    // Process VDC colors (same for both themes for now)
+    if (data.vdcColors && theme === 'light') {
+      for (const [groupKey, group] of Object.entries(data.vdcColors)) {
+        // Skip non-object entries (like root-level description)
+        if (typeof group !== 'object' || !group || !Array.isArray(group.colors)) {
+          continue;
+        }
+        
+        const categoryName = `VDC: ${this.formatCategoryName(groupKey)}`;
+        categories.push({ name: categoryName, description: group.description });
+        
+        for (const color of group.colors) {
+          colors.push({
+            token: color.token,
+            hex: color.hex,
+            usage: color.usage,
+            category: categoryName
+          });
+        }
+      }
+    }
+    
+    return { colors, categories };
+  }
+  
+  /**
+   * Format a camelCase or kebab-case key into a readable category name
+   */
+  private formatCategoryName(key: string): string {
+    return key
+      .replace(/([A-Z])/g, ' $1')
+      .replace(/-/g, ' ')
+      .replace(/^\s+/, '')
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
   }
   
   /**

@@ -8,6 +8,8 @@ alwaysApply: true
 
 ## 1. Propose Components Before Implementation
 
+> **STOP AND WAIT**: You MUST present a proposal and receive explicit approval before writing ANY implementation code.
+
 **ALWAYS** present the Kendo UI components you plan to use and wait for user approval before implementing.
 
 ### Proposal Format
@@ -18,7 +20,7 @@ Before coding, present:
 ## Proposed Kendo Components
 
 | UI Element | Kendo Component | Module |
-|------------|-----------------|--------|
+|---|-----|-----|
 | Search input | kendo-textbox | InputsModule |
 | Submit button | kendoButton | ButtonsModule |
 | Data table | kendo-grid | GridModule |
@@ -33,6 +35,15 @@ Shall I proceed with this implementation?
 **Do NOT proceed until user explicitly approves.**
 
 ## 2. Icon Management
+
+> **BEFORE using ANY icon**, check `assets/tokens/vdc-icons.json` first.
+
+### Icon Verification Checklist
+
+For EVERY icon you use:
+- [ ] Search vdc-icons.json for the icon name (e.g., `fa-xmark`)
+- [ ] If NOT found, add it BEFORE using it in code
+- [ ] Keep a running list of icons used during implementation
 
 When using a new icon that is NOT in `assets/tokens/vdc-icons.json`:
 
@@ -54,6 +65,8 @@ When using a new icon that is NOT in `assets/tokens/vdc-icons.json`:
 3. **Then** use the icon in your implementation
 
 ## 3. Component Documentation
+
+> **Document incrementally** - Update components.json as you make design decisions, not at the end.
 
 After implementing a VDC component wrapper, update `assets/data/components.json`:
 

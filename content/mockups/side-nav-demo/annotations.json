@@ -1,0 +1,74 @@
+{
+  "annotations": [
+    {
+      "id": "ann-1",
+      "selector": ".vdc-side-nav__rail",
+      "title": "Icon Rail (Tier 1)",
+      "note": "Vertical strip of context icons. Click to switch between Global, Personal, and Project contexts. Active context shows full opacity, inactive at 40%.",
+      "position": "top-right"
+    },
+    {
+      "id": "ann-2",
+      "selector": ".vdc-side-nav__panel",
+      "title": "Content Panel (Tier 2)",
+      "note": "Expandable panel showing navigation items for the selected context. Header color and title change based on context.",
+      "position": "top-left"
+    },
+    {
+      "id": "ann-3",
+      "selector": ".vdc-side-nav__context-btn--active",
+      "title": "Active Context Button",
+      "note": "Shows current context. When a project is selected, displays project initials instead of the default icon.",
+      "position": "right"
+    },
+    {
+      "id": "ann-4",
+      "selector": ".vdc-side-nav__project-search",
+      "title": "Project Search",
+      "note": "Search input to filter projects by name. Appears in Project Browser view.",
+      "position": "bottom-left"
+    },
+    {
+      "id": "ann-5",
+      "selector": ".vdc-side-nav__filter-pill",
+      "title": "My Projects Filter",
+      "note": "Toggle filter to show only projects owned by the current user. Displays count of matching projects. Active state uses context color.",
+      "position": "bottom-right"
+    },
+    {
+      "id": "ann-6",
+      "selector": ".vdc-side-nav__cancel-switch-btn",
+      "title": "Cancel Switch Button",
+      "note": "Appears when switching projects from an active project. Click to return to the previous project without selecting a new one.",
+      "position": "top-left"
+    },
+    {
+      "id": "ann-7",
+      "selector": ".vdc-side-nav__item--active",
+      "title": "Active Navigation Item",
+      "note": "Shows selected item with context-colored background tint, left border, and text/icon color.",
+      "position": "right"
+    },
+    {
+      "id": "ann-8",
+      "selector": ".vdc-side-nav__utilities",
+      "title": "Utilities Section",
+      "note": "Bottom section of icon rail with user profile, help, and theme toggle buttons.",
+      "position": "top-right"
+    },
+    {
+      "id": "ann-9",
+      "selector": ".vdc-top-nav__collapse-btn",
+      "title": "Panel Collapse Button",
+      "note": "Toggles the side nav panel between expanded and collapsed states. Icon changes direction based on state.",
+      "position": "bottom-left"
+    },
+    {
+      "id": "ann-10",
+      "selector": ".vdc-breadcrumbs",
+      "title": "Breadcrumb Navigation",
+      "note": "Shows current navigation path. Updates dynamically based on context and selected project/item.",
+      "position": "bottom-right"
+    }
+  ]
+}

@@ -432,6 +432,70 @@
       "variants": [
         { "label": "Current", "fontAwesome": "fa-regular fa-arrow-left", "isProduction": false }
       ]
+    },
+    {
+      "name": "Close/Cancel",
+      "purpose": "Close dialogs, cancel actions, or dismiss items",
+      "entity": null,
+      "category": "Navigation",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-xmark", "isProduction": false }
+      ]
+    },
+    {
+      "name": "Submissions",
+      "purpose": "Represents user submissions",
+      "entity": null,
+      "category": "VDC Actions",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-paper-plane", "isProduction": false }
+      ]
+    },
+    {
+      "name": "Color Palette",
+      "purpose": "Represents color system or design tokens",
+      "entity": null,
+      "category": "Other",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-palette", "isProduction": false }
+      ]
+    },
+    {
+      "name": "Documentation",
+      "purpose": "Represents documentation or guidelines",
+      "entity": null,
+      "category": "Other",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-regular fa-books", "isProduction": false },
+        { "label": "Previous", "fontAwesome": "fa-regular fa-book", "isProduction": false }
+      ]
+    },
+    {
+      "name": "Typography",
+      "purpose": "Represents text and typography settings",
+      "entity": null,
+      "category": "Other",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-solid fa-font", "isProduction": false }
+      ]
+    },
+    {
+      "name": "Borders",
+      "purpose": "Represents border and frame styles",
+      "entity": null,
+      "category": "Other",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-solid fa-border-all", "isProduction": false }
+      ]
+    },
+    {
+      "name": "Interactive",
+      "purpose": "Represents interactive elements and states",
+      "entity": null,
+      "category": "Other",
+      "variants": [
+        { "label": "Current", "fontAwesome": "fa-solid fa-hand-pointer", "isProduction": false }
+      ]
     }
   ]
 }

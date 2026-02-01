@@ -25,40 +25,55 @@ export const routes: Routes = [
     ]
   },
 
-  // Shell routes (with navigation)
+  // Shell routes (with side navigation)
   {
     path: '',
     component: ShellLayoutComponent,
     children: [
       {
         path: '',
-        redirectTo: 'dashboard',
+        redirectTo: 'style-guide/palettes',
         pathMatch: 'full'
       },
-      {
-        path: 'dashboard',
-        loadChildren: () => import('./features/dashboard/dashboard.routes')
-          .then(m => m.DASHBOARD_ROUTES)
-      },
-      {
-        path: 'style-guide',
-        loadChildren: () => import('./features/style-guide/style-guide.routes')
-          .then(m => m.STYLE_GUIDE_ROUTES)
-      },
-      {
-        path: 'explorer',
-        loadChildren: () => import('./features/component-explorer/explorer.routes')
-          .then(m => m.EXPLORER_ROUTES)
-      },
+      // Mockups
       {
         path: 'mockups/:slug',
         loadChildren: () => import('./features/mockups/mockup-shell.routes')
           .then(m => m.MOCKUP_SHELL_ROUTES)
       },
+      // Style Guide
       {
-        path: 'vdc-icons',
+        path: 'style-guide',
+        loadChildren: () => import('./features/style-guide/style-guide.routes')
+          .then(m => m.STYLE_GUIDE_ROUTES)
+      },
+      // Components
+      {
+        path: 'components',
+        loadChildren: () => import('./features/component-explorer/explorer.routes')
+          .then(m => m.EXPLORER_ROUTES)
+      },
+      // Icons
+      {
+        path: 'icons',
         loadChildren: () => import('./features/vdc-icons/vdc-icons.routes')
           .then(m => m.VDC_ICONS_ROUTES)
+      },
+      // Legacy redirects
+      {
+        path: 'dashboard',
+        redirectTo: 'style-guide/palettes',
+        pathMatch: 'full'
+      },
+      {
+        path: 'explorer',
+        redirectTo: 'components',
+        pathMatch: 'full'
+      },
+      {
+        path: 'vdc-icons',
+        redirectTo: 'icons/vdc-entities',
+        pathMatch: 'full'
       }
     ]
   },
@@ -66,6 +81,6 @@ export const routes: Routes = [
   // Fallback
   {
     path: '**',
-    redirectTo: 'dashboard'
+    redirectTo: 'style-guide/palettes'
   }
 ];

@@ -1,195 +1,950 @@
 {
-  "categories": [
+  "meta": {
+    "source": "@progress/kendo-theme-fluent v12.3.0",
+    "lastUpdated": "2026-01-31",
+    "description": "Complete Kendo UI Fluent theme color system with light/dark themes plus VDC custom colors",
+    "themes": ["light", "dark"]
+  },
+  "usageGuidelines": {
+    "surfaces": {
+      "description": "Guidelines for choosing surface colors by component type",
+      "rules": [
+        {
+          "component": "Page Background",
+          "light": "app-surface",
+          "dark": "app-surface",
+          "notes": "Base layer of the application. All other surfaces float above this."
+        },
+        {
+          "component": "Modal / Dialog",
+          "light": "surface",
+          "dark": "surface",
+          "notes": "Elevated floating containers. Use with shadow for depth. Content sits on this."
+        },
+        {
+          "component": "Card",
+          "light": "surface",
+          "dark": "surface",
+          "notes": "Contained content areas. Use shadow-sm for subtle elevation."
+        },
+        {
+          "component": "Dropdown / Popup / Menu",
+          "light": "surface",
+          "dark": "surface",
+          "notes": "Floating interactive elements. Always elevated above trigger element."
+        },
+        {
+          "component": "Sidebar / Navigation Panel",
+          "light": "surface or app-surface",
+          "dark": "surface or app-surface",
+          "notes": "Use surface for prominent nav, app-surface for subtle/integrated nav."
+        },
+        {
+          "component": "Input Fields",
+          "light": "base",
+          "dark": "base",
+          "notes": "Interactive form controls. Provides clear affordance for interaction."
+        },
+        {
+          "component": "Table Row (default)",
+          "light": "surface",
+          "dark": "surface",
+          "notes": "Default table row background."
+        },
+        {
+          "component": "Table Row (alternate)",
+          "light": "base-subtle",
+          "dark": "base-subtle",
+          "notes": "Zebra striping for better readability."
+        },
+        {
+          "component": "Hover State",
+          "light": "base-hover",
+          "dark": "base-hover",
+          "notes": "Apply on interactive elements when hovered."
+        },
+        {
+          "component": "Selected State",
+          "light": "primary-subtle",
+          "dark": "primary-subtle",
+          "notes": "Highlight selected items in lists, tables, trees."
+        },
+        {
+          "component": "Disabled Area",
+          "light": "base-subtle",
+          "dark": "base-subtle",
+          "notes": "Indicates non-interactive state. Pair with subtle text."
+        },
+        {
+          "component": "Toolbar / Header Bar",
+          "light": "surface",
+          "dark": "surface",
+          "notes": "Chrome areas containing actions. May use border-bottom for separation."
+        },
+        {
+          "component": "Toast / Notification",
+          "light": "surface",
+          "dark": "surface",
+          "notes": "Temporary messages. Use semantic border-left color for type indication."
+        },
+        {
+          "component": "Tooltip",
+          "light": "inverse (dark bg)",
+          "dark": "inverse (light bg)",
+          "notes": "High contrast for visibility. Inverts in each theme."
+        }
+      ]
+    },
+    "text": {
+      "description": "Guidelines for choosing text colors",
+      "rules": [
+        {
+          "use": "Primary Content",
+          "token": "on-app-surface / on-base",
+          "notes": "Main headings, body text, important content"
+        },
+        {
+          "use": "Secondary Content",
+          "token": "subtle",
+          "notes": "Descriptions, captions, metadata, timestamps"
+        },
+        {
+          "use": "Disabled Text",
+          "token": "subtle (with reduced opacity)",
+          "notes": "Non-interactive labels, placeholder text"
+        },
+        {
+          "use": "Links",
+          "token": "primary-on-surface",
+          "notes": "Clickable text links. Use primary-hover on hover."
+        },
+        {
+          "use": "Error Messages",
+          "token": "error-on-surface",
+          "notes": "Validation errors, destructive action warnings"
+        },
+        {
+          "use": "Success Messages",
+          "token": "success-on-surface",
+          "notes": "Confirmation text, positive feedback"
+        },
+        {
+          "use": "Text on Primary Button",
+          "token": "on-primary",
+          "notes": "Always white for contrast on primary backgrounds"
+        },
+        {
+          "use": "Text on Colored Backgrounds",
+          "token": "on-{color}",
+          "notes": "Use corresponding on-* token for proper contrast"
+        }
+      ]
+    },
+    "borders": {
+      "description": "Guidelines for border usage",
+      "rules": [
+        {
+          "use": "Default Borders",
+          "token": "border",
+          "notes": "Standard borders for inputs, cards, dividers"
+        },
+        {
+          "use": "Subtle Dividers",
+          "token": "border-alt or base-emphasis",
+          "notes": "Light separators between sections"
+        },
+        {
+          "use": "Focus Ring",
+          "token": "primary",
+          "notes": "Keyboard focus indication (2px outline)"
+        },
+        {
+          "use": "Error Border",
+          "token": "error",
+          "notes": "Invalid input indication"
+        }
+      ]
+    },
+    "states": {
+      "description": "Interactive state patterns",
+      "rules": [
+        {
+          "state": "Default",
+          "background": "{color}",
+          "text": "on-{color}",
+          "notes": "Resting state"
+        },
+        {
+          "state": "Hover",
+          "background": "{color}-hover",
+          "text": "on-{color}",
+          "notes": "Mouse over state"
+        },
+        {
+          "state": "Active/Pressed",
+          "background": "{color}-active",
+          "text": "on-{color}",
+          "notes": "Mouse down or touch state"
+        },
+        {
+          "state": "Focus",
+          "background": "{color}",
+          "text": "on-{color}",
+          "notes": "Add focus ring using primary color"
+        },
+        {
+          "state": "Disabled",
+          "background": "{color}-subtle",
+          "text": "subtle",
+          "notes": "Reduced opacity appearance"
+        },
+        {
+          "state": "Selected",
+          "background": "{color}-subtle",
+          "text": "{color}-on-subtle",
+          "notes": "Highlighted/selected items"
+        }
+      ]
+    }
+  },
+  "palettes": [
     {
-      "name": "Brand",
-      "description": "Primary brand colors for VDC"
+      "name": "Neutral Gray",
+      "description": "Base gray scale for surfaces, text, and neutral elements",
+      "usage": "Base, Secondary, Light, Dark, and Inverse variable groups",
+      "colors": [
+        { "shade": "white", "hex": "#ffffff" },
+        { "shade": "1", "hex": "#fafafa" },
+        { "shade": "2", "hex": "#f5f5f5" },
+        { "shade": "3", "hex": "#f0f0f0" },
+        { "shade": "4", "hex": "#ebebeb" },
+        { "shade": "5", "hex": "#e0e0e0" },
+        { "shade": "6", "hex": "#d1d1d1" },
+        { "shade": "7", "hex": "#c7c7c7" },
+        { "shade": "8", "hex": "#b3b3b3" },
+        { "shade": "9", "hex": "#9e9e9e" },
+        { "shade": "10", "hex": "#8a8a8a" },
+        { "shade": "11", "hex": "#707070" },
+        { "shade": "12", "hex": "#616161" },
+        { "shade": "13", "hex": "#424242" },
+        { "shade": "14", "hex": "#333333" },
+        { "shade": "15", "hex": "#242424" },
+        { "shade": "black", "hex": "#000000" }
+      ]
     },
     {
-      "name": "Semantic",
-      "description": "Colors with specific meaning (success, error, etc.)"
+      "name": "Blue",
+      "description": "Primary brand color palette",
+      "usage": "Primary variable group - buttons, links, key interactions",
+      "colors": [
+        { "shade": "1", "hex": "#ebf3fc" },
+        { "shade": "2", "hex": "#cfe4fa" },
+        { "shade": "3", "hex": "#abd1f8" },
+        { "shade": "4", "hex": "#96c6fa" },
+        { "shade": "5", "hex": "#479ef5" },
+        { "shade": "6", "hex": "#1988f0" },
+        { "shade": "7", "hex": "#0f6cbd" },
+        { "shade": "8", "hex": "#115ea3" },
+        { "shade": "9", "hex": "#0f548c" },
+        { "shade": "10", "hex": "#0e4775" },
+        { "shade": "11", "hex": "#1e3345" },
+        { "shade": "12", "hex": "#0a2e4a" },
+        { "shade": "13", "hex": "#082338" },
+        { "shade": "14", "hex": "#061724" },
+        { "shade": "15", "hex": "#061724" }
+      ]
     },
     {
-      "name": "Surface",
-      "description": "Background colors for different surface levels"
+      "name": "Berry",
+      "description": "Accent purple/pink palette",
+      "usage": "Tertiary variable group - accents, highlights, special features",
+      "colors": [
+        { "shade": "1", "hex": "#fdf5fc" },
+        { "shade": "2", "hex": "#f5daf2" },
+        { "shade": "3", "hex": "#edbbe7" },
+        { "shade": "4", "hex": "#e59edd" },
+        { "shade": "5", "hex": "#e090d5" },
+        { "shade": "6", "hex": "#da7ed0" },
+        { "shade": "7", "hex": "#d161c4" },
+        { "shade": "8", "hex": "#cb4dbd" },
+        { "shade": "9", "hex": "#c239b3" },
+        { "shade": "10", "hex": "#af33a1" },
+        { "shade": "11", "hex": "#962c8a" },
+        { "shade": "12", "hex": "#6d2064" },
+        { "shade": "13", "hex": "#53184c" },
+        { "shade": "14", "hex": "#3a1136" },
+        { "shade": "15", "hex": "#20091d" }
+      ]
     },
     {
-      "name": "Text",
-      "description": "Text colors for different contexts"
+      "name": "Green",
+      "description": "Success and positive state palette",
+      "usage": "Success variable group - confirmations, completed states, positive actions",
+      "colors": [
+        { "shade": "1", "hex": "#f1faf1" },
+        { "shade": "2", "hex": "#c9eac9" },
+        { "shade": "3", "hex": "#9fd89f" },
+        { "shade": "4", "hex": "#84cd84" },
+        { "shade": "5", "hex": "#70c270" },
+        { "shade": "6", "hex": "#64b964" },
+        { "shade": "7", "hex": "#54b054" },
+        { "shade": "8", "hex": "#479e47" },
+        { "shade": "9", "hex": "#359735" },
+        { "shade": "10", "hex": "#258d25" },
+        { "shade": "11", "hex": "#107c10" },
+        { "shade": "12", "hex": "#0e700e" },
+        { "shade": "13", "hex": "#0c5e0c" },
+        { "shade": "14", "hex": "#094509" },
+        { "shade": "15", "hex": "#052505" }
+      ]
     },
     {
-      "name": "Border",
-      "description": "Border and divider colors"
+      "name": "Cranberry",
+      "description": "Error and destructive action palette",
+      "usage": "Error variable group - validation errors, destructive actions, critical alerts",
+      "colors": [
+        { "shade": "1", "hex": "#fdf3f4" },
+        { "shade": "2", "hex": "#f6d1d5" },
+        { "shade": "3", "hex": "#f4c3c7" },
+        { "shade": "4", "hex": "#eeacb2" },
+        { "shade": "5", "hex": "#e78890" },
+        { "shade": "6", "hex": "#dc626d" },
+        { "shade": "7", "hex": "#ce3b47" },
+        { "shade": "8", "hex": "#c50f1f" },
+        { "shade": "9", "hex": "#b10e1c" },
+        { "shade": "10", "hex": "#960b18" },
+        { "shade": "11", "hex": "#810812" },
+        { "shade": "12", "hex": "#6e0811" },
+        { "shade": "13", "hex": "#4b0206" },
+        { "shade": "14", "hex": "#3b0509" },
+        { "shade": "15", "hex": "#200205" }
+      ]
     },
     {
-      "name": "Entity",
-      "description": "Colors for VDC business entities"
+      "name": "Orange",
+      "description": "Warning and caution palette",
+      "usage": "Warning variable group - warnings, caution states, attention needed",
+      "colors": [
+        { "shade": "1", "hex": "#fff9f5" },
+        { "shade": "2", "hex": "#fee5d7" },
+        { "shade": "3", "hex": "#fdcfb4" },
+        { "shade": "4", "hex": "#fcb992" },
+        { "shade": "5", "hex": "#faa06b" },
+        { "shade": "6", "hex": "#f98845" },
+        { "shade": "7", "hex": "#f87528" },
+        { "shade": "8", "hex": "#f7630c" },
+        { "shade": "9", "hex": "#de590b" },
+        { "shade": "10", "hex": "#bc4b09" },
+        { "shade": "11", "hex": "#a04008" },
+        { "shade": "12", "hex": "#8a3707" },
+        { "shade": "13", "hex": "#612705" },
+        { "shade": "14", "hex": "#4a1e04" },
+        { "shade": "15", "hex": "#200e04" }
+      ]
     },
     {
-      "name": "Navigation",
-      "description": "Colors for navigation context tiers"
+      "name": "Steel Blue",
+      "description": "Informational palette",
+      "usage": "Info variable group - informational messages, neutral highlights",
+      "colors": [
+        { "shade": "1", "hex": "#f6fafe" },
+        { "shade": "2", "hex": "#dcedfa" },
+        { "shade": "3", "hex": "#bfddf5" },
+        { "shade": "4", "hex": "#a3cdf0" },
+        { "shade": "5", "hex": "#83bdeb" },
+        { "shade": "6", "hex": "#65ade5" },
+        { "shade": "7", "hex": "#4fa1e1" },
+        { "shade": "8", "hex": "#3a96dd" },
+        { "shade": "9", "hex": "#3991d5" },
+        { "shade": "10", "hex": "#3487c7" },
+        { "shade": "11", "hex": "#2c72a8" },
+        { "shade": "12", "hex": "#20547c" },
+        { "shade": "13", "hex": "#174169" },
+        { "shade": "14", "hex": "#112d4e" },
+        { "shade": "15", "hex": "#091823" }
+      ]
+    },
+    {
+      "name": "Techno Teal",
+      "description": "Data visualization Series A",
+      "usage": "Series A variable group - first series in charts and graphs",
+      "colors": [
+        { "shade": "1", "hex": "#eaf5f6" },
+        { "shade": "2", "hex": "#d4eced" },
+        { "shade": "3", "hex": "#bfe2e3" },
+        { "shade": "4", "hex": "#a9d9da" },
+        { "shade": "5", "hex": "#94cfd1" },
+        { "shade": "6", "hex": "#7bc4c6" },
+        { "shade": "7", "hex": "#5fb8bb" },
+        { "shade": "8", "hex": "#42afb3" },
+        { "shade": "9", "hex": "#2aa0a4" },
+        { "shade": "10", "hex": "#268e92" },
+        { "shade": "11", "hex": "#20787b" },
+        { "shade": "12", "hex": "#1a6365" },
+        { "shade": "13", "hex": "#155052" },
+        { "shade": "14", "hex": "#0f3739" },
+        { "shade": "15", "hex": "#091f20" }
+      ]
+    },
+    {
+      "name": "Saffron Forge",
+      "description": "Data visualization Series B",
+      "usage": "Series B variable group - second series in charts and graphs",
+      "colors": [
+        { "shade": "1", "hex": "#faf8ef" },
+        { "shade": "2", "hex": "#f0ead0" },
+        { "shade": "3", "hex": "#e6dcb2" },
+        { "shade": "4", "hex": "#dfd19a" },
+        { "shade": "5", "hex": "#d7c580" },
+        { "shade": "6", "hex": "#ceb964" },
+        { "shade": "7", "hex": "#c2a940" },
+        { "shade": "8", "hex": "#b69a2b" },
+        { "shade": "9", "hex": "#ae8c00" },
+        { "shade": "10", "hex": "#997a00" },
+        { "shade": "11", "hex": "#826900" },
+        { "shade": "12", "hex": "#6b5600" },
+        { "shade": "13", "hex": "#574600" },
+        { "shade": "14", "hex": "#3d3100" },
+        { "shade": "15", "hex": "#292100" }
+      ]
+    },
+    {
+      "name": "Electric Fuchsia",
+      "description": "Data visualization Series C",
+      "usage": "Series C variable group - third series in charts and graphs",
+      "colors": [
+        { "shade": "1", "hex": "#fdedf7" },
+        { "shade": "2", "hex": "#fbdaee" },
+        { "shade": "3", "hex": "#f8bfe2" },
+        { "shade": "4", "hex": "#f49ad1" },
+        { "shade": "5", "hex": "#f180c5" },
+        { "shade": "6", "hex": "#ed5eb6" },
+        { "shade": "7", "hex": "#ea40a9" },
+        { "shade": "8", "hex": "#e61e99" },
+        { "shade": "9", "hex": "#e3008c" },
+        { "shade": "10", "hex": "#c7007b" },
+        { "shade": "11", "hex": "#aa0069" },
+        { "shade": "12", "hex": "#8f0058" },
+        { "shade": "13", "hex": "#720046" },
+        { "shade": "14", "hex": "#520032" },
+        { "shade": "15", "hex": "#290019" }
+      ]
+    },
+    {
+      "name": "Bright Basil",
+      "description": "Data visualization Series D",
+      "usage": "Series D variable group - fourth series in charts and graphs",
+      "colors": [
+        { "shade": "1", "hex": "#f1f9f0" },
+        { "shade": "2", "hex": "#dbf1da" },
+        { "shade": "3", "hex": "#c5e8c4" },
+        { "shade": "4", "hex": "#b0e0ae" },
+        { "shade": "5", "hex": "#9ad798" },
+        { "shade": "6", "hex": "#89d086" },
+        { "shade": "7", "hex": "#6fc66c" },
+        { "shade": "8", "hex": "#4eb94a" },
+        { "shade": "9", "hex": "#2eb22a" },
+        { "shade": "10", "hex": "#13a10e" },
+        { "shade": "11", "hex": "#118d0c" },
+        { "shade": "12", "hex": "#0e790b" },
+        { "shade": "13", "hex": "#0c6709" },
+        { "shade": "14", "hex": "#0a5107" },
+        { "shade": "15", "hex": "#062f04" }
+      ]
+    },
+    {
+      "name": "Iris Purple",
+      "description": "Data visualization Series E",
+      "usage": "Series E variable group - fifth series in charts and graphs",
+      "colors": [
+        { "shade": "1", "hex": "#edf0fd" },
+        { "shade": "2", "hex": "#dfe4fc" },
+        { "shade": "3", "hex": "#d1d8fa" },
+        { "shade": "4", "hex": "#bec9f8" },
+        { "shade": "5", "hex": "#c3b1db" },
+        { "shade": "6", "hex": "#99aaf4" },
+        { "shade": "7", "hex": "#a58bca" },
+        { "shade": "8", "hex": "#758bf0" },
+        { "shade": "9", "hex": "#637cef" },
+        { "shade": "10", "hex": "#516ad6" },
+        { "shade": "11", "hex": "#4a5db3" },
+        { "shade": "12", "hex": "#3d4d94" },
+        { "shade": "13", "hex": "#323e78" },
+        { "shade": "14", "hex": "#242c56" },
+        { "shade": "15", "hex": "#12162b" }
+      ]
+    },
+    {
+      "name": "Terracotta Heat",
+      "description": "Data visualization Series F",
+      "usage": "Series F variable group - sixth series in charts and graphs",
+      "colors": [
+        { "shade": "1", "hex": "#faf0ea" },
+        { "shade": "2", "hex": "#f6e0d5" },
+        { "shade": "3", "hex": "#f0cdbc" },
+        { "shade": "4", "hex": "#ebbba3" },
+        { "shade": "5", "hex": "#e5a787" },
+        { "shade": "6", "hex": "#dd9269" },
+        { "shade": "7", "hex": "#d77c4c" },
+        { "shade": "8", "hex": "#d66529" },
+        { "shade": "9", "hex": "#ca5010" },
+        { "shade": "10", "hex": "#b3480f" },
+        { "shade": "11", "hex": "#973c0c" },
+        { "shade": "12", "hex": "#7f330a" },
+        { "shade": "13", "hex": "#652808" },
+        { "shade": "14", "hex": "#4b1e06" },
+        { "shade": "15", "hex": "#260f03" }
+      ]
     }
   ],
-  "colors": [
-    {
-      "token": "vdc-primary",
-      "hex": "#0078d4",
-      "rgb": "0, 120, 212",
-      "usage": "Primary actions, links, and key interactive elements",
-      "category": "Brand"
+  "semanticColors": {
+    "misc": {
+      "description": "Application-level surface and border colors",
+      "colors": [
+        { "token": "app-surface", "hex": "#fafafa", "paletteRef": "neutral-gray-1", "usage": "Page background - base layer of the application" },
+        { "token": "on-app-surface", "hex": "#242424", "paletteRef": "neutral-gray-15", "usage": "Primary text color on page background" },
+        { "token": "subtle", "hex": "#707070", "paletteRef": "neutral-gray-11", "usage": "Secondary text, captions, metadata, timestamps" },
+        { "token": "surface", "hex": "#ffffff", "paletteRef": "neutral-gray-white", "usage": "Elevated surfaces: modals, cards, dropdowns, popovers" },
+        { "token": "surface-alt", "hex": "#ffffff", "paletteRef": "neutral-gray-white", "usage": "Alternative elevated surface for visual separation" },
+        { "token": "border", "hex": "rgba(36, 36, 36, 0.72)", "paletteRef": "neutral-gray-15 @ 72%", "usage": "Default borders for inputs, cards, dividers" },
+        { "token": "border-alt", "hex": "#000000", "paletteRef": "neutral-gray-black", "usage": "High contrast borders, focus rings" }
+      ]
     },
-    {
-      "token": "vdc-primary-hover",
-      "hex": "#106ebe",
-      "rgb": "16, 110, 190",
-      "usage": "Hover state for primary elements",
-      "category": "Brand"
+    "base": {
+      "description": "Neutral component colors for default/secondary UI elements",
+      "colors": [
+        { "token": "base-subtle", "hex": "#f5f5f5", "paletteRef": "neutral-gray-2", "usage": "Subtle backgrounds: disabled areas, zebra stripes, muted sections" },
+        { "token": "base-subtle-hover", "hex": "#ebebeb", "paletteRef": "neutral-gray-4", "usage": "Hover state for subtle backgrounds" },
+        { "token": "base-subtle-active", "hex": "#e0e0e0", "paletteRef": "neutral-gray-5", "usage": "Active/pressed state for subtle backgrounds" },
+        { "token": "base", "hex": "#ffffff", "paletteRef": "neutral-gray-white", "usage": "Default interactive surface: inputs, buttons, list items" },
+        { "token": "base-hover", "hex": "#f5f5f5", "paletteRef": "neutral-gray-2", "usage": "Hover state for interactive elements" },
+        { "token": "base-active", "hex": "#ebebeb", "paletteRef": "neutral-gray-4", "usage": "Active/pressed state for interactive elements" },
+        { "token": "base-emphasis", "hex": "#d1d1d1", "paletteRef": "neutral-gray-6", "usage": "Emphasized borders, dividers, subtle separators" },
+        { "token": "base-on-subtle", "hex": "#242424", "paletteRef": "neutral-gray-15", "usage": "Text color on subtle backgrounds" },
+        { "token": "on-base", "hex": "#242424", "paletteRef": "neutral-gray-15", "usage": "Text color on base backgrounds" },
+        { "token": "base-on-surface", "hex": "#242424", "paletteRef": "neutral-gray-15", "usage": "Text color on elevated surfaces" }
+      ]
     },
-    {
-      "token": "vdc-secondary",
-      "hex": "#6264a7",
-      "rgb": "98, 100, 167",
-      "usage": "Secondary actions and accent elements",
-      "category": "Brand"
+    "primary": {
+      "description": "Primary brand colors for main actions and key interactive elements",
+      "colors": [
+        { "token": "primary-subtle", "hex": "#ebf3fc", "paletteRef": "blue-1", "usage": "Selected row highlight, active nav item background" },
+        { "token": "primary-subtle-hover", "hex": "#cfe4fa", "paletteRef": "blue-2", "usage": "Hover state for selected/highlighted items" },
+        { "token": "primary-subtle-active", "hex": "#96c6fa", "paletteRef": "blue-4", "usage": "Active state for selected/highlighted items" },
+        { "token": "primary", "hex": "#0f6cbd", "paletteRef": "blue-7", "usage": "Primary buttons, main CTA, active indicators" },
+        { "token": "primary-hover", "hex": "#115ea3", "paletteRef": "blue-8", "usage": "Primary button hover state" },
+        { "token": "primary-active", "hex": "#0f548c", "paletteRef": "blue-9", "usage": "Primary button pressed/active state" },
+        { "token": "primary-emphasis", "hex": "#abd1f8", "paletteRef": "blue-3", "usage": "Focus rings, selection borders" },
+        { "token": "primary-on-subtle", "hex": "#0a2e4a", "paletteRef": "blue-12", "usage": "Text on primary-subtle backgrounds" },
+        { "token": "on-primary", "hex": "#ffffff", "paletteRef": "neutral-gray-white", "usage": "Text/icons on primary backgrounds (buttons)" },
+        { "token": "primary-on-surface", "hex": "#0f6cbd", "paletteRef": "blue-7", "usage": "Links, primary text on surface backgrounds" }
+      ]
     },
-    {
-      "token": "vdc-success",
-      "hex": "#107c10",
-      "rgb": "16, 124, 16",
-      "usage": "Success states, confirmations, positive actions",
-      "category": "Semantic"
+    "secondary": {
+      "description": "Secondary action colors for less prominent interactions",
+      "colors": [
+        { "token": "secondary-subtle", "hex": "#f0f0f0", "paletteRef": "neutral-gray-3", "usage": "Secondary button background (outline style)" },
+        { "token": "secondary-subtle-hover", "hex": "#fafafa", "paletteRef": "neutral-gray-1", "usage": "Secondary subtle hover" },
+        { "token": "secondary-subtle-active", "hex": "#ffffff", "paletteRef": "neutral-gray-white", "usage": "Secondary subtle active" },
+        { "token": "secondary", "hex": "#ebebeb", "paletteRef": "neutral-gray-4", "usage": "Secondary button background (filled style)" },
+        { "token": "secondary-hover", "hex": "#f5f5f5", "paletteRef": "neutral-gray-2", "usage": "Secondary button hover" },
+        { "token": "secondary-active", "hex": "#fafafa", "paletteRef": "neutral-gray-1", "usage": "Secondary button active" },
+        { "token": "secondary-emphasis", "hex": "#e0e0e0", "paletteRef": "neutral-gray-5", "usage": "Secondary emphasis/borders" },
+        { "token": "secondary-on-subtle", "hex": "#616161", "paletteRef": "neutral-gray-12", "usage": "Text on secondary subtle" },
+        { "token": "on-secondary", "hex": "#616161", "paletteRef": "neutral-gray-12", "usage": "Text on secondary backgrounds" },
+        { "token": "secondary-on-surface", "hex": "#616161", "paletteRef": "neutral-gray-12", "usage": "Secondary text on surfaces" }
+      ]
     },
-    {
-      "token": "vdc-warning",
-      "hex": "#ffb900",
-      "rgb": "255, 185, 0",
-      "usage": "Warning states, caution indicators",
-      "category": "Semantic"
+    "tertiary": {
+      "description": "Accent colors for special features, highlights, and differentiation",
+      "colors": [
+        { "token": "tertiary-subtle", "hex": "#fdf5fc", "paletteRef": "berry-1", "usage": "Accent highlight backgrounds" },
+        { "token": "tertiary-subtle-hover", "hex": "#f5daf2", "paletteRef": "berry-2", "usage": "Accent subtle hover" },
+        { "token": "tertiary-subtle-active", "hex": "#edbbe7", "paletteRef": "berry-3", "usage": "Accent subtle active" },
+        { "token": "tertiary", "hex": "#c239b3", "paletteRef": "berry-9", "usage": "Tertiary buttons, accent indicators" },
+        { "token": "tertiary-hover", "hex": "#af33a1", "paletteRef": "berry-10", "usage": "Tertiary hover" },
+        { "token": "tertiary-active", "hex": "#962c8a", "paletteRef": "berry-11", "usage": "Tertiary active" },
+        { "token": "tertiary-emphasis", "hex": "#edbbe7", "paletteRef": "berry-3", "usage": "Tertiary emphasis" },
+        { "token": "tertiary-on-subtle", "hex": "#af33a1", "paletteRef": "berry-10", "usage": "Text on tertiary subtle" },
+        { "token": "on-tertiary", "hex": "#ffffff", "paletteRef": "neutral-gray-white", "usage": "Text on tertiary backgrounds" },
+        { "token": "tertiary-on-surface", "hex": "#c239b3", "paletteRef": "berry-9", "usage": "Tertiary text on surfaces" }
+      ]
     },
-    {
-      "token": "vdc-error",
-      "hex": "#d13438",
-      "rgb": "209, 52, 56",
-      "usage": "Error states, destructive actions ONLY",
-      "category": "Semantic"
+    "info": {
+      "description": "Informational colors for neutral messages and highlights",
+      "colors": [
+        { "token": "info-subtle", "hex": "#f6fafe", "paletteRef": "steel-blue-1", "usage": "Info banner/alert background" },
+        { "token": "info-subtle-hover", "hex": "#dcedfa", "paletteRef": "steel-blue-2", "usage": "Info subtle hover" },
+        { "token": "info-subtle-active", "hex": "#bfddf5", "paletteRef": "steel-blue-3", "usage": "Info subtle active" },
+        { "token": "info", "hex": "#3a96dd", "paletteRef": "steel-blue-8", "usage": "Info icons, badges, indicators" },
+        { "token": "info-hover", "hex": "#3991d5", "paletteRef": "steel-blue-9", "usage": "Info hover" },
+        { "token": "info-active", "hex": "#4fa1e1", "paletteRef": "steel-blue-7", "usage": "Info active" },
+        { "token": "info-emphasis", "hex": "#bfddf5", "paletteRef": "steel-blue-3", "usage": "Info emphasis/borders" },
+        { "token": "info-on-subtle", "hex": "#20547c", "paletteRef": "steel-blue-12", "usage": "Text on info subtle" },
+        { "token": "on-info", "hex": "#242424", "paletteRef": "neutral-gray-15", "usage": "Text on info backgrounds" },
+        { "token": "info-on-surface", "hex": "#3487c7", "paletteRef": "steel-blue-10", "usage": "Info text on surfaces" }
+      ]
     },
-    {
-      "token": "vdc-surface-100",
-      "hex": "#ffffff",
-      "rgb": "255, 255, 255",
-      "usage": "Primary surface (cards, dialogs, content areas)",
-      "category": "Surface"
+    "success": {
+      "description": "Success colors for positive states, confirmations, and completed actions",
+      "colors": [
+        { "token": "success-subtle", "hex": "#f1faf1", "paletteRef": "green-1", "usage": "Success banner/alert background, completed states" },
+        { "token": "success-subtle-hover", "hex": "#c9eac9", "paletteRef": "green-2", "usage": "Success subtle hover" },
+        { "token": "success-subtle-active", "hex": "#9fd89f", "paletteRef": "green-3", "usage": "Success subtle active" },
+        { "token": "success", "hex": "#107c10", "paletteRef": "green-11", "usage": "Success icons, badges, checkmarks" },
+        { "token": "success-hover", "hex": "#0e700e", "paletteRef": "green-12", "usage": "Success hover" },
+        { "token": "success-active", "hex": "#0c5e0c", "paletteRef": "green-13", "usage": "Success active" },
+        { "token": "success-emphasis", "hex": "#9fd89f", "paletteRef": "green-3", "usage": "Success emphasis/borders" },
+        { "token": "success-on-subtle", "hex": "#0e700e", "paletteRef": "green-12", "usage": "Text on success subtle" },
+        { "token": "on-success", "hex": "#ffffff", "paletteRef": "neutral-gray-white", "usage": "Text on success backgrounds" },
+        { "token": "success-on-surface", "hex": "#107c10", "paletteRef": "green-11", "usage": "Success text on surfaces" }
+      ]
     },
-    {
-      "token": "vdc-surface-200",
-      "hex": "#faf9f8",
-      "rgb": "250, 249, 248",
-      "usage": "Page background, secondary surfaces",
-      "category": "Surface"
+    "warning": {
+      "description": "Warning colors for caution states and attention-needed situations",
+      "colors": [
+        { "token": "warning-subtle", "hex": "#fff9f5", "paletteRef": "orange-1", "usage": "Warning banner/alert background" },
+        { "token": "warning-subtle-hover", "hex": "#fee5d7", "paletteRef": "orange-2", "usage": "Warning subtle hover" },
+        { "token": "warning-subtle-active", "hex": "#fdcfb4", "paletteRef": "orange-3", "usage": "Warning subtle active" },
+        { "token": "warning", "hex": "#f7630c", "paletteRef": "orange-8", "usage": "Warning icons, badges, indicators" },
+        { "token": "warning-hover", "hex": "#de590b", "paletteRef": "orange-9", "usage": "Warning hover" },
+        { "token": "warning-active", "hex": "#bc4b09", "paletteRef": "orange-10", "usage": "Warning active" },
+        { "token": "warning-emphasis", "hex": "#fdcfb4", "paletteRef": "orange-3", "usage": "Warning emphasis/borders" },
+        { "token": "warning-on-subtle", "hex": "#8a3707", "paletteRef": "orange-12", "usage": "Text on warning subtle" },
+        { "token": "on-warning", "hex": "#242424", "paletteRef": "neutral-gray-15", "usage": "Text on warning backgrounds" },
+        { "token": "warning-on-surface", "hex": "#8a3707", "paletteRef": "orange-12", "usage": "Warning text on surfaces" }
+      ]
     },
-    {
-      "token": "vdc-surface-300",
-      "hex": "#f3f2f1",
-      "rgb": "243, 242, 241",
-      "usage": "Hover backgrounds, subtle emphasis",
-      "category": "Surface"
+    "error": {
+      "description": "Error colors for validation errors, destructive actions, and critical alerts",
+      "colors": [
+        { "token": "error-subtle", "hex": "#fdf3f4", "paletteRef": "cranberry-1", "usage": "Error banner/alert background, invalid input highlight" },
+        { "token": "error-subtle-hover", "hex": "#f6d1d5", "paletteRef": "cranberry-2", "usage": "Error subtle hover" },
+        { "token": "error-subtle-active", "hex": "#eeacb2", "paletteRef": "cranberry-4", "usage": "Error subtle active" },
+        { "token": "error", "hex": "#c50f1f", "paletteRef": "cranberry-8", "usage": "Error icons, invalid borders, destructive button" },
+        { "token": "error-hover", "hex": "#b10e1c", "paletteRef": "cranberry-9", "usage": "Error/destructive hover" },
+        { "token": "error-active", "hex": "#960b18", "paletteRef": "cranberry-10", "usage": "Error/destructive active" },
+        { "token": "error-emphasis", "hex": "#eeacb2", "paletteRef": "cranberry-4", "usage": "Error emphasis/borders" },
+        { "token": "error-on-subtle", "hex": "#b10e1c", "paletteRef": "cranberry-9", "usage": "Text on error subtle" },
+        { "token": "on-error", "hex": "#ffffff", "paletteRef": "neutral-gray-white", "usage": "Text on error backgrounds" },
+        { "token": "error-on-surface", "hex": "#c50f1f", "paletteRef": "cranberry-8", "usage": "Error/validation text on surfaces" }
+      ]
     },
-    {
-      "token": "vdc-text-primary",
-      "hex": "#323130",
-      "rgb": "50, 49, 48",
-      "usage": "Primary text, headings, important content",
-      "category": "Text"
+    "light": {
+      "description": "Light variant colors for light-themed elements within dark contexts",
+      "colors": [
+        { "token": "light-subtle", "hex": "#ffffff", "paletteRef": "neutral-gray-white", "usage": "Light subtle background" },
+        { "token": "light-subtle-hover", "hex": "#f5f5f5", "paletteRef": "neutral-gray-2", "usage": "Light subtle hover" },
+        { "token": "light-subtle-active", "hex": "#ebebeb", "paletteRef": "neutral-gray-4", "usage": "Light subtle active" },
+        { "token": "light", "hex": "#ebebeb", "paletteRef": "neutral-gray-4", "usage": "Light background" },
+        { "token": "light-hover", "hex": "#f5f5f5", "paletteRef": "neutral-gray-2", "usage": "Light hover" },
+        { "token": "light-active", "hex": "#f0f0f0", "paletteRef": "neutral-gray-3", "usage": "Light active" },
+        { "token": "light-emphasis", "hex": "#e0e0e0", "paletteRef": "neutral-gray-5", "usage": "Light emphasis" },
+        { "token": "light-on-subtle", "hex": "#616161", "paletteRef": "neutral-gray-12", "usage": "Text on light subtle" },
+        { "token": "on-light", "hex": "#242424", "paletteRef": "neutral-gray-15", "usage": "Text on light backgrounds" },
+        { "token": "light-on-surface", "hex": "#ffffff", "paletteRef": "neutral-gray-white", "usage": "Light text on dark surfaces" }
+      ]
     },
-    {
-      "token": "vdc-text-secondary",
-      "hex": "#605e5c",
-      "rgb": "96, 94, 92",
-      "usage": "Secondary text, descriptions, captions",
-      "category": "Text"
+    "dark": {
+      "description": "Dark variant colors for dark elements within light contexts",
+      "colors": [
+        { "token": "dark-subtle", "hex": "#000000", "paletteRef": "neutral-gray-black", "usage": "Dark subtle background" },
+        { "token": "dark-subtle-hover", "hex": "#242424", "paletteRef": "neutral-gray-15", "usage": "Dark subtle hover" },
+        { "token": "dark-subtle-active", "hex": "#333333", "paletteRef": "neutral-gray-14", "usage": "Dark subtle active" },
+        { "token": "dark", "hex": "#242424", "paletteRef": "neutral-gray-15", "usage": "Dark background" },
+        { "token": "dark-hover", "hex": "#424242", "paletteRef": "neutral-gray-13", "usage": "Dark hover" },
+        { "token": "dark-active", "hex": "#333333", "paletteRef": "neutral-gray-14", "usage": "Dark active" },
+        { "token": "dark-emphasis", "hex": "#616161", "paletteRef": "neutral-gray-12", "usage": "Dark emphasis" },
+        { "token": "dark-on-subtle", "hex": "#ffffff", "paletteRef": "neutral-gray-white", "usage": "Text on dark subtle" },
+        { "token": "on-dark", "hex": "#ffffff", "paletteRef": "neutral-gray-white", "usage": "Text on dark backgrounds" },
+        { "token": "dark-on-surface", "hex": "#616161", "paletteRef": "neutral-gray-12", "usage": "Dark text on light surfaces" }
+      ]
     },
-    {
-      "token": "vdc-text-disabled",
-      "hex": "#a19f9d",
-      "rgb": "161, 159, 157",
-      "usage": "Disabled text, placeholder text",
-      "category": "Text"
+    "inverse": {
+      "description": "Inverse colors for tooltips and high-contrast elements that flip with theme",
+      "colors": [
+        { "token": "inverse-subtle", "hex": "#616161", "paletteRef": "neutral-gray-12", "usage": "Inverse subtle background" },
+        { "token": "inverse-subtle-hover", "hex": "#8a8a8a", "paletteRef": "neutral-gray-10", "usage": "Inverse subtle hover" },
+        { "token": "inverse-subtle-active", "hex": "#707070", "paletteRef": "neutral-gray-11", "usage": "Inverse subtle active" },
+        { "token": "inverse", "hex": "#242424", "paletteRef": "neutral-gray-15", "usage": "Tooltip background, high-contrast surface" },
+        { "token": "inverse-hover", "hex": "#424242", "paletteRef": "neutral-gray-13", "usage": "Inverse hover" },
+        { "token": "inverse-active", "hex": "#333333", "paletteRef": "neutral-gray-14", "usage": "Inverse active" },
+        { "token": "inverse-emphasis", "hex": "#707070", "paletteRef": "neutral-gray-11", "usage": "Inverse emphasis" },
+        { "token": "inverse-on-subtle", "hex": "#ffffff", "paletteRef": "neutral-gray-white", "usage": "Text on inverse subtle" },
+        { "token": "on-inverse", "hex": "#ffffff", "paletteRef": "neutral-gray-white", "usage": "Tooltip text, text on inverse backgrounds" },
+        { "token": "inverse-on-surface", "hex": "#616161", "paletteRef": "neutral-gray-12", "usage": "Inverse text on surfaces" }
+      ]
     },
-    {
-      "token": "vdc-border-default",
-      "hex": "#8a8886",
-      "rgb": "138, 136, 134",
-      "usage": "Default borders for inputs, cards",
-      "category": "Border"
-    },
-    {
-      "token": "vdc-border-subtle",
-      "hex": "#edebe9",
-      "rgb": "237, 235, 233",
-      "usage": "Subtle dividers, table borders",
-      "category": "Border"
-    },
-    {
-      "token": "vdc-icon-default",
-      "hex": "#242424",
-      "rgb": "36, 36, 36",
-      "usage": "Default color for icons without dedicated entity colors",
-      "category": "Entity"
-    },
-    {
-      "token": "vdc-entity-ingredient",
-      "hex": "#5E4DB2",
-      "rgb": "94, 77, 178",
-      "usage": "Ingredient entity icons, badges, and accents",
-      "category": "Entity"
-    },
-    {
-      "token": "vdc-entity-ingredient-light",
-      "hex": "#F3F0FF",
-      "rgb": "243, 240, 255",
-      "usage": "Ingredient entity backgrounds and subtle highlights",
-      "category": "Entity"
-    },
-    {
-      "token": "vdc-entity-release",
-      "hex": "#943D73",
-      "rgb": "148, 61, 115",
-      "usage": "Release entity icons, badges, and accents",
-      "category": "Entity"
-    },
-    {
-      "token": "vdc-entity-release-light",
-      "hex": "#FFECF8",
-      "rgb": "255, 236, 248",
-      "usage": "Release entity backgrounds and subtle highlights",
-      "category": "Entity"
-    },
-    {
-      "token": "vdc-entity-workflow",
-      "hex": "#F5CD47",
-      "rgb": "245, 205, 71",
-      "usage": "Workflow entity icons, badges, and accents (from VDC logo)",
-      "category": "Entity"
-    },
-    {
-      "token": "vdc-context-personal",
-      "hex": "#2E7D6B",
-      "rgb": "46, 125, 107",
-      "usage": "Personal context navigation and user-specific areas",
-      "category": "Navigation"
-    },
-    {
-      "token": "vdc-context-global",
-      "hex": "#0078d4",
-      "rgb": "0, 120, 212",
-      "usage": "Global context navigation (references vdc-primary)",
-      "category": "Navigation"
-    },
-    {
-      "token": "vdc-context-project",
-      "hex": "#0B4F8A",
-      "rgb": "11, 79, 138",
-      "usage": "Project context navigation and project-specific areas",
-      "category": "Navigation"
+    "series": {
+      "description": "Data visualization colors for charts, graphs, and multi-series data",
+      "colors": [
+        { "token": "series-a", "hex": "#2aa0a4", "paletteRef": "techno-teal-9", "usage": "First data series (teal)" },
+        { "token": "series-a-bold", "hex": "#20787b", "paletteRef": "techno-teal-11", "usage": "Series A darker variant" },
+        { "token": "series-a-bolder", "hex": "#155052", "paletteRef": "techno-teal-13", "usage": "Series A darkest variant" },
+        { "token": "series-a-subtle", "hex": "#5fb8bb", "paletteRef": "techno-teal-7", "usage": "Series A lighter variant" },
+        { "token": "series-a-subtler", "hex": "#94cfd1", "paletteRef": "techno-teal-5", "usage": "Series A lightest variant" },
+        { "token": "series-b", "hex": "#ae8c00", "paletteRef": "saffron-forge-9", "usage": "Second data series (gold)" },
+        { "token": "series-b-bold", "hex": "#826900", "paletteRef": "saffron-forge-11", "usage": "Series B darker variant" },
+        { "token": "series-b-bolder", "hex": "#574600", "paletteRef": "saffron-forge-13", "usage": "Series B darkest variant" },
+        { "token": "series-b-subtle", "hex": "#c2a940", "paletteRef": "saffron-forge-7", "usage": "Series B lighter variant" },
+        { "token": "series-b-subtler", "hex": "#d7c580", "paletteRef": "saffron-forge-5", "usage": "Series B lightest variant" },
+        { "token": "series-c", "hex": "#e3008c", "paletteRef": "electric-fuchsia-9", "usage": "Third data series (fuchsia)" },
+        { "token": "series-c-bold", "hex": "#aa0069", "paletteRef": "electric-fuchsia-11", "usage": "Series C darker variant" },
+        { "token": "series-c-bolder", "hex": "#720046", "paletteRef": "electric-fuchsia-13", "usage": "Series C darkest variant" },
+        { "token": "series-c-subtle", "hex": "#ea40a9", "paletteRef": "electric-fuchsia-7", "usage": "Series C lighter variant" },
+        { "token": "series-c-subtler", "hex": "#f180c5", "paletteRef": "electric-fuchsia-5", "usage": "Series C lightest variant" },
+        { "token": "series-d", "hex": "#13a10e", "paletteRef": "bright-basil-10", "usage": "Fourth data series (green)" },
+        { "token": "series-d-bold", "hex": "#0e790b", "paletteRef": "bright-basil-12", "usage": "Series D darker variant" },
+        { "token": "series-d-bolder", "hex": "#0a5107", "paletteRef": "bright-basil-14", "usage": "Series D darkest variant" },
+        { "token": "series-d-subtle", "hex": "#4eb94a", "paletteRef": "bright-basil-8", "usage": "Series D lighter variant" },
+        { "token": "series-d-subtler", "hex": "#89d086", "paletteRef": "bright-basil-6", "usage": "Series D lightest variant" },
+        { "token": "series-e", "hex": "#637cef", "paletteRef": "iris-purple-9", "usage": "Fifth data series (purple)" },
+        { "token": "series-e-bold", "hex": "#4a5db3", "paletteRef": "iris-purple-11", "usage": "Series E darker variant" },
+        { "token": "series-e-bolder", "hex": "#323e78", "paletteRef": "iris-purple-13", "usage": "Series E darkest variant" },
+        { "token": "series-e-subtle", "hex": "#c3b1db", "paletteRef": "iris-purple-5", "usage": "Series E lighter variant" },
+        { "token": "series-e-subtler", "hex": "#a58bca", "paletteRef": "iris-purple-7", "usage": "Series E variant" },
+        { "token": "series-f", "hex": "#ca5010", "paletteRef": "terracotta-heat-9", "usage": "Sixth data series (orange)" },
+        { "token": "series-f-bold", "hex": "#973c0c", "paletteRef": "terracotta-heat-11", "usage": "Series F darker variant" },
+        { "token": "series-f-bolder", "hex": "#652808", "paletteRef": "terracotta-heat-13", "usage": "Series F darkest variant" },
+        { "token": "series-f-subtle", "hex": "#d77c4c", "paletteRef": "terracotta-heat-7", "usage": "Series F lighter variant" },
+        { "token": "series-f-subtler", "hex": "#e5a787", "paletteRef": "terracotta-heat-5", "usage": "Series F lightest variant" }
+      ]
     }
-  ]
+  },
+  "semanticColorsDark": {
+    "misc": {
+      "description": "Application-level surface and border colors (dark theme)",
+      "colors": [
+        { "token": "app-surface", "hex": "#1F1F1F", "usage": "Page background - base layer (dark)" },
+        { "token": "on-app-surface", "hex": "#FFFFFF", "usage": "Primary text color on page background (dark)" },
+        { "token": "subtle", "hex": "#999999", "usage": "Secondary text, captions, metadata (dark)" },
+        { "token": "surface", "hex": "#292929", "usage": "Elevated surfaces: modals, cards, dropdowns (dark)" },
+        { "token": "surface-alt", "hex": "#292929", "usage": "Alternative elevated surface (dark)" },
+        { "token": "border", "hex": "#666666", "usage": "Default borders (dark)" },
+        { "token": "border-alt", "hex": "#757575", "usage": "High contrast borders (dark)" }
+      ]
+    },
+    "base": {
+      "description": "Neutral component colors (dark theme)",
+      "colors": [
+        { "token": "base-subtle", "hex": "#141414", "usage": "Subtle backgrounds (dark)" },
+        { "token": "base-subtle-hover", "hex": "#292929", "usage": "Subtle background hover (dark)" },
+        { "token": "base-subtle-active", "hex": "#242424", "usage": "Subtle background active (dark)" },
+        { "token": "base", "hex": "#292929", "usage": "Default interactive surface (dark)" },
+        { "token": "base-hover", "hex": "#3D3D3D", "usage": "Hover state (dark)" },
+        { "token": "base-active", "hex": "#383838", "usage": "Active state (dark)" },
+        { "token": "base-emphasis", "hex": "#666666", "usage": "Emphasized borders (dark)" },
+        { "token": "base-on-subtle", "hex": "#D6D6D6", "usage": "Text on subtle backgrounds (dark)" },
+        { "token": "on-base", "hex": "#FFFFFF", "usage": "Text on base backgrounds (dark)" },
+        { "token": "base-on-surface", "hex": "#FFFFFF", "usage": "Text on surfaces (dark)" }
+      ]
+    },
+    "primary": {
+      "description": "Primary brand colors (dark theme)",
+      "colors": [
+        { "token": "primary-subtle", "hex": "#082338", "usage": "Selected highlight (dark)" },
+        { "token": "primary-subtle-hover", "hex": "#1E3345", "usage": "Selected hover (dark)" },
+        { "token": "primary-subtle-active", "hex": "#061724", "usage": "Selected active (dark)" },
+        { "token": "primary", "hex": "#115EA3", "usage": "Primary buttons (dark)" },
+        { "token": "primary-hover", "hex": "#0F6CBD", "usage": "Primary hover (dark)" },
+        { "token": "primary-active", "hex": "#0F548C", "usage": "Primary active (dark)" },
+        { "token": "primary-emphasis", "hex": "#0E4775", "usage": "Focus rings (dark)" },
+        { "token": "primary-on-subtle", "hex": "#EBF3FC", "usage": "Text on primary subtle (dark)" },
+        { "token": "on-primary", "hex": "#FFFFFF", "usage": "Text on primary (dark)" },
+        { "token": "primary-on-surface", "hex": "#479EF5", "usage": "Links on surfaces (dark)" }
+      ]
+    },
+    "secondary": {
+      "description": "Secondary action colors (dark theme)",
+      "colors": [
+        { "token": "secondary-subtle", "hex": "#0A0A0A", "usage": "Secondary subtle (dark)" },
+        { "token": "secondary-subtle-hover", "hex": "#1F1F1F", "usage": "Secondary subtle hover (dark)" },
+        { "token": "secondary-subtle-active", "hex": "#1A1A1A", "usage": "Secondary subtle active (dark)" },
+        { "token": "secondary", "hex": "#000000", "usage": "Secondary background (dark)" },
+        { "token": "secondary-hover", "hex": "#141414", "usage": "Secondary hover (dark)" },
+        { "token": "secondary-active", "hex": "#0F0F0F", "usage": "Secondary active (dark)" },
+        { "token": "secondary-emphasis", "hex": "#525252", "usage": "Secondary emphasis (dark)" },
+        { "token": "secondary-on-subtle", "hex": "#ADADAD", "usage": "Text on secondary subtle (dark)" },
+        { "token": "on-secondary", "hex": "#ADADAD", "usage": "Text on secondary (dark)" },
+        { "token": "secondary-on-surface", "hex": "#ADADAD", "usage": "Secondary text (dark)" }
+      ]
+    },
+    "tertiary": {
+      "description": "Accent colors (dark theme)",
+      "colors": [
+        { "token": "tertiary-subtle", "hex": "#3A1136", "usage": "Accent highlight (dark)" },
+        { "token": "tertiary-subtle-hover", "hex": "#6D2064", "usage": "Accent hover (dark)" },
+        { "token": "tertiary-subtle-active", "hex": "#932B88", "usage": "Accent active (dark)" },
+        { "token": "tertiary", "hex": "#C239B3", "usage": "Tertiary buttons (dark)" },
+        { "token": "tertiary-hover", "hex": "#AF33A1", "usage": "Tertiary hover (dark)" },
+        { "token": "tertiary-active", "hex": "#932B88", "usage": "Tertiary active (dark)" },
+        { "token": "tertiary-emphasis", "hex": "#C239B3", "usage": "Tertiary emphasis (dark)" },
+        { "token": "tertiary-on-subtle", "hex": "#DA7ED0", "usage": "Text on tertiary subtle (dark)" },
+        { "token": "on-tertiary", "hex": "#FFFFFF", "usage": "Text on tertiary (dark)" },
+        { "token": "tertiary-on-surface", "hex": "#D161C4", "usage": "Tertiary text (dark)" }
+      ]
+    },
+    "info": {
+      "description": "Informational colors (dark theme)",
+      "colors": [
+        { "token": "info-subtle", "hex": "#112D4E", "usage": "Info background (dark)" },
+        { "token": "info-subtle-hover", "hex": "#174169", "usage": "Info hover (dark)" },
+        { "token": "info-subtle-active", "hex": "#20547C", "usage": "Info active (dark)" },
+        { "token": "info", "hex": "#3A96DD", "usage": "Info icons (dark)" },
+        { "token": "info-hover", "hex": "#3487C7", "usage": "Info hover (dark)" },
+        { "token": "info-active", "hex": "#2C72A8", "usage": "Info active (dark)" },
+        { "token": "info-emphasis", "hex": "#3487C7", "usage": "Info emphasis (dark)" },
+        { "token": "info-on-subtle", "hex": "#A3CDF0", "usage": "Text on info subtle (dark)" },
+        { "token": "on-info", "hex": "#FFFFFF", "usage": "Text on info (dark)" },
+        { "token": "info-on-surface", "hex": "#BFDDF5", "usage": "Info text (dark)" }
+      ]
+    },
+    "success": {
+      "description": "Success colors (dark theme)",
+      "colors": [
+        { "token": "success-subtle", "hex": "#052505", "usage": "Success background (dark)" },
+        { "token": "success-subtle-hover", "hex": "#094509", "usage": "Success hover (dark)" },
+        { "token": "success-subtle-active", "hex": "#0C5E0C", "usage": "Success active (dark)" },
+        { "token": "success", "hex": "#107C10", "usage": "Success icons (dark)" },
+        { "token": "success-hover", "hex": "#0E700E", "usage": "Success hover (dark)" },
+        { "token": "success-active", "hex": "#0C5E0C", "usage": "Success active (dark)" },
+        { "token": "success-emphasis", "hex": "#107C10", "usage": "Success emphasis (dark)" },
+        { "token": "success-on-subtle", "hex": "#54B054", "usage": "Text on success subtle (dark)" },
+        { "token": "on-success", "hex": "#FFFFFF", "usage": "Text on success (dark)" },
+        { "token": "success-on-surface", "hex": "#9FD89F", "usage": "Success text (dark)" }
+      ]
+    },
+    "warning": {
+      "description": "Warning colors (dark theme)",
+      "colors": [
+        { "token": "warning-subtle", "hex": "#4A1E04", "usage": "Warning background (dark)" },
+        { "token": "warning-subtle-hover", "hex": "#8A3707", "usage": "Warning hover (dark)" },
+        { "token": "warning-subtle-active", "hex": "#BC4B09", "usage": "Warning active (dark)" },
+        { "token": "warning", "hex": "#F7630C", "usage": "Warning icons (dark)" },
+        { "token": "warning-hover", "hex": "#F87528", "usage": "Warning hover (dark)" },
+        { "token": "warning-active", "hex": "#F98845", "usage": "Warning active (dark)" },
+        { "token": "warning-emphasis", "hex": "#DE590B", "usage": "Warning emphasis (dark)" },
+        { "token": "warning-on-subtle", "hex": "#FDCFB4", "usage": "Text on warning subtle (dark)" },
+        { "token": "on-warning", "hex": "#FFFFFF", "usage": "Text on warning (dark)" },
+        { "token": "warning-on-surface", "hex": "#FDCFB4", "usage": "Warning text (dark)" }
+      ]
+    },
+    "error": {
+      "description": "Error colors (dark theme)",
+      "colors": [
+        { "token": "error-subtle", "hex": "#3B0509", "usage": "Error background (dark)" },
+        { "token": "error-subtle-hover", "hex": "#6E0811", "usage": "Error hover (dark)" },
+        { "token": "error-subtle-active", "hex": "#960B18", "usage": "Error active (dark)" },
+        { "token": "error", "hex": "#C50F1F", "usage": "Error icons (dark)" },
+        { "token": "error-hover", "hex": "#B10E1C", "usage": "Error hover (dark)" },
+        { "token": "error-active", "hex": "#960B18", "usage": "Error active (dark)" },
+        { "token": "error-emphasis", "hex": "#C50F1F", "usage": "Error emphasis (dark)" },
+        { "token": "error-on-subtle", "hex": "#DC626D", "usage": "Text on error subtle (dark)" },
+        { "token": "on-error", "hex": "#FFFFFF", "usage": "Text on error (dark)" },
+        { "token": "error-on-surface", "hex": "#EEACB2", "usage": "Error text (dark)" }
+      ]
+    },
+    "light": {
+      "description": "Light variant colors (dark theme)",
+      "colors": [
+        { "token": "light-subtle", "hex": "#ADADAD", "usage": "Light subtle (dark)" },
+        { "token": "light-subtle-hover", "hex": "#999999", "usage": "Light subtle hover (dark)" },
+        { "token": "light-subtle-active", "hex": "#757575", "usage": "Light subtle active (dark)" },
+        { "token": "light", "hex": "#D6D6D6", "usage": "Light background (dark)" },
+        { "token": "light-hover", "hex": "#ADADAD", "usage": "Light hover (dark)" },
+        { "token": "light-active", "hex": "#999999", "usage": "Light active (dark)" },
+        { "token": "light-emphasis", "hex": "#525252", "usage": "Light emphasis (dark)" },
+        { "token": "light-on-subtle", "hex": "#292929", "usage": "Text on light subtle (dark)" },
+        { "token": "on-light", "hex": "#292929", "usage": "Text on light (dark)" },
+        { "token": "light-on-surface", "hex": "#ADADAD", "usage": "Light text (dark)" }
+      ]
+    },
+    "dark": {
+      "description": "Dark variant colors (dark theme)",
+      "colors": [
+        { "token": "dark-subtle", "hex": "#0F0F0F", "usage": "Dark subtle (dark)" },
+        { "token": "dark-subtle-hover", "hex": "#1A1A1A", "usage": "Dark subtle hover (dark)" },
+        { "token": "dark-subtle-active", "hex": "#242424", "usage": "Dark subtle active (dark)" },
+        { "token": "dark", "hex": "#292929", "usage": "Dark background (dark)" },
+        { "token": "dark-hover", "hex": "#3D3D3D", "usage": "Dark hover (dark)" },
+        { "token": "dark-active", "hex": "#383838", "usage": "Dark active (dark)" },
+        { "token": "dark-emphasis", "hex": "#525252", "usage": "Dark emphasis (dark)" },
+        { "token": "dark-on-subtle", "hex": "#ADADAD", "usage": "Text on dark subtle (dark)" },
+        { "token": "on-dark", "hex": "#FFFFFF", "usage": "Text on dark (dark)" },
+        { "token": "dark-on-surface", "hex": "#292929", "usage": "Dark text (dark)" }
+      ]
+    },
+    "inverse": {
+      "description": "Inverse colors (dark theme - flipped from light)",
+      "colors": [
+        { "token": "inverse-subtle", "hex": "#757575", "usage": "Inverse subtle (dark)" },
+        { "token": "inverse-subtle-hover", "hex": "#525252", "usage": "Inverse subtle hover (dark)" },
+        { "token": "inverse-subtle-active", "hex": "#666666", "usage": "Inverse subtle active (dark)" },
+        { "token": "inverse", "hex": "#D6D6D6", "usage": "Tooltip background (dark)" },
+        { "token": "inverse-hover", "hex": "#999999", "usage": "Inverse hover (dark)" },
+        { "token": "inverse-active", "hex": "#ADADAD", "usage": "Inverse active (dark)" },
+        { "token": "inverse-emphasis", "hex": "#666666", "usage": "Inverse emphasis (dark)" },
+        { "token": "inverse-on-subtle", "hex": "#FFFFFF", "usage": "Text on inverse subtle (dark)" },
+        { "token": "on-inverse", "hex": "#292929", "usage": "Tooltip text (dark)" },
+        { "token": "inverse-on-surface", "hex": "#ADADAD", "usage": "Inverse text (dark)" }
+      ]
+    },
+    "series": {
+      "description": "Data visualization colors (dark theme - adjusted for dark backgrounds)",
+      "colors": [
+        { "token": "series-a", "hex": "#2AA0A4", "usage": "First data series (dark)" },
+        { "token": "series-a-bold", "hex": "#5FB8BB", "usage": "Series A bold (dark)" },
+        { "token": "series-a-bolder", "hex": "#94CFD1", "usage": "Series A bolder (dark)" },
+        { "token": "series-a-subtle", "hex": "#207878", "usage": "Series A subtle (dark)" },
+        { "token": "series-a-subtler", "hex": "#155052", "usage": "Series A subtler (dark)" },
+        { "token": "series-b", "hex": "#AE8C00", "usage": "Second data series (dark)" },
+        { "token": "series-b-bold", "hex": "#C2A940", "usage": "Series B bold (dark)" },
+        { "token": "series-b-bolder", "hex": "#D7C580", "usage": "Series B bolder (dark)" },
+        { "token": "series-b-subtle", "hex": "#826900", "usage": "Series B subtle (dark)" },
+        { "token": "series-b-subtler", "hex": "#574600", "usage": "Series B subtler (dark)" },
+        { "token": "series-c", "hex": "#E3008C", "usage": "Third data series (dark)" },
+        { "token": "series-c-bold", "hex": "#EA40A9", "usage": "Series C bold (dark)" },
+        { "token": "series-c-bolder", "hex": "#F180C5", "usage": "Series C bolder (dark)" },
+        { "token": "series-c-subtle", "hex": "#AA0069", "usage": "Series C subtle (dark)" },
+        { "token": "series-c-subtler", "hex": "#720046", "usage": "Series C subtler (dark)" },
+        { "token": "series-d", "hex": "#13A10E", "usage": "Fourth data series (dark)" },
+        { "token": "series-d-bold", "hex": "#4EB94A", "usage": "Series D bold (dark)" },
+        { "token": "series-d-bolder", "hex": "#89D086", "usage": "Series D bolder (dark)" },
+        { "token": "series-d-subtle", "hex": "#0E790B", "usage": "Series D subtle (dark)" },
+        { "token": "series-d-subtler", "hex": "#0A5107", "usage": "Series D subtler (dark)" },
+        { "token": "series-e", "hex": "#4A5DB3", "usage": "Fifth data series (dark)" },
+        { "token": "series-e-bold", "hex": "#758BF0", "usage": "Series E bold (dark)" },
+        { "token": "series-e-bolder", "hex": "#C3B1DB", "usage": "Series E bolder (dark)" },
+        { "token": "series-e-subtle", "hex": "#3D4D94", "usage": "Series E subtle (dark)" },
+        { "token": "series-e-subtler", "hex": "#323E78", "usage": "Series E subtler (dark)" },
+        { "token": "series-f", "hex": "#CA5010", "usage": "Sixth data series (dark)" },
+        { "token": "series-f-bold", "hex": "#973C0C", "usage": "Series F bold (dark)" },
+        { "token": "series-f-bolder", "hex": "#652808", "usage": "Series F bolder (dark)" },
+        { "token": "series-f-subtle", "hex": "#D77C4C", "usage": "Series F subtle (dark)" },
+        { "token": "series-f-subtler", "hex": "#E5A787", "usage": "Series F subtler (dark)" }
+      ]
+    }
+  },
+  "vdcColors": {
+    "description": "VDC-specific custom colors for entities and navigation",
+    "entity": {
+      "description": "Colors for VDC business entities - use for icons, badges, and accent highlights",
+      "colors": [
+        { "token": "vdc-icon-default", "hex": "#242424", "usage": "Default icon color when no entity-specific color applies" },
+        { "token": "vdc-entity-ingredient", "hex": "#5E4DB2", "usage": "Ingredient entity: icons, badges, row accents, breadcrumb highlights" },
+        { "token": "vdc-entity-ingredient-light", "hex": "#F3F0FF", "usage": "Ingredient entity: subtle backgrounds, selected row highlight" },
+        { "token": "vdc-entity-release", "hex": "#943D73", "usage": "Release entity: icons, badges, row accents, breadcrumb highlights" },
+        { "token": "vdc-entity-release-light", "hex": "#FFECF8", "usage": "Release entity: subtle backgrounds, selected row highlight" },
+        { "token": "vdc-entity-workflow", "hex": "#F5CD47", "usage": "Workflow entity: icons, badges (from VDC logo golden color)" }
+      ]
+    },
+    "navigation": {
+      "description": "Colors for VDC navigation context tiers - sidebar and breadcrumb theming",
+      "colors": [
+        { "token": "vdc-context-personal", "hex": "#2E7D6B", "usage": "Personal workspace context: sidebar accent, user-specific areas" },
+        { "token": "vdc-context-global", "hex": "#0f6cbd", "usage": "Global context: matches Kendo primary, system-wide views" },
+        { "token": "vdc-context-project", "hex": "#0B4F8A", "usage": "Project context: project-scoped views and navigation" }
+      ]
+    }
+  }
 }

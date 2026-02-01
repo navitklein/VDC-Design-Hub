@@ -1,0 +1,107 @@
+---
+description: Best practices for mockup implementation - state considerations, production reference, and efficiency
+globs: src/app/features/mockups/**/*.ts
+alwaysApply: false
+---
+
+# Mockup Implementation Best Practices
+
+## 1. Clarify Requirements Upfront
+
+Before starting implementation, ask about:
+
+### Interactive States
+- [ ] What should hover state look like?
+- [ ] What should active/selected state look like?
+- [ ] What should disabled state look like?
+- [ ] What should focus state look like?
+
+### Visual Details
+- [ ] Specific colors or use context colors?
+- [ ] Icons for each action/item?
+- [ ] Spacing and alignment preferences?
+
+> **Ask these questions BEFORE coding** - don't assume defaults will match expectations.
+
+## 2. Reference Production Early
+
+When implementing a component that exists in VDC production:
+
+1. **Ask for screenshots** of the production version
+2. **Compare your implementation** against production regularly
+3. **Note differences** - some are intentional (design improvements), others are bugs
+
+## 3. Keep Running Lists
+
+During implementation, maintain:
+
+### Icons Used
+`
+Icons in this mockup:
+- fa-globe (Global context)
+- fa-circle-user (Personal context)
+- fa-layer-group (Projects)
+...
+`
+
+### Design Decisions Made
+`
+Design decisions:
+1. Active state uses 40% opacity for inactive, 100% for active
+2. Panel header height: 48px to match top nav
+...
+`
+
+## 4. Iterative Refinement
+
+Expect multiple rounds of refinement. To minimize back-and-forth:
+
+1. **Implement minimal version first** - get basic structure approved
+2. **Add interactivity in layers** - hover, then active, then animations
+3. **Check in frequently** - show progress before completing
+
+## 5. CSS Best Practices for Kendo Components
+
+### Targeting Kendo Elements
+- Kendo buttons wrap content in .k-button-text - apply flex/gap to this inner element
+- Use !important sparingly - it indicates style conflicts that may need proper cascade resolution
+- Prefer CSS variables over hardcoded values for consistency
+
+### Common Kendo Overrides
+`css
+/* Fix button content alignment */
+.my-button.k-button {
+  display: flex !important;
+}
+.my-button .k-button-text {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* Remove default flat button border */
+.my-pill.k-button-flat {
+  border: 1px solid var(--vdc-border-subtle) !important;
+}
+`
+
+## 6. Efficiency Tips
+
+1. **Batch similar changes** - if updating multiple items, do them together
+2. **Use find/replace** for consistent naming
+3. **Test edge cases early** - empty states, long text, many items
+4. **Document as you go** - update components.json incrementally
+
+## Pre-Implementation Checklist
+
+- [ ] Proposal approved (see component-workflow.mdc)
+- [ ] All icons verified in vdc-icons.json
+- [ ] Interactive states clarified with user
+- [ ] Production reference reviewed (if applicable)
+
+## Post-Implementation Checklist
+
+- [ ] All icons added to vdc-icons.json
+- [ ] components.json updated with templateChanges and designDecisions
+- [ ] Demo documentation reflects actual behavior
+- [ ] No linter errors

@@ -5,6 +5,11 @@ import { ExplorerDetailComponent } from './explorer-detail/explorer-detail.compo
 export const EXPLORER_ROUTES: Routes = [
   {
     path: '',
+    redirectTo: 'overview',
+    pathMatch: 'full'
+  },
+  {
+    path: 'overview',
     component: ExplorerListComponent
   },
   {

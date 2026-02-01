@@ -1,24 +1,29 @@
 import { Routes } from '@angular/router';
-import { ColorSystemComponent } from './color-system/color-system.component';
-import { IconographyComponent } from './iconography/iconography.component';
-import { VdcIconographyComponent } from './vdc-iconography/vdc-iconography.component';
+import { PalettesComponent } from './palettes/palettes.component';
+import { SemanticColorsComponent } from './semantic/semantic-colors.component';
+import { VdcColorsComponent } from './vdc-colors/vdc-colors.component';
+import { GuidelinesComponent } from './guidelines/guidelines.component';
 
 export const STYLE_GUIDE_ROUTES: Routes = [
   {
     path: '',
-    redirectTo: 'colors',
+    redirectTo: 'palettes',
     pathMatch: 'full'
   },
   {
-    path: 'colors',
-    component: ColorSystemComponent
+    path: 'palettes',
+    component: PalettesComponent
   },
   {
-    path: 'icons',
-    component: IconographyComponent
+    path: 'semantic',
+    component: SemanticColorsComponent
   },
   {
-    path: 'vdc-icons',
-    component: VdcIconographyComponent
+    path: 'vdc-colors',
+    component: VdcColorsComponent
+  },
+  {
+    path: 'guidelines',
+    component: GuidelinesComponent
   }
 ];

@@ -1,8 +1,9 @@
-import { Component, inject, OnInit, signal, computed } from '@angular/core';
+import { Component, inject, OnInit, signal, computed, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { ButtonsModule } from '@progress/kendo-angular-buttons';
-import { InputsModule } from '@progress/kendo-angular-inputs';
+import { ActivatedRoute } from '@angular/router';
+import { ButtonsModule, KENDO_CHIPLIST } from '@progress/kendo-angular-buttons';
+import { KENDO_TEXTBOX } from '@progress/kendo-angular-inputs';
 import { forkJoin } from 'rxjs';
 import { TokenService } from '../../core/services/token.service';
 import { VdcIconConcept } from '../../core/models';
@@ -24,520 +25,288 @@ interface ColorOption {
 
 /**
  * VDC Icons Component - Enhanced icon catalog with filtering and testing
+ * Category is set via route data, entity filtering via chip filters
  */
 @Component({
   selector: 'app-vdc-icons',
   standalone: true,
-  imports: [CommonModule, FormsModule, ButtonsModule, InputsModule],
+  imports: [CommonModule, FormsModule, ButtonsModule, KENDO_TEXTBOX, KENDO_CHIPLIST],
   template: `
     <div class="vdc-icons">
-      <!-- Category Sidebar -->
-      <aside class="category-sidebar">
-        <h3 class="sidebar-title">Categories</h3>
-        <ul class="category-list">
-          <li>
-            <button 
-              class="category-item"
-              [class.category-item--active]="selectedCategory() === 'All'"
-              (click)="selectCategory('All')">
-              <span class="category-name">All</span>
-              <span class="category-count">{{ totalIconCount() }}</span>
-            </button>
-          </li>
-          @for (cat of categoriesWithCounts(); track cat.name) {
-            <li>
-              <button 
-                class="category-item"
-                [class.category-item--active]="selectedCategory() === cat.name"
-                (click)="selectCategory(cat.name)">
-                <span class="category-name">{{ cat.name }}</span>
-                <span class="category-count">{{ cat.count }}</span>
-              </button>
-            </li>
-          }
-        </ul>
-      </aside>
-
-      <!-- Main Content Area -->
-      <div class="vdc-icons__main">
-        <!-- Header -->
-        <header class="vdc-icons__header">
-          <div>
-            <h1 class="vdc-heading-1">VDC Icons</h1>
-            <p class="vdc-caption">
-              Icon catalog for VDC design system. Click icons to expand and test with different colors, styles, and sizes.
-            </p>
-          </div>
-        </header>
-
-        <!-- Search and Entity Filters -->
-        <section class="filters-bar">
-          <!-- Search Input -->
-          <div class="search-box">
-            <i class="fa-solid fa-magnifying-glass search-icon"></i>
-            <input 
-              type="text" 
-              class="search-input"
-              placeholder="Search icons by name..."
-              [value]="searchQuery()"
-              (input)="onSearchInput($event)" />
-            @if (searchQuery()) {
-              <button class="search-clear" (click)="clearSearch()">
-                <i class="fa-solid fa-times"></i>
-              </button>
-            }
-          </div>
-
-          <!-- Entity Filter Chips -->
-          <div class="entity-filters">
-            <span class="filter-label">Entity:</span>
-            <div class="filter-chips">
-              <button 
-                class="filter-chip"
-                [class.filter-chip--active]="selectedEntity() === 'All'"
-                (click)="selectEntity('All')">
-                All ({{ filteredByCategory().length }})
-              </button>
-              @for (entity of entitiesWithCounts(); track entity.name) {
-                <button 
-                  class="filter-chip"
-                  [class.filter-chip--active]="selectedEntity() === entity.name"
-                  (click)="selectEntity(entity.name)">
-                  {{ entity.name }} ({{ entity.count }})
-                </button>
-              }
-            </div>
-          </div>
-
-          <!-- Special Filters -->
-          <div class="special-filters">
-            <button 
-              class="filter-chip filter-chip--tbd"
-              [class.filter-chip--active]="showOnlyTbd()"
-              (click)="toggleTbdFilter()">
-              <i class="fa-solid fa-question"></i>
-              TBD Only ({{ tbdCount() }})
-            </button>
-          </div>
-        </section>
-
-        <!-- Results Count -->
-        <div class="results-info">
-          <span>{{ filteredIcons().length }} icon{{ filteredIcons().length !== 1 ? 's' : '' }}</span>
-          @if (searchQuery() || selectedCategory() !== 'All' || selectedEntity() !== 'All' || showOnlyTbd()) {
-            <button class="clear-filters" (click)="clearAllFilters()">
-              <i class="fa-solid fa-times"></i> Clear filters
-            </button>
-          }
+      <!-- Header -->
+      <header class="vdc-icons__header">
+        <div>
+          <h1 class="vdc-heading-1">{{ categoryTitle() }}</h1>
+          <p class="vdc-caption">
+            Click icons to expand and test with different colors, styles, and sizes.
+          </p>
         </div>
+      </header>
 
-        <!-- Loading State -->
-        @if (loading()) {
-          <div class="vdc-icons__loading">
-            @for (i of [1,2,3,4,5,6]; track i) {
-              <div class="vdc-skeleton" style="height: 180px;"></div>
+      <!-- Filters Bar -->
+      <section class="vdc-icons__filters">
+        <!-- Search Input -->
+        <kendo-textbox
+          class="vdc-icons__search"
+          placeholder="Search icons by name..."
+          [value]="searchQuery()"
+          (valueChange)="onSearch($event)"
+          [clearButton]="true"
+          [size]="'large'">
+          <ng-template kendoTextBoxPrefixTemplate>
+            <i class="fa-regular fa-search"></i>
+          </ng-template>
+        </kendo-textbox>
+
+        <!-- Entity Filter Chips -->
+        @if (entitiesWithCounts().length > 0) {
+          <kendo-chiplist [selection]="'single'">
+            <kendo-chip 
+              label="All"
+              [size]="'large'"
+              [rounded]="'full'"
+              [selected]="selectedEntity() === 'All'"
+              (contentClick)="selectEntity('All')">
+            </kendo-chip>
+            @for (entity of entitiesWithCounts(); track entity.name) {
+              <kendo-chip 
+                [label]="entity.name + ' (' + entity.count + ')'"
+                [size]="'large'"
+                [rounded]="'full'"
+                [selected]="selectedEntity() === entity.name"
+                (contentClick)="selectEntity(entity.name)">
+              </kendo-chip>
             }
-          </div>
+          </kendo-chiplist>
         }
 
-        <!-- Icon Grid -->
-        @if (!loading()) {
-          @if (filteredIcons().length === 0) {
-            <div class="empty-state">
-              <i class="fa-regular fa-face-meh"></i>
-              <p>No icons found</p>
-              <button class="clear-filters-btn" (click)="clearAllFilters()">Clear filters</button>
-            </div>
-          } @else {
-            <div class="vdc-icons__grid">
-              @for (icon of filteredIcons(); track icon.name) {
-                <div 
-                  class="icon-card"
-                  [class.icon-card--expanded]="expandedIcon()?.name === icon.name"
-                  (click)="selectIcon(icon)">
-                  
-                  <div class="icon-card__header">
-                    <h3 class="icon-card__name">{{ icon.name }}</h3>
-                    @if (icon.entity) {
-                      <span class="icon-card__entity">
-                        <i class="fa-solid fa-link"></i>
-                        {{ icon.entity }}
-                      </span>
-                    }
-                  </div>
-                  
-                  <p class="icon-card__purpose">{{ icon.purpose }}</p>
-                  
-                  <!-- Icon Variants Preview -->
-                  <div class="icon-card__variants">
-                    @for (variant of icon.variants; track variant.label) {
-                      <div class="icon-card__variant">
-                        <div class="icon-card__variant-preview">
-                          @if (variant.fontAwesome === 'TBD') {
-                            <span class="icon-card__tbd">?</span>
-                          } @else if (variant.fontAwesome.startsWith('custom:')) {
-                            <img src="/vdc-logo.svg" alt="VDC Logo" class="icon-card__custom-icon" />
-                          } @else {
-                            <i [class]="variant.fontAwesome"></i>
-                          }
-                        </div>
-                        <span class="icon-card__variant-label">{{ variant.label }}</span>
-                        @if (variant.isProduction) {
-                          <span class="icon-card__production-badge">Prod</span>
+        <!-- TBD Filter -->
+        <kendo-chiplist [selection]="'single'">
+          <kendo-chip 
+            [label]="'TBD Only (' + tbdCount() + ')'"
+            [size]="'large'"
+            [rounded]="'full'"
+            [selected]="showOnlyTbd()"
+            (contentClick)="toggleTbdFilter()">
+          </kendo-chip>
+        </kendo-chiplist>
+      </section>
+
+      <!-- Results Count -->
+      <div class="vdc-icons__results">
+        <span>{{ filteredIcons().length }} icon{{ filteredIcons().length !== 1 ? 's' : '' }}</span>
+        @if (searchQuery() || selectedEntity() !== 'All' || showOnlyTbd()) {
+          <button class="vdc-icons__clear-filters" (click)="clearAllFilters()">
+            <i class="fa-regular fa-xmark"></i> Clear filters
+          </button>
+        }
+      </div>
+
+      <!-- Loading State -->
+      @if (loading()) {
+        <div class="vdc-icons__loading">
+          @for (i of [1,2,3,4,5,6]; track i) {
+            <div class="vdc-skeleton" style="height: 180px;"></div>
+          }
+        </div>
+      }
+
+      <!-- Icon Grid -->
+      @if (!loading()) {
+        @if (filteredIcons().length === 0) {
+          <div class="vdc-icons__empty">
+            <i class="fa-regular fa-face-meh"></i>
+            <p>No icons found</p>
+            <button class="vdc-icons__clear-btn" (click)="clearAllFilters()">Clear filters</button>
+          </div>
+        } @else {
+          <div class="vdc-icons__grid">
+            @for (icon of filteredIcons(); track icon.name) {
+              <div 
+                class="icon-card"
+                [class.icon-card--expanded]="expandedIcon()?.name === icon.name"
+                (click)="selectIcon(icon)">
+                
+                <div class="icon-card__header">
+                  <h3 class="icon-card__name">{{ icon.name }}</h3>
+                  @if (icon.entity) {
+                    <span class="icon-card__entity">
+                      <i class="fa-solid fa-link"></i>
+                      {{ icon.entity }}
+                    </span>
+                  }
+                </div>
+                
+                <p class="icon-card__purpose">{{ icon.purpose }}</p>
+                
+                <!-- Icon Variants Preview -->
+                <div class="icon-card__variants">
+                  @for (variant of icon.variants; track variant.label) {
+                    <div class="icon-card__variant">
+                      <div class="icon-card__variant-preview">
+                        @if (variant.fontAwesome === 'TBD') {
+                          <span class="icon-card__tbd">?</span>
+                        } @else if (variant.fontAwesome.startsWith('custom:')) {
+                          <img src="/vdc-logo.svg" alt="VDC Logo" class="icon-card__custom-icon" />
+                        } @else {
+                          <i [class]="variant.fontAwesome"></i>
                         }
                       </div>
-                    }
-                  </div>
-
-                  <!-- Expandable Testing Panel -->
-                  @if (expandedIcon()?.name === icon.name) {
-                    <div class="icon-card__expanded" (click)="$event.stopPropagation()">
-                      <button class="icon-card__close" (click)="closeExpanded($event)">
-                        <i class="fa-solid fa-times"></i>
-                      </button>
-                      
-                      <!-- Large Icon Preview with Circle Option -->
-                      <div class="expanded__preview-area">
-                        <div 
-                          class="expanded__icon-preview"
-                          [class.expanded__icon-preview--circle]="testConfig().showCircle"
-                          [style.background-color]="testConfig().showCircle ? testConfig().circleColor : 'transparent'"
-                          [style.width.px]="testConfig().showCircle ? circleSize() : null"
-                          [style.height.px]="testConfig().showCircle ? circleSize() : null">
-                          <i 
-                            [class]="getIconClass(icon, testConfig().style)"
-                            [style.color]="testConfig().colorHex"
-                            [style.font-size.px]="testConfig().size">
-                          </i>
-                        </div>
-                      </div>
-
-                      <!-- Circle Toggle with Background Options -->
-                      <div class="expanded__circle-section">
-                        <label class="expanded__circle-toggle">
-                          <input type="checkbox" [checked]="testConfig().showCircle" (change)="toggleCircle()" />
-                          Show in circle
-                        </label>
-                        @if (testConfig().showCircle) {
-                          <div class="expanded__circle-colors">
-                            @for (bg of circleBackgrounds; track bg.color) {
-                              <button 
-                                class="circle-color-btn"
-                                [style.background-color]="bg.color"
-                                [class.active]="testConfig().circleColor === bg.color"
-                                (click)="setCircleColor(bg.color)"
-                                [title]="bg.name">
-                              </button>
-                            }
-                          </div>
-                        }
-                      </div>
-                      
-                      <!-- Apply Entity Colors Button -->
-                      @if (icon.colorToken) {
-                        <button class="entity-colors-btn" (click)="applyEntityColors(icon)">
-                          <i class="fa-regular fa-palette"></i>
-                          Apply Entity Colors
-                        </button>
+                      <span class="icon-card__variant-label">{{ variant.label }}</span>
+                      @if (variant.isProduction) {
+                        <span class="icon-card__production-badge">Prod</span>
                       }
-                      
-                      <!-- Style Previews -->
-                      <div class="expanded__section">
-                        <label class="expanded__label">Style</label>
-                        <div class="expanded__styles">
-                          @for (style of ['regular', 'solid', 'light']; track style) {
-                            <button 
-                              class="expanded__style-btn"
-                              [class.expanded__style-btn--active]="testConfig().style === style"
-                              (click)="setTestStyle(style)">
-                              <i 
-                                [class]="getIconClass(icon, style)"
-                                [style.font-size.px]="20">
-                              </i>
-                              <span>{{ style }}</span>
-                            </button>
-                          }
-                        </div>
-                      </div>
-
-                      <!-- Color Options -->
-                      <div class="expanded__section">
-                        <label class="expanded__label">Color</label>
-                        <div class="expanded__colors">
-                          @for (color of colorOptions; track color.token) {
-                            <button 
-                              class="expanded__color"
-                              [style.background-color]="color.hex"
-                              [class.active]="testConfig().color === color.token"
-                              (click)="setTestColor(color)"
-                              [title]="color.name">
-                            </button>
-                          }
-                        </div>
-                      </div>
-
-                      <!-- Size Options -->
-                      <div class="expanded__section">
-                        <label class="expanded__label">Size: {{ testConfig().size }}px</label>
-                        <div class="expanded__sizes">
-                          @for (size of sizeOptions; track size) {
-                            <button 
-                              class="expanded__size"
-                              [class.active]="testConfig().size === size"
-                              (click)="setTestSize(size)">
-                              {{ size }}px
-                            </button>
-                          }
-                        </div>
-                      </div>
-
-                      <!-- Copy Code -->
-                      <div class="expanded__code">
-                        <code>{{ getIconClass(icon, testConfig().style) }}</code>
-                        <button (click)="copyCode(icon)"><i class="fa-regular fa-copy"></i> Copy</button>
-                      </div>
                     </div>
                   }
                 </div>
-              }
-            </div>
-          }
+
+                <!-- Expandable Testing Panel -->
+                @if (expandedIcon()?.name === icon.name) {
+                  <div class="icon-card__expanded" (click)="$event.stopPropagation()">
+                    <button class="icon-card__close" (click)="closeExpanded($event)">
+                      <i class="fa-solid fa-times"></i>
+                    </button>
+                    
+                    <!-- Large Icon Preview with Circle Option -->
+                    <div class="expanded__preview-area">
+                      <div 
+                        class="expanded__icon-preview"
+                        [class.expanded__icon-preview--circle]="testConfig().showCircle"
+                        [style.background-color]="testConfig().showCircle ? testConfig().circleColor : 'transparent'"
+                        [style.width.px]="testConfig().showCircle ? circleSize() : null"
+                        [style.height.px]="testConfig().showCircle ? circleSize() : null">
+                        <i 
+                          [class]="getIconClass(icon, testConfig().style)"
+                          [style.color]="testConfig().colorHex"
+                          [style.font-size.px]="testConfig().size">
+                        </i>
+                      </div>
+                    </div>
+
+                    <!-- Circle Toggle with Background Options -->
+                    <div class="expanded__circle-section">
+                      <label class="expanded__circle-toggle">
+                        <input type="checkbox" [checked]="testConfig().showCircle" (change)="toggleCircle()" />
+                        Show in circle
+                      </label>
+                      @if (testConfig().showCircle) {
+                        <div class="expanded__circle-colors">
+                          @for (bg of circleBackgrounds; track bg.color) {
+                            <button 
+                              class="circle-color-btn"
+                              [style.background-color]="bg.color"
+                              [class.active]="testConfig().circleColor === bg.color"
+                              (click)="setCircleColor(bg.color)"
+                              [title]="bg.name">
+                            </button>
+                          }
+                        </div>
+                      }
+                    </div>
+                    
+                    <!-- Apply Entity Colors Button -->
+                    @if (icon.colorToken) {
+                      <button class="entity-colors-btn" (click)="applyEntityColors(icon)">
+                        <i class="fa-regular fa-palette"></i>
+                        Apply Entity Colors
+                      </button>
+                    }
+                    
+                    <!-- Style Previews -->
+                    <div class="expanded__section">
+                      <label class="expanded__label">Style</label>
+                      <div class="expanded__styles">
+                        @for (style of ['regular', 'solid', 'light']; track style) {
+                          <button 
+                            class="expanded__style-btn"
+                            [class.expanded__style-btn--active]="testConfig().style === style"
+                            (click)="setTestStyle(style)">
+                            <i 
+                              [class]="getIconClass(icon, style)"
+                              [style.font-size.px]="20">
+                            </i>
+                            <span>{{ style }}</span>
+                          </button>
+                        }
+                      </div>
+                    </div>
+
+                    <!-- Color Options -->
+                    <div class="expanded__section">
+                      <label class="expanded__label">Color</label>
+                      <div class="expanded__colors">
+                        @for (color of colorOptions; track color.token) {
+                          <button 
+                            class="expanded__color"
+                            [style.background-color]="color.hex"
+                            [class.active]="testConfig().color === color.token"
+                            (click)="setTestColor(color)"
+                            [title]="color.name">
+                          </button>
+                        }
+                      </div>
+                    </div>
+
+                    <!-- Size Options -->
+                    <div class="expanded__section">
+                      <label class="expanded__label">Size: {{ testConfig().size }}px</label>
+                      <div class="expanded__sizes">
+                        @for (size of sizeOptions; track size) {
+                          <button 
+                            class="expanded__size"
+                            [class.active]="testConfig().size === size"
+                            (click)="setTestSize(size)">
+                            {{ size }}px
+                          </button>
+                        }
+                      </div>
+                    </div>
+
+                    <!-- Copy Code -->
+                    <div class="expanded__code">
+                      <code>{{ getIconClass(icon, testConfig().style) }}</code>
+                      <button (click)="copyCode(icon)"><i class="fa-regular fa-copy"></i> Copy</button>
+                    </div>
+                  </div>
+                }
+              </div>
+            }
+          </div>
         }
-      </div>
+      }
     </div>
   `,
   styles: [`
     .vdc-icons {
       display: flex;
-      gap: var(--vdc-space-lg);
-      min-height: calc(100vh - 120px);
-    }
-
-    /* Category Sidebar */
-    .category-sidebar {
-      width: 220px;
-      flex-shrink: 0;
-      background: var(--vdc-surface-100);
-      border-radius: var(--vdc-radius-lg);
-      padding: var(--vdc-space-md);
-      box-shadow: var(--vdc-shadow-sm);
-      position: sticky;
-      top: 80px;
-      height: fit-content;
-      max-height: calc(100vh - 100px);
-      overflow-y: auto;
-    }
-
-    .sidebar-title {
-      margin: 0 0 var(--vdc-space-md);
-      font-size: var(--vdc-font-size-sm);
-      font-weight: var(--vdc-font-weight-semibold);
-      color: var(--vdc-text-secondary);
-      text-transform: uppercase;
-      letter-spacing: 0.5px;
-    }
-
-    .category-list {
-      list-style: none;
-      margin: 0;
-      padding: 0;
-      display: flex;
       flex-direction: column;
-      gap: 2px;
-    }
-
-    .category-item {
-      width: 100%;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: var(--vdc-space-sm) var(--vdc-space-md);
-      border: none;
-      border-radius: var(--vdc-radius-md);
-      background: transparent;
-      color: var(--vdc-text-primary);
-      font-size: var(--vdc-font-size-sm);
-      cursor: pointer;
-      transition: all 0.15s;
-      text-align: left;
-
-      &:hover {
-        background: var(--vdc-surface-200);
-      }
-
-      &--active {
-        background: var(--vdc-primary);
-        color: white;
-
-        .category-count {
-          background: rgba(255, 255, 255, 0.2);
-          color: white;
-        }
-      }
-    }
-
-    .category-name {
-      font-weight: var(--vdc-font-weight-medium);
-    }
-
-    .category-count {
-      padding: 2px 8px;
-      background: var(--vdc-surface-200);
-      border-radius: var(--vdc-radius-full);
-      font-size: var(--vdc-font-size-xs);
-      color: var(--vdc-text-secondary);
-      font-weight: var(--vdc-font-weight-semibold);
-    }
-
-    /* Main Content */
-    .vdc-icons__main {
-      flex: 1;
-      min-width: 0;
+      gap: var(--vdc-space-lg);
     }
 
     .vdc-icons__header {
-      margin-bottom: var(--vdc-space-lg);
-
       h1 { margin: 0 0 var(--vdc-space-xs); }
       p { margin: 0; }
     }
 
-    /* Filters Bar */
-    .filters-bar {
+    .vdc-icons__filters {
       display: flex;
       flex-direction: column;
       gap: var(--vdc-space-md);
-      margin-bottom: var(--vdc-space-md);
     }
 
-    /* Search Box */
-    .search-box {
-      position: relative;
+    .vdc-icons__search {
       max-width: 400px;
     }
 
-    .search-icon {
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--vdc-text-secondary);
-      font-size: var(--vdc-font-size-sm);
-    }
-
-    .search-input {
-      width: 100%;
-      padding: 10px 36px 10px 36px;
-      border: 1px solid var(--vdc-border-default);
-      border-radius: var(--vdc-radius-md);
-      font-size: var(--vdc-font-size-sm);
-      background: var(--vdc-surface-100);
-      color: var(--vdc-text-primary);
-      transition: border-color 0.15s, box-shadow 0.15s;
-
-      &:focus {
-        outline: none;
-        border-color: var(--vdc-primary);
-        box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.1);
-      }
-
-      &::placeholder {
-        color: var(--vdc-text-disabled);
-      }
-    }
-
-    .search-clear {
-      position: absolute;
-      right: 8px;
-      top: 50%;
-      transform: translateY(-50%);
-      background: none;
-      border: none;
-      color: var(--vdc-text-secondary);
-      cursor: pointer;
-      padding: 4px;
-      border-radius: var(--vdc-radius-sm);
-
-      &:hover {
-        color: var(--vdc-text-primary);
-        background: var(--vdc-surface-200);
-      }
-    }
-
-    /* Entity Filters */
-    .entity-filters {
-      display: flex;
-      align-items: center;
-      gap: var(--vdc-space-sm);
-      flex-wrap: wrap;
-    }
-
-    .filter-label {
-      font-size: var(--vdc-font-size-sm);
-      font-weight: var(--vdc-font-weight-semibold);
-      color: var(--vdc-text-secondary);
-    }
-
-    .filter-chips {
-      display: flex;
-      gap: var(--vdc-space-xs);
-      flex-wrap: wrap;
-    }
-
-    .filter-chip {
-      padding: 6px 12px;
-      border: 1px solid var(--vdc-border-default);
-      border-radius: var(--vdc-radius-full);
-      background: var(--vdc-surface-100);
-      color: var(--vdc-text-secondary);
-      font-size: var(--vdc-font-size-sm);
-      cursor: pointer;
-      transition: all 0.15s;
-
-      &:hover {
-        background: var(--vdc-surface-200);
-        color: var(--vdc-text-primary);
-      }
-
-      &--active {
-        background: var(--vdc-primary);
-        border-color: var(--vdc-primary);
-        color: white;
-      }
-
-      &--tbd {
-        border-color: var(--vdc-warning);
-        color: var(--vdc-warning);
-
-        i { margin-right: 4px; }
-
-        &:hover {
-          background: rgba(255, 185, 0, 0.1);
-        }
-
-        &.filter-chip--active {
-          background: var(--vdc-warning);
-          color: white;
-        }
-      }
-    }
-
-    .special-filters {
-      display: flex;
-      gap: var(--vdc-space-sm);
-    }
-
-    /* Results Info */
-    .results-info {
+    .vdc-icons__results {
       display: flex;
       align-items: center;
       gap: var(--vdc-space-md);
-      margin-bottom: var(--vdc-space-md);
       font-size: var(--vdc-font-size-sm);
       color: var(--vdc-text-secondary);
     }
 
-    .clear-filters {
+    .vdc-icons__clear-filters {
       display: inline-flex;
       align-items: center;
       gap: 4px;
@@ -554,25 +323,16 @@ interface ColorOption {
       }
     }
 
-    /* Empty State */
-    .empty-state {
+    .vdc-icons__empty {
       text-align: center;
-      padding: var(--vdc-space-xl) var(--vdc-space-lg);
+      padding: var(--vdc-space-xl);
       color: var(--vdc-text-secondary);
 
-      i {
-        font-size: 48px;
-        margin-bottom: var(--vdc-space-md);
-        opacity: 0.5;
-      }
-
-      p {
-        margin: 0 0 var(--vdc-space-md);
-        font-size: var(--vdc-font-size-md);
-      }
+      i { font-size: 48px; margin-bottom: var(--vdc-space-md); opacity: 0.5; }
+      p { margin: 0 0 var(--vdc-space-md); font-size: var(--vdc-font-size-md); }
     }
 
-    .clear-filters-btn {
+    .vdc-icons__clear-btn {
       padding: 8px 16px;
       background: var(--vdc-primary);
       color: white;
@@ -580,12 +340,9 @@ interface ColorOption {
       border-radius: var(--vdc-radius-md);
       cursor: pointer;
 
-      &:hover {
-        background: var(--vdc-primary-dark, #005a9e);
-      }
+      &:hover { background: var(--vdc-primary-dark, #005a9e); }
     }
 
-    /* Loading & Grid */
     .vdc-icons__loading, .vdc-icons__grid {
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -779,9 +536,7 @@ interface ColorOption {
       cursor: pointer;
       transition: all 0.15s;
 
-      i {
-        font-size: var(--vdc-font-size-md);
-      }
+      i { font-size: var(--vdc-font-size-md); }
 
       &:hover {
         background: var(--vdc-primary);
@@ -798,10 +553,7 @@ interface ColorOption {
       cursor: pointer;
       transition: all 0.15s;
 
-      &:hover {
-        transform: scale(1.1);
-      }
-
+      &:hover { transform: scale(1.1); }
       &.active { 
         border-color: var(--vdc-primary);
         box-shadow: 0 0 0 2px rgba(0, 120, 212, 0.3);
@@ -840,10 +592,7 @@ interface ColorOption {
       cursor: pointer;
       transition: all 0.15s;
 
-      &:hover { 
-        background: var(--vdc-surface-200); 
-      }
-
+      &:hover { background: var(--vdc-surface-200); }
       &--active { 
         border-color: var(--vdc-primary);
         background: var(--vdc-surface-200);
@@ -870,10 +619,7 @@ interface ColorOption {
       cursor: pointer;
       transition: all 0.15s;
 
-      &:hover {
-        transform: scale(1.1);
-      }
-
+      &:hover { transform: scale(1.1); }
       &.active { 
         border-color: var(--vdc-text-primary);
         box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.1);
@@ -895,10 +641,7 @@ interface ColorOption {
       cursor: pointer;
       transition: all 0.15s;
 
-      &:hover {
-        background: var(--vdc-surface-200);
-      }
-
+      &:hover { background: var(--vdc-surface-200); }
       &.active {
         background: var(--vdc-primary);
         border-color: var(--vdc-primary);
@@ -945,13 +688,16 @@ interface ColorOption {
 })
 export class VdcIconsComponent implements OnInit {
   private readonly tokenService = inject(TokenService);
+  private readonly route = inject(ActivatedRoute);
   
   readonly loading = this.tokenService.loading;
   readonly vdcIcons = this.tokenService.vdcIcons;
   readonly categories = this.tokenService.vdcIconCategories;
   
-  // Filters
+  // Category from route
   readonly selectedCategory = signal<string>('All');
+  
+  // Filters
   readonly selectedEntity = signal<string>('All');
   readonly searchQuery = signal<string>('');
   readonly showOnlyTbd = signal<boolean>(false);
@@ -971,25 +717,21 @@ export class VdcIconsComponent implements OnInit {
   
   // Color options - includes standard colors and entity colors
   readonly colorOptions: ColorOption[] = [
-    // Default icon color (production default)
     { name: 'Default Icon', token: 'vdc-icon-default', hex: '#242424' },
-    // Standard semantic colors
     { name: 'Primary', token: 'vdc-primary', hex: '#0078d4' },
     { name: 'Success', token: 'vdc-success', hex: '#107c10' },
     { name: 'Warning', token: 'vdc-warning', hex: '#ffb900' },
     { name: 'Error', token: 'vdc-error', hex: '#d13438' },
     { name: 'Text', token: 'vdc-text-primary', hex: '#323130' },
     { name: 'Secondary', token: 'vdc-text-secondary', hex: '#605e5c' },
-    // Entity colors
     { name: 'Ingredient', token: 'vdc-entity-ingredient', hex: '#5E4DB2' },
     { name: 'Release', token: 'vdc-entity-release', hex: '#943D73' },
     { name: 'Workflow', token: 'vdc-entity-workflow', hex: '#F5CD47' },
-    // Context colors
     { name: 'Project', token: 'vdc-context-project', hex: '#0B4F8A' },
     { name: 'Personal', token: 'vdc-context-personal', hex: '#2E7D6B' }
   ];
   
-  // Circle background options (including the pink from the image)
+  // Circle background options
   readonly circleBackgrounds = [
     { name: 'Light Pink', color: '#f8e8f0' },
     { name: 'Light Purple', color: '#ede8f5' },
@@ -1000,44 +742,27 @@ export class VdcIconsComponent implements OnInit {
     { name: 'White', color: '#ffffff' }
   ];
   
-  // Size options
   readonly sizeOptions = [16, 24, 32, 48, 64];
   
-  // Circle size multiplier - keeps consistent padding ratio around the icon
-  // 1.8 means icon takes ~55% of circle, with ~22.5% padding on each side
   private readonly circleSizeMultiplier = 1.8;
   
-  // Computed circle size based on icon size and multiplier
   readonly circleSize = computed(() => Math.round(this.testConfig().size * this.circleSizeMultiplier));
   
-  // Total icon count
-  readonly totalIconCount = computed(() => this.vdcIcons().length);
+  // Category title for header
+  readonly categoryTitle = computed(() => {
+    const cat = this.selectedCategory();
+    return cat === 'All' ? 'All Icons' : `${cat} Icons`;
+  });
   
-  // TBD icons count
+  // TBD icons count (within selected category)
   readonly tbdCount = computed(() => {
-    return this.vdcIcons().filter(icon => 
+    return this.iconsInCategory().filter(icon => 
       icon.variants.some(v => v.fontAwesome === 'TBD')
     ).length;
   });
   
-  // Categories with counts (always based on all icons)
-  readonly categoriesWithCounts = computed(() => {
-    const icons = this.vdcIcons();
-    const countMap = new Map<string, number>();
-    
-    icons.forEach(icon => {
-      const count = countMap.get(icon.category) || 0;
-      countMap.set(icon.category, count + 1);
-    });
-    
-    return this.categories().map(cat => ({
-      name: cat.name,
-      count: countMap.get(cat.name) || 0
-    }));
-  });
-  
-  // Icons filtered by category only (for entity count calculation)
-  readonly filteredByCategory = computed(() => {
+  // Icons filtered by category only
+  readonly iconsInCategory = computed(() => {
     let icons = this.vdcIcons();
     
     if (this.selectedCategory() !== 'All') {
@@ -1049,7 +774,7 @@ export class VdcIconsComponent implements OnInit {
   
   // Entities with counts (based on selected category)
   readonly entitiesWithCounts = computed(() => {
-    const icons = this.filteredByCategory();
+    const icons = this.iconsInCategory();
     const countMap = new Map<string, number>();
     
     icons.forEach(icon => {
@@ -1064,14 +789,9 @@ export class VdcIconsComponent implements OnInit {
       .sort((a, b) => a.name.localeCompare(b.name));
   });
   
-  // Fully filtered icons (category + entity + search)
+  // Fully filtered icons
   readonly filteredIcons = computed(() => {
-    let icons = this.vdcIcons();
-    
-    // Filter by category
-    if (this.selectedCategory() !== 'All') {
-      icons = icons.filter(i => i.category === this.selectedCategory());
-    }
+    let icons = this.iconsInCategory();
     
     // Filter by entity
     if (this.selectedEntity() !== 'All') {
@@ -1097,25 +817,34 @@ export class VdcIconsComponent implements OnInit {
     return icons;
   });
   
+  constructor() {
+    // Listen to route data changes for category
+    effect(() => {
+      // This will be populated from route subscription in ngOnInit
+    });
+  }
+  
   ngOnInit(): void {
     // Load both VDC icons and colors for entity color lookup
     forkJoin({
       icons: this.tokenService.loadVdcIcons(),
       colors: this.tokenService.loadColors()
     }).subscribe();
+    
+    // Subscribe to route data for category
+    this.route.data.subscribe(data => {
+      if (data['category']) {
+        this.selectedCategory.set(data['category']);
+        this.selectedEntity.set('All'); // Reset entity filter when category changes
+      }
+    });
   }
   
-  onSearchInput(event: Event): void {
-    const input = event.target as HTMLInputElement;
-    this.searchQuery.set(input.value);
-  }
-  
-  clearSearch(): void {
-    this.searchQuery.set('');
+  onSearch(query: string | null): void {
+    this.searchQuery.set(query || '');
   }
   
   clearAllFilters(): void {
-    this.selectedCategory.set('All');
     this.selectedEntity.set('All');
     this.searchQuery.set('');
     this.showOnlyTbd.set(false);
@@ -1125,22 +854,16 @@ export class VdcIconsComponent implements OnInit {
     this.showOnlyTbd.update(v => !v);
   }
   
-  selectCategory(category: string): void {
-    this.selectedCategory.set(category);
-    this.selectedEntity.set('All'); // Reset entity filter when category changes
-  }
-  
   selectEntity(entity: string): void {
     this.selectedEntity.set(entity);
   }
   
   selectIcon(icon: VdcIconConcept): void {
-    // Toggle expand if clicking same icon, otherwise expand new one
     if (this.expandedIcon()?.name === icon.name) {
       this.expandedIcon.set(null);
     } else {
       this.expandedIcon.set(icon);
-      this.applyEntityColors(icon);  // Auto-apply entity colors on expand
+      this.applyEntityColors(icon);
     }
   }
   
@@ -1170,19 +893,15 @@ export class VdcIconsComponent implements OnInit {
   }
   
   getIconClass(icon: VdcIconConcept, style: string): string {
-    // Get the base icon name from the first variant
     const firstVariant = icon.variants[0];
     if (!firstVariant || firstVariant.fontAwesome === 'TBD' || firstVariant.fontAwesome.startsWith('custom:')) {
       return '';
     }
     
-    // Check if this is a Kit icon (custom icons from Font Awesome Kit)
-    // Kit icons don't support style variants - they stay as fa-kit
     if (firstVariant.fontAwesome.startsWith('fa-kit')) {
       return firstVariant.fontAwesome;
     }
     
-    // Extract icon name (e.g., "fa-rocket-launch" from "fa-regular fa-rocket-launch")
     const parts = firstVariant.fontAwesome.split(' ');
     const iconName = parts.length > 1 ? parts[1] : parts[0];
     
@@ -1196,13 +915,8 @@ export class VdcIconsComponent implements OnInit {
     });
   }
   
-  /**
-   * Apply entity colors to the test configuration.
-   * Uses the icon's colorToken to look up the entity color and its light variant.
-   */
   applyEntityColors(icon: VdcIconConcept): void {
     if (!icon.colorToken) {
-      // Use default icon color for icons without entity colors
       this.testConfig.update(c => ({
         ...c,
         color: 'vdc-icon-default',
@@ -1223,7 +937,6 @@ export class VdcIconsComponent implements OnInit {
         circleColor: lightColor?.hex || '#f3f2f1'
       }));
     } else {
-      // Fallback to default if color token not found in loaded colors
       this.testConfig.update(c => ({
         ...c,
         color: 'vdc-icon-default',

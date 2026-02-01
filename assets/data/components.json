@@ -75,15 +75,22 @@
         "https://www.telerik.com/kendo-angular-ui/components/tooltip"
       ],
       "templateChanges": [
-        "Custom 2-tier layout with icon rail and content panel",
-        "Context-based color theming using VDC design tokens",
-        "Project browser with search and recent projects list",
+        "2-tier layout: icon rail (tier 1) + content panel (tier 2)",
+        "Project browser with search, 'My Projects' filter pill, and cancel switch",
+        "Entity icons on all navigation items",
+        "Project initials shown in rail when project is selected",
+        "Context-based coloring for active states",
         "Bottom utilities section with user profile, help, and theme toggle"
       ],
       "designDecisions": [
+        "Active context uses dimmed/bright icon approach (40% inactive, 100% active)",
+        "Active nav items use context color for text, icon, border, and background tint",
+        "Filter pill uses context color when active",
+        "Panel header height matches top nav (48px)",
+        "Project initials derived from shortcode (first 3 chars before dash)",
+        "Cancel switch allows returning to previous project without selecting new one",
         "Icon rail uses context colors (global/personal/project) as background",
-        "VDC logo uses white variant for visibility on dark backgrounds",
-        "Panel collapses with animation when toggled from top nav"
+        "VDC logo uses white variant for visibility on dark backgrounds"
       ],
       "status": "draft",
       "category": "Navigation"
