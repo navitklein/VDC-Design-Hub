@@ -132,6 +132,7 @@ import { ButtonsModule } from '@progress/kendo-angular-buttons';
 
     .feature-layout__launch-btn {
       margin-left: auto;
+      // Focus ring handled by global _kendo-fluent-overrides.scss
     }
 
     .feature-layout__content {

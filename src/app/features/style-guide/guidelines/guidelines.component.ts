@@ -195,6 +195,53 @@ import { TokenService } from '../../../core/services/token.service';
               </div>
             </section>
           }
+
+          <!-- Focus Ring Section -->
+          @if (selectedSection() === 'all' || selectedSection() === 'focus') {
+            <section class="guidelines__section">
+              <h2 class="guidelines__title">
+                <i class="fa-solid fa-bullseye"></i> Focus Ring
+              </h2>
+              <p class="guidelines__desc">Keyboard accessibility focus indicators for interactive elements</p>
+              
+              <div class="guidelines__table-wrapper">
+                <table class="guidelines__table">
+                  <thead>
+                    <tr>
+                      <th>Component</th>
+                      <th>Focus Color</th>
+                      <th>CSS Properties</th>
+                      <th>Notes</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    @for (rule of focusRules; track rule.component) {
+                      <tr>
+                        <td class="cell-component">{{ rule.component }}</td>
+                        <td class="cell-token">
+                          <span class="color-dot" [style.background-color]="rule.colorHex"></span>
+                          <code>{{ rule.color }}</code>
+                        </td>
+                        <td class="cell-code">
+                          <code>{{ rule.css }}</code>
+                        </td>
+                        <td class="cell-notes">{{ rule.notes }}</td>
+                      </tr>
+                    }
+                  </tbody>
+                </table>
+              </div>
+
+              <div class="guidelines__info-box">
+                <h3><i class="fa-solid fa-circle-info"></i> Important</h3>
+                <ul>
+                  <li><strong>Never use <code>outline: none</code></strong> without providing an alternative focus indicator - this breaks keyboard accessibility.</li>
+                  <li><strong>Always include <code>box-shadow: none</code></strong> when overriding Kendo focus styles to remove the default black shadow.</li>
+                  <li>Focus rings must be visible for WCAG 2.1 compliance (Success Criterion 2.4.7).</li>
+                </ul>
+              </div>
+            </section>
+          }
         </div>
       }
     </div>
@@ -314,6 +361,58 @@ import { TokenService } from '../../../core/services/token.service';
     .color-dot--dark {
       box-shadow: inset 0 0 0 2px #1f1f1f;
     }
+
+    .cell-code code {
+      background: var(--vdc-surface-300);
+      padding: 2px 6px;
+      border-radius: var(--vdc-radius-sm);
+      font-family: monospace;
+      font-size: var(--vdc-font-size-xs);
+      color: var(--vdc-text-primary);
+      white-space: nowrap;
+    }
+
+    .guidelines__info-box {
+      margin-top: var(--vdc-space-lg);
+      padding: var(--vdc-space-md);
+      background: color-mix(in srgb, var(--vdc-primary) 8%, transparent);
+      border-left: 4px solid var(--vdc-primary);
+      border-radius: var(--vdc-radius-md);
+
+      h3 {
+        margin: 0 0 var(--vdc-space-sm);
+        font-size: var(--vdc-font-size-md);
+        font-weight: var(--vdc-font-weight-semibold);
+        color: var(--vdc-primary);
+        display: flex;
+        align-items: center;
+        gap: var(--vdc-space-xs);
+      }
+
+      ul {
+        margin: 0;
+        padding-left: var(--vdc-space-lg);
+      }
+
+      li {
+        margin-bottom: var(--vdc-space-xs);
+        font-size: var(--vdc-font-size-sm);
+        color: var(--vdc-text-primary);
+
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      code {
+        background: var(--vdc-surface-100);
+        padding: 1px 4px;
+        border-radius: var(--vdc-radius-sm);
+        font-family: monospace;
+        font-size: var(--vdc-font-size-xs);
+        color: var(--vdc-error);
+      }
+    }
   `]
 })
 export class GuidelinesComponent implements OnInit {
@@ -331,7 +430,40 @@ export class GuidelinesComponent implements OnInit {
     { id: 'surfaces', label: 'Surfaces' },
     { id: 'text', label: 'Text' },
     { id: 'borders', label: 'Borders' },
-    { id: 'states', label: 'States' }
+    { id: 'states', label: 'States' },
+    { id: 'focus', label: 'Focus' }
+  ];
+
+  // Focus ring rules (static data - not from token service)
+  readonly focusRules = [
+    {
+      component: 'Buttons (.k-button)',
+      color: 'rgba(15, 108, 189, 0.5)',
+      colorHex: 'rgba(15, 108, 189, 0.5)',
+      css: 'outline: 2px solid; outline-offset: 2px; box-shadow: none',
+      notes: 'Semi-transparent blue on light backgrounds'
+    },
+    {
+      component: 'Chips (.k-chip)',
+      color: 'rgba(15, 108, 189, 0.5)',
+      colorHex: 'rgba(15, 108, 189, 0.5)',
+      css: 'outline: 2px solid; outline-offset: 2px; box-shadow: none',
+      notes: 'Same as buttons for consistency'
+    },
+    {
+      component: 'Inputs (.k-input)',
+      color: 'var(--vdc-primary)',
+      colorHex: '#0f6cbd',
+      css: 'border-color: var(--vdc-primary); box-shadow: 0 0 0 1px',
+      notes: 'Uses border highlight instead of outline'
+    },
+    {
+      component: 'Buttons on dark backgrounds',
+      color: 'rgba(255, 255, 255, 0.5)',
+      colorHex: 'rgba(255, 255, 255, 0.5)',
+      css: 'outline: 2px solid; outline-offset: 2px; box-shadow: none',
+      notes: 'White ring for visibility on colored/dark backgrounds'
+    }
   ];
 
   // Build a lookup map for color hex values

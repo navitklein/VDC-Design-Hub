@@ -116,6 +116,18 @@
       ],
       "status": "draft",
       "category": "Navigation"
+    },
+    {
+      "name": "VdcChip",
+      "slug": "vdc-chip",
+      "description": "Filter pills and selection chips for single or multi-select filtering",
+      "kendoBase": ["kendo-chiplist", "kendo-chip"],
+      "kendoDocs": [
+        "https://www.telerik.com/kendo-angular-ui/components/buttons/chiplist",
+        "https://www.telerik.com/kendo-angular-ui/components/buttons/chip"
+      ],
+      "status": "ready",
+      "category": "Inputs"
     }
   ]
 }

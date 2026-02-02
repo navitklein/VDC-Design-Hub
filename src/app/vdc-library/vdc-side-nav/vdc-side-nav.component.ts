@@ -303,19 +303,30 @@ import {
       color: rgba(255, 255, 255, 0.4);
       transition: all 0.15s ease;
 
-      &:hover,
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.7);
+      }
+
       &:focus {
         background-color: rgba(255, 255, 255, 0.1);
         color: rgba(255, 255, 255, 0.7);
+        outline: 2px solid rgba(255, 255, 255, 0.5);
+        outline-offset: 2px;
       }
 
       &.vdc-side-nav__context-btn--active {
         background-color: rgba(255, 255, 255, 0.15);
         color: rgba(255, 255, 255, 1);
 
-        &:hover,
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.2);
+        }
+
         &:focus {
           background-color: rgba(255, 255, 255, 0.2);
+          outline: 2px solid rgba(255, 255, 255, 0.5);
+          outline-offset: 2px;
         }
       }
 
@@ -352,10 +363,16 @@ import {
       color: rgba(255, 255, 255, 0.7);
       transition: all 0.15s ease;
 
-      &:hover,
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+        color: rgba(255, 255, 255, 1);
+      }
+
       &:focus {
         background-color: rgba(255, 255, 255, 0.15);
         color: rgba(255, 255, 255, 1);
+        outline: 2px solid rgba(255, 255, 255, 0.5);
+        outline-offset: 2px;
       }
 
       i {
@@ -435,6 +452,7 @@ import {
       font-weight: var(--vdc-font-weight-regular, 400);
       text-decoration: none;
       transition: all 0.15s ease;
+      // Focus ring handled by global _kendo-fluent-overrides.scss
 
       &:hover,
       &:focus {
@@ -489,8 +507,10 @@ import {
       background: transparent !important;
       color: var(--vdc-text-secondary);
       transition: all 0.15s ease;
+      // Focus ring handled by global _kendo-fluent-overrides.scss
 
-      &:hover {
+      &:hover,
+      &:focus {
         border-color: var(--panel-color) !important;
         color: var(--panel-color);
         background: transparent !important;
@@ -544,6 +564,7 @@ import {
       font-weight: var(--vdc-font-weight-regular, 400);
       text-align: left;
       transition: all 0.15s ease;
+      // Focus ring handled by global _kendo-fluent-overrides.scss
 
       .k-button-text {
         display: flex;
@@ -606,6 +627,7 @@ import {
       background: transparent;
       text-align: left;
       transition: background-color 0.15s ease;
+      // Focus ring handled by global _kendo-fluent-overrides.scss
 
       &:hover,
       &:focus {
@@ -663,6 +685,7 @@ import {
       color: var(--vdc-text-secondary);
       font-size: var(--vdc-font-size-sm);
       transition: all 0.15s ease;
+      // Focus ring handled by global _kendo-fluent-overrides.scss
 
       &:hover,
       &:focus {

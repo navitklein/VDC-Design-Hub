@@ -71,7 +71,7 @@ export interface NavItem {
             kendoTooltip
             [position]="'right'"
           >
-            <i class="fa-regular fa-circle-question"></i>
+            <i class="fa-light fa-circle-question"></i>
           </button>
         </div>
       </nav>
@@ -173,19 +173,30 @@ export interface NavItem {
       color: rgba(255, 255, 255, 0.4);
       transition: all 0.15s ease;
 
-      &:hover,
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.7);
+      }
+
       &:focus {
         background-color: rgba(255, 255, 255, 0.1);
         color: rgba(255, 255, 255, 0.7);
+        outline: 2px solid rgba(255, 255, 255, 0.5);
+        outline-offset: 2px;
       }
 
       &.app-side-nav__section-btn--active {
         background-color: rgba(255, 255, 255, 0.15);
         color: rgba(255, 255, 255, 1);
 
-        &:hover,
+        &:hover {
+          background-color: rgba(255, 255, 255, 0.2);
+        }
+
         &:focus {
           background-color: rgba(255, 255, 255, 0.2);
+          outline: 2px solid rgba(255, 255, 255, 0.5);
+          outline-offset: 2px;
         }
       }
 
@@ -214,10 +225,16 @@ export interface NavItem {
       color: rgba(255, 255, 255, 0.7);
       transition: all 0.15s ease;
 
-      &:hover,
+      &:hover {
+        background-color: rgba(255, 255, 255, 0.15);
+        color: rgba(255, 255, 255, 1);
+      }
+
       &:focus {
         background-color: rgba(255, 255, 255, 0.15);
         color: rgba(255, 255, 255, 1);
+        outline: 2px solid rgba(255, 255, 255, 0.5);
+        outline-offset: 2px;
       }
 
       i {
@@ -336,7 +353,7 @@ export class AppSideNavComponent {
     {
       id: 'mockups',
       label: 'Mockups',
-      icon: 'fa-regular fa-window-restore',
+      icon: 'fa-light fa-window-restore',
       color: '#0f6cbd',
       children: [
         { id: 'side-nav-demo', label: 'Side Nav Demo', route: '/mockups/side-nav-demo/identity' },
@@ -346,7 +363,7 @@ export class AppSideNavComponent {
     {
       id: 'style-guide',
       label: 'Style Guide',
-      icon: 'fa-regular fa-swatchbook',
+      icon: 'fa-light fa-swatchbook',
       color: '#0f6cbd',
       children: [
         { id: 'palettes', label: 'Palettes', route: '/style-guide/palettes', icon: 'fa-regular fa-palette' },
@@ -358,12 +375,13 @@ export class AppSideNavComponent {
     {
       id: 'components',
       label: 'Components',
-      icon: 'fa-regular fa-cubes',
+      icon: 'fa-light fa-cubes',
       color: '#0f6cbd',
       children: [
         { id: 'overview', label: 'Overview', route: '/components/overview', icon: 'fa-regular fa-grid-2' },
         { id: 'vdc-breadcrumbs', label: 'VdcBreadcrumbs', route: '/components/vdc-breadcrumbs', icon: 'fa-regular fa-ellipsis' },
         { id: 'vdc-button', label: 'VdcButton', route: '/components/vdc-button', icon: 'fa-regular fa-square' },
+        { id: 'vdc-chip', label: 'VdcChip', route: '/components/vdc-chip', icon: 'fa-regular fa-tags' },
         { id: 'vdc-dropdown', label: 'VdcDropdown', route: '/components/vdc-dropdown', icon: 'fa-regular fa-caret-down' },
         { id: 'vdc-grid', label: 'VdcGrid', route: '/components/vdc-grid', icon: 'fa-regular fa-table' },
         { id: 'vdc-side-nav', label: 'VdcSideNav', route: '/components/vdc-side-nav', icon: 'fa-regular fa-sidebar' },
@@ -373,7 +391,7 @@ export class AppSideNavComponent {
     {
       id: 'icons',
       label: 'Icons',
-      icon: 'fa-regular fa-icons',
+      icon: 'fa-light fa-icons',
       color: '#0f6cbd',
       children: [
         { id: 'vdc-entities', label: 'VDC Entities', route: '/icons/vdc-entities', icon: 'fa-regular fa-box' },

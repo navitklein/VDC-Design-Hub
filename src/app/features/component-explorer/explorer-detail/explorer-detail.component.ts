@@ -2,6 +2,7 @@ import { Component, inject, OnInit, signal } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { MarkdownModule } from 'ngx-markdown';
+import { KENDO_CHIPLIST } from '@progress/kendo-angular-buttons';
 import { MarkdownLoaderService } from '../../../core/services/markdown-loader.service';
 
 // Import VDC Library components for demo
@@ -19,6 +20,7 @@ import { VdcFormFieldComponent } from '../../../vdc-library/vdc-form-field';
     CommonModule, 
     RouterModule, 
     MarkdownModule,
+    KENDO_CHIPLIST,
     VdcButtonComponent,
     VdcDropdownComponent,
     VdcFormFieldComponent
@@ -26,7 +28,7 @@ import { VdcFormFieldComponent } from '../../../vdc-library/vdc-form-field';
   template: `
     <div class="explorer-detail">
       <!-- Back Link -->
-      <a routerLink="/explorer" class="explorer-detail__back">
+      <a routerLink="/components/overview" class="explorer-detail__back">
         <i class="fa-solid fa-arrow-left"></i>
         Back to Components
       </a>
@@ -138,6 +140,51 @@ import { VdcFormFieldComponent } from '../../../vdc-library/vdc-form-field';
                     error="Username is already taken"
                     style="width: 300px;">
                   </vdc-form-field>
+                </div>
+              }
+              @case ('vdc-chip') {
+                <div class="demo-section">
+                  <h3>Single Selection</h3>
+                  <kendo-chiplist [selection]="'single'">
+                    <kendo-chip label="All" [selected]="true" [size]="'large'" [rounded]="'full'"></kendo-chip>
+                    <kendo-chip label="Active" [size]="'large'" [rounded]="'full'"></kendo-chip>
+                    <kendo-chip label="Completed" [size]="'large'" [rounded]="'full'"></kendo-chip>
+                    <kendo-chip label="Pending" [size]="'large'" [rounded]="'full'"></kendo-chip>
+                  </kendo-chiplist>
+                </div>
+                <div class="demo-section">
+                  <h3>Multiple Selection</h3>
+                  <kendo-chiplist [selection]="'multiple'">
+                    <kendo-chip label="Workflow" [selected]="true" [size]="'large'" [rounded]="'full'"></kendo-chip>
+                    <kendo-chip label="Ingredient" [selected]="true" [size]="'large'" [rounded]="'full'"></kendo-chip>
+                    <kendo-chip label="Release" [size]="'large'" [rounded]="'full'"></kendo-chip>
+                    <kendo-chip label="Project" [size]="'large'" [rounded]="'full'"></kendo-chip>
+                  </kendo-chiplist>
+                </div>
+                <div class="demo-section">
+                  <h3>With Counts</h3>
+                  <kendo-chiplist [selection]="'single'">
+                    <kendo-chip label="All (24)" [selected]="true" [size]="'large'" [rounded]="'full'"></kendo-chip>
+                    <kendo-chip label="Active (12)" [size]="'large'" [rounded]="'full'"></kendo-chip>
+                    <kendo-chip label="Failed (3)" [size]="'large'" [rounded]="'full'"></kendo-chip>
+                  </kendo-chiplist>
+                </div>
+                <div class="demo-section">
+                  <h3>Sizes</h3>
+                  <div class="demo-row">
+                    <kendo-chip label="Small" [size]="'small'" [rounded]="'full'"></kendo-chip>
+                    <kendo-chip label="Medium" [size]="'medium'" [rounded]="'full'"></kendo-chip>
+                    <kendo-chip label="Large" [size]="'large'" [rounded]="'full'"></kendo-chip>
+                  </div>
+                </div>
+                <div class="demo-section">
+                  <h3>Rounded Variants</h3>
+                  <div class="demo-row">
+                    <kendo-chip label="Small radius" [rounded]="'small'"></kendo-chip>
+                    <kendo-chip label="Medium radius" [rounded]="'medium'"></kendo-chip>
+                    <kendo-chip label="Large radius" [rounded]="'large'"></kendo-chip>
+                    <kendo-chip label="Full (pill)" [rounded]="'full'"></kendo-chip>
+                  </div>
                 </div>
               }
               @default {

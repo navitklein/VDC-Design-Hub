@@ -5,6 +5,40 @@
 // Use CSS custom properties for consistency with tokens.
 
 // ---------------------------------------------------------------------------
+// Focus Ring Overrides
+// ---------------------------------------------------------------------------
+// Soften the default black focus ring to a subtle semi-transparent blue.
+// This applies globally to all Kendo components for accessibility.
+:root {
+  --kendo-focus-ring-color: rgba(15, 108, 189, 0.5);  // 50% opacity primary blue
+  --kendo-focus-ring-width: 2px;
+  --kendo-focus-ring-offset: 2px;
+}
+
+// Buttons - use subtle blue focus ring instead of harsh black
+.k-button:focus,
+.k-button.k-focus {
+  outline: var(--kendo-focus-ring-width) solid var(--kendo-focus-ring-color);
+  outline-offset: var(--kendo-focus-ring-offset);
+  box-shadow: none;  // Remove Kendo's default black box-shadow on focus
+}
+
+// Chips (filter pills) - use subtle blue focus ring
+.k-chip:focus,
+.k-chip.k-focus,
+.k-chip.k-selected:focus {
+  outline: var(--kendo-focus-ring-width) solid var(--kendo-focus-ring-color);
+  outline-offset: var(--kendo-focus-ring-offset);
+  box-shadow: none;  // Remove Kendo's default black box-shadow on focus
+}
+
+// Chiplist container - no outline needed (individual chips have focus)
+.k-chiplist:focus,
+.k-chiplist.k-focus {
+  outline: none;
+}
+
+// ---------------------------------------------------------------------------
 // Global Kendo Overrides
 // ---------------------------------------------------------------------------
 .k-button {

@@ -111,6 +111,7 @@ export interface VdcBreadcrumbItem extends BreadCrumbItem {
       background-color: transparent;
       color: var(--vdc-primary);
       transition: all 0.15s ease;
+      // Focus ring handled by global _kendo-fluent-overrides.scss
 
       &:hover,
       &:focus {
@@ -198,6 +199,7 @@ export interface VdcBreadcrumbItem extends BreadCrumbItem {
       background-color: transparent;
       color: var(--vdc-text-secondary);
       margin-right: var(--vdc-space-xs);
+      // Focus ring handled by global _kendo-fluent-overrides.scss
 
       &:hover,
       &:focus {

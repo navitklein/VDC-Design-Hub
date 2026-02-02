@@ -63,8 +63,31 @@ interface ComponentsFile {
 
       @if (!loading() && filteredComponents().length > 0) {
         <div class="explorer-list__grid">
+          <!-- General Guidelines Card -->
+          <a [routerLink]="['/components', 'guidelines']" class="component-card component-card--guidelines vdc-card">
+            <div class="component-card__icon component-card__icon--guidelines">
+              <i class="fa-solid fa-book"></i>
+            </div>
+            <div class="component-card__content">
+              <div class="component-card__header">
+                <h3 class="component-card__name">General Guidelines</h3>
+                <span class="vdc-badge vdc-badge--info">
+                  docs
+                </span>
+              </div>
+              <p class="component-card__description">Cross-component design patterns, focus ring styling, and accessibility requirements</p>
+              <div class="component-card__meta">
+                <span class="component-card__kendo">
+                  <i class="fa-solid fa-universal-access"></i>
+                  Accessibility
+                </span>
+                <span class="component-card__category">Guidelines</span>
+              </div>
+            </div>
+          </a>
+
           @for (component of filteredComponents(); track component.slug) {
-            <a [routerLink]="[component.slug]" class="component-card vdc-card">
+            <a [routerLink]="['/components', component.slug]" class="component-card vdc-card">
               <div class="component-card__icon">
                 <i class="fa-solid fa-cube"></i>
               </div>
@@ -195,6 +218,21 @@ interface ComponentsFile {
     .component-card__category {
       font-size: var(--vdc-font-size-xs);
       color: var(--vdc-text-disabled);
+    }
+
+    .component-card--guidelines {
+      border: 1px solid var(--vdc-primary);
+      background: color-mix(in srgb, var(--vdc-primary) 5%, var(--vdc-surface-100));
+    }
+
+    .component-card__icon--guidelines {
+      background-color: var(--vdc-primary);
+      color: white;
+    }
+
+    .vdc-badge--info {
+      background-color: var(--vdc-primary);
+      color: white;
     }
   `]
 })

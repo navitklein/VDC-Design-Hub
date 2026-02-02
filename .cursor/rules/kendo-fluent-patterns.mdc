@@ -8,32 +8,101 @@ alwaysApply: false
 
 ## Always Use VDC Wrappers in Mockups
 
+```html
 <!-- Use VDC wrapper -->
 <vdc-button variant="primary">Save</vdc-button>
 <vdc-grid [data]="items"></vdc-grid>
 
 <!-- Don't use raw Kendo directly in mockups -->
+```
 
 ## VDC Wrapper Pattern
 
+```typescript
 @Component({
   selector: 'vdc-button',
   standalone: true,
   imports: [ButtonsModule],
-  template: <button kendoButton [themeColor]="themeColor"><ng-content></ng-content></button>
+  template: `<button kendoButton [themeColor]="themeColor"><ng-content></ng-content></button>`
 })
 export class VdcButtonComponent {
   @Input() variant: 'primary' | 'secondary' | 'destructive' = 'primary';
 }
+```
 
 ## Tailwind + Kendo Coexistence
 
 - Use Tailwind for layout (flex, grid, spacing, positioning)
 - Use Kendo theme for component styling (colors, borders, shadows)
-- Override Kendo only via _kendo-fluent-overrides.scss
+- Override Kendo only via `_kendo-fluent-overrides.scss`
 
+```html
 <!-- Layout with Tailwind, component is Kendo -->
 <div class="flex gap-4 p-6">
   <vdc-dropdown [data]="options"></vdc-dropdown>
   <vdc-button variant="primary">Apply</vdc-button>
 </div>
+```
+
+## Focus Ring Styling
+
+VDC uses a subtle semi-transparent blue focus ring instead of the default black Fluent theme focus ring.
+
+### Global Configuration
+
+Focus ring is configured in `_kendo-fluent-overrides.scss`:
+
+| Property | Value | Description |
+|----------|-------|-------------|
+| Color | `rgba(15, 108, 189, 0.5)` | 50% opacity primary blue |
+| Width | `2px` | Ring thickness |
+| Offset | `2px` | Gap between element and ring |
+
+### Required CSS for Focus Override
+
+When overriding Kendo component styles, ALWAYS include focus ring styling:
+
+```scss
+.k-button:focus,
+.k-button.k-focus {
+  outline: 2px solid rgba(15, 108, 189, 0.5);
+  outline-offset: 2px;
+  box-shadow: none;  // IMPORTANT: removes Kendo's black shadow
+}
+```
+
+### Dark/Colored Backgrounds
+
+For buttons on dark or colored backgrounds (like side nav rail), use white:
+
+```scss
+.dark-bg .k-button:focus {
+  outline: 2px solid rgba(255, 255, 255, 0.5);
+  outline-offset: 2px;
+  box-shadow: none;
+}
+```
+
+### What NOT to Do
+
+```scss
+// BAD: Removes focus indicator entirely - breaks accessibility
+.k-button:focus {
+  outline: none;
+}
+
+// BAD: Missing box-shadow removal - leaves black border
+.k-button:focus {
+  outline: 2px solid blue;
+  // Forgot box-shadow: none!
+}
+```
+
+### Components That Need Focus Styling
+
+| Component | Selector | Notes |
+|-----------|----------|-------|
+| Buttons | `.k-button` | Most common |
+| Chips | `.k-chip` | Filter pills |
+| Inputs | `.k-input`, `.k-textbox` | Use border color change |
+| Dropdowns | `.k-dropdown` | Use border color change |

@@ -40,6 +40,7 @@ export type VdcButtonSize = 'small' | 'medium' | 'large';
     button {
       font-family: var(--vdc-font-family);
       transition: all 0.15s ease;
+      // Focus ring is handled by global _kendo-fluent-overrides.scss
     }
 
     .vdc-button--small {
